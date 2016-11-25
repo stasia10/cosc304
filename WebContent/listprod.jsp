@@ -36,28 +36,39 @@
 			if (hasName) {
 				out.println("<h2><font face = 'Sans-Serif'>Products containing '" + name + "'</font></h2>");
 				out.println(
-						"<table id = 'hor-minimalist-b'><tbody><th></th><th><b>Category</b></th><th><b>Product Name</b></th><th><b>Species</b></th><th><b>Price</b></th>");
-				String SQL = "SELECT productName, price, productId, category, species FROM Product WHERE productName LIKE ? AND Inventory > 0 ORDER BY productName";
+						"<table id = 'hor-minimalist-b'><tbody><th></th><th><b>Category</b></th><th><b>Product Name</b></th><th><b>Price</b></th>");
+				String SQL = "SELECT productName, price, productId, category FROM Product WHERE productName LIKE ? AND Inventory > 0 ORDER BY productName";
 				PreparedStatement pstmt = con.prepareStatement(SQL);
 				pstmt.setString(1, "%" + name + "%");
 				ResultSet rst = pstmt.executeQuery();
+				out.println("<tr><td><a href=\"addcart.jsp?id=" + rst.getString(3) + "&name=" + rst.getString(1)
+					+ "&price=" + rst.getString(2) + "\">Add to cart</a>" + "</td><td>" + rst. getString(4) + "</td><td>" + rst.getString(1)
+					+ "</td><td>" + rst.getString(2) + "</td></tr>");
 				while (rst.next()) {
-					out.println("<tr><td><a href=\"addcart.jsp?id=" + rst.getString(3) + "&name=" + rst.getString(1)
-							+ "&price=" + rst.getString(2) + "\">Add to cart</a>" + "</td><td>" + rst.getString(4) + "</td><td>" 
-							+ rst.getString(1) + "</td><td>" + rst.getString(5) + "</td><td>" + rst.getString(2) + "</td></tr>");
+					String SQL2 = "SELECT species FROM Product WHERE category = 'CS'";
+					PreparedStatement pstmt2 = con.prepareStatement(SQL2);
+					ResultSet rst2 = pstmt2.executeQuery();
+					out.println("<tr align='right'><td colspan='4'><table id = 'hor-minimalist-b'><tbody><th></th><th><b>Species</b></th>");
+					out.println("<td>" + rst2.getString(1) + "</td></table>");
 				}
 				out.println("</tbody></table>");
 			} else {
 				out.println("<h2><font face = 'Sans-Serif'>All Products</font></h2>");
 				out.println(
-						"<table id = 'hor-minimalist-b'><tbody><th></th><th><b>Category</b></th><th><b>Product Name</b></th><th><b>Species</b></th><th><b>Price</b></th>");
-				String SQL = "SELECT productName, price, productId, category, species FROM Product WHERE Inventory > 0 ORDER BY productName";
+						"<table id = 'hor-minimalist-b'><tbody><th></th><th><b>Category</b></th><th><b>Product Name</b></th><th><b>Price</b></th>");
+				String SQL = "SELECT productName, price, productId, category FROM Product WHERE Inventory > 0 ORDER BY productName";
 				PreparedStatement pstmt = con.prepareStatement(SQL);
 				ResultSet rst = pstmt.executeQuery();
+				out.println("<tr><td><a href=\"addcart.jsp?id=" + rst.getString(3) + "&name=" + rst.getString(1)
+					+ "&price=" + rst.getString(2) + "\">Add to cart</a>" + "</td><td>" + rst. getString(4) + "</td><td>" + rst.getString(1)
+					+ "</td><td>" + rst.getString(2) + "</td></tr>");
+				String cat = null;
 				while (rst.next()) {
-					out.println("<tr><td><a href=\"addcart.jsp?id=" + rst.getString(3) + "&name=" + rst.getString(1)
-					+ "&price=" + rst.getString(2) + "\">Add to cart</a>" + "</td><td>" + rst.getString(4) + "</td><td>" 
-					+ rst.getString(1) + "</td><td>" + rst.getString(5) + "</td><td>" + rst.getString(2) + "</td></tr>");
+					String SQL2 = "SELECT species FROM Product WHERE category = 'CS'";
+					PreparedStatement pstmt2 = con.prepareStatement(SQL2);
+					ResultSet rst2 = pstmt2.executeQuery();
+					out.println("<tr align='right'><td colspan='4'><table id = 'hor-minimalist-b'><tbody><th></th><th><b>Species</b></th>");
+					out.println("<td>" + rst2.getString(1) + "</td></table>");
 				}
 				out.println("</tbody></table>");
 			}
