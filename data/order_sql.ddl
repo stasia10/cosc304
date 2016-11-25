@@ -165,46 +165,46 @@ INSERT INTO Product (weight, productName, species, price, Inventory, category, p
 	VALUES(2.00, 'Cacti', 'Stenocereus pruinosus', 25.00, 10, 'CS', 'sp.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES (0.50, 'Pink Bow', null, 3.00, 10, 'pb.png');
+	VALUES (0.50, 'Pink Bow', null, 3.00, 10, 'AC', 'pb.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES (0.50, 'Blue Bow', null, 3.00, 10, 'bb.png');
+	VALUES (0.50, 'Blue Bow', null, 3.00, 10, 'AC', 'bb.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES (0.50, 'Yellow Bow', null, 3.00, 10, 'yb.png');
+	VALUES (0.50, 'Yellow Bow', null, 3.00, 10, 'AC', 'yb.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES (1.00, 'Brown Pot', null, 10.00, 10, 'bp.png');
+	VALUES (1.00, 'Brown Pot', null, 10.00, 10, 'AC', 'bp.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES (0.50, 'Grey Pot', null, 10.00, 10, 'gp.png');
+	VALUES (0.50, 'Grey Pot', null, 10.00, 10, 'AC', 'gp.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES (0.50, 'Black Pot', null, 3.00, 10, 'blp.png');
+	VALUES (0.50, 'Black Pot', null, 3.00, 10, 'AC', 'blp.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES (0.50, 'Black Tie', null, 4.50, 10, 'bt.png');
+	VALUES (0.50, 'Black Tie', null, 4.50, 10, 'AC', 'bt.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES (0.50, 'Red Tie', null, 4.50, 10, 'rt.png');
+	VALUES (0.50, 'Red Tie', null, 4.50, 10, 'AC', 'rt.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES (0.50, 'White Tie', null, 4.50, 10, 'wt.png');
+	VALUES (0.50, 'White Tie', null, 4.50, 10, 'AC', 'wt.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES (5.00, 'Garden Fertilizer', null, 25.00, 10, 'ft.png');
+	VALUES (5.00, 'Garden Fertilizer', null, 25.00, 10, 'AC', 'ft.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES (5.00, 'Pro-Mix Health Fertilizer', null, 35.00, 10, 'ft.png');
+	VALUES (5.00, 'Pro-Mix Health Fertilizer', null, 35.00, 10, 'AC', 'ft.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES (5.00, 'Starter Fertilizer', null, 20.00, 10, 'ft.png');
+	VALUES (5.00, 'Starter Fertilizer', null, 20.00, 10, 'AC', 'ft.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES (5.00, 'Nutrition Fertilizer', null, 25.00, 10, 'ft.png');
+	VALUES (5.00, 'Nutrition Fertilizer', null, 25.00, 10, 'AC', 'ft.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(5.00, 'Cacti Soil', null, 15.00, 10, 'ft.png');
+	VALUES(5.00, 'Cacti Soil', null, 15.00, 10, 'AC', 'ft.png');
 	
 	
 INSERT INTO Warehouse VALUES('CactiOne', 'CactiVille');
