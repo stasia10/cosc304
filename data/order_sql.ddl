@@ -56,6 +56,7 @@ productName  VARCHAR(50) NOT NULL,
 species VARCHAR(50),
 price  DECIMAL (9,2) NOT NULL,
 Inventory  INTEGER,
+category CHAR(2) CHECK (category IN ('AC', 'FT', 'CS')),
 picture VARCHAR(50),	
 PRIMARY KEY (productId),
 CONSTRAINT FK_Product_CactiSpecies FOREIGN KEY (species) REFERENCES CactiSpecies (species));
@@ -132,74 +133,74 @@ INSERT INTO Account VALUES('johnJacob', 'pass', 'John Jacob', '652 Fake Ave, Fak
 INSERT INTO Account VALUES('janeDoe', 'pass', 'Jane Doe', '8554 Fake St, Faketown, BC Canada G7T 6F7','8554 Fake St, Faketown, BC Canada G7T 6F7','NULL','Supervisor','janedoe@fancycacti.com','2505551211')
 
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
-	VALUES(5.00, 'Cacti', 'Cereus peruvianus', 25.00, 10, '');
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
+	VALUES(2.00, 'Cacti', 'Cereus peruvianus', 25.00, 10, 'CS', '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
-	VALUES(5.00, 'Cacti', 'Grafted Gymnocalycium Cultivars', 25.00, 10, '');
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
+	VALUES(2.00, 'Cacti', 'Grafted Gymnocalycium Cultivars', 25.00, 10, 'CS', '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
-	VALUES(5.00, 'Cacti', 'Echinopsis chamaecereus cultivar', 25.00, 10, '');
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
+	VALUES(2.00, 'Cacti', 'Echinopsis chamaecereus cultivar', 25.00, 10, 'CS', '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
-	VALUES(5.00, 'Cacti', 'Pilosocereus pachycladus', 25.00, 10, '');
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
+	VALUES(2.00, 'Cacti', 'Pilosocereus pachycladus', 25.00, 10, 'CS', '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
-	VALUES(5.00, 'Cacti', 'Cereus tetragonus', 25.00, 10, '');
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
+	VALUES(2.00, 'Cacti', 'Cereus tetragonus', 25.00, 10, 'CS', '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
-	VALUES(5.00, 'Cacti', 'Austrocylindropuntia subulata monstrose', 25.00, 10, '');
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
+	VALUES(2.00, 'Cacti', 'Austrocylindropuntia subulata monstrose', 25.00, 10, 'CS', '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
-	VALUES(5.00, 'Cacti', 'Epiphyllum hybrids', 25.00, 10, '');
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
+	VALUES(2.00, 'Cacti', 'Epiphyllum hybrids', 25.00, 10, 'CS', '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
-	VALUES(5.00, 'Cacti', 'Opuntia microdasys', 25.00, 10, '');
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
+	VALUES(2.00, 'Cacti', 'Opuntia microdasys', 25.00, 10, 'CS', '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
-	VALUES(5.00, 'Cacti', 'Echinopsis', 25.00, 10, '');
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
+	VALUES(2.00, 'Cacti', 'Echinopsis', 25.00, 10, 'CS', '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
-	VALUES(5.00, 'Cacti', 'Stenocereus pruinosus', 25.00, 10, '');
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
+	VALUES(2.00, 'Cacti', 'Stenocereus pruinosus', 'CS', 25.00, 10, '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES (0.50, 'Pink Bow', null, 3.00, 10, '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES (0.50, 'Blue Bow', null, 3.00, 10, '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES (0.50, 'Yellow Bow', null, 3.00, 10, '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES (1.00, 'Brown Pot', null, 10.00, 10, '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES (0.50, 'Grey Pot', null, 10.00, 10, '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES (0.50, 'Black Pot', null, 3.00, 10, '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES (0.50, 'Black Tie', null, 4.50, 10, '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES (0.50, 'Red Tie', null, 4.50, 10, '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES (0.50, 'White Tie', null, 4.50, 10, '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES (5.00, 'Garden Fertilizer', null, 25.00, 10, '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES (5.00, 'Pro-Mix Health Fertilizer', null, 35.00, 10, '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES (5.00, 'Starter Fertilizer', null, 20.00, 10, '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture) 
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES (5.00, 'Nutrition Fertilizer', null, 25.00, 10, '');
 DECLARE @productId INT
-INSERT INTO Product (weight, productName, species, price, Inventory, picture)
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES(5.00, 'Cacti Soil', null, 15.00, 10, '');

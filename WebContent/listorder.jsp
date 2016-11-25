@@ -15,9 +15,9 @@
 	<%
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		Connection con = null;
-		String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_kreid;";
-		String uid = "kreid";
-		String pw = "39265137";
+		String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_group2;";
+		String uid = "group2";
+		String pw = "group2";
 		try {
 			con = DriverManager.getConnection(url, uid, pw);
 			String SQL = "SELECT orderId, accountUsername, fullName, totalAmount FROM Invoice i, Account a WHERE i.accountUsername=a.username";
