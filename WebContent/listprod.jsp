@@ -48,8 +48,10 @@
 					String SQL2 = "SELECT species FROM Product WHERE category = 'CS'";
 					PreparedStatement pstmt2 = con.prepareStatement(SQL2);
 					ResultSet rst2 = pstmt2.executeQuery();
-					out.println("<tr align='right'><td colspan='4'><table id = 'hor-minimalist-b'><tbody><th></th><th><b>Species</b></th>");
-					out.println("<td>" + rst2.getString(1) + "</td></table>");
+					while(rst2.next()) {
+						out.println("<tr align='right'><td colspan='4'><table id = 'hor-minimalist-b'><tbody><th></th><th><b>Species</b></th>");
+						out.println("<td>" + rst2.getString(1) + "</td></tbody></table>");
+					}
 				}
 				out.println("</tbody></table>");
 			} else {
@@ -67,8 +69,10 @@
 					String SQL2 = "SELECT species FROM Product WHERE category = 'CS'";
 					PreparedStatement pstmt2 = con.prepareStatement(SQL2);
 					ResultSet rst2 = pstmt2.executeQuery();
-					out.println("<tr align='right'><td colspan='4'><table id = 'hor-minimalist-b'><tbody><th></th><th><b>Species</b></th>");
-					out.println("<td>" + rst2.getString(1) + "</td></table>");
+					while(rst2.next()) {
+						out.println("<tr align='right'><td colspan='4'><table id = 'hor-minimalist-b'><tbody><th></th><th><b>Species</b></th>");
+						out.println("<td>" + rst2.getString(1) + "</td></tbody></table>");
+					}
 				}
 				out.println("</tbody></table>");
 			}
