@@ -134,34 +134,34 @@ INSERT INTO Account VALUES('janeDoe', 'pass', 'Jane Doe', '8554 Fake St, Faketow
 
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Cereus peruvianus', 25.00, 10, 'CS', '');
+	VALUES(2.00, 'Cacti', 'Cereus peruvianus', 12.99, 10, 'CS', '');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Grafted Gymnocalycium Cultivars', 25.00, 10, 'CS', '');
+	VALUES(2.00, 'Cacti', 'Grafted Gymnocalycium Cultivars', 19.99, 10, 'CS', '');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Echinopsis chamaecereus cultivar', 25.00, 10, 'CS', '');
+	VALUES(2.00, 'Cacti', 'Echinopsis chamaecereus cultivar', 24.99, 10, 'CS', '');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Pilosocereus pachycladus', 25.00, 10, 'CS', '');
+	VALUES(2.00, 'Cacti', 'Pilosocereus pachycladus', 12.99, 10, 'CS', '');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Cereus tetragonus', 25.00, 10, 'CS', '');
+	VALUES(2.00, 'Cacti', 'Cereus tetragonus', 24.99, 10, 'CS', '');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Austrocylindropuntia subulata monstrose', 25.00, 10, 'CS', '');
+	VALUES(2.00, 'Cacti', 'Austrocylindropuntia subulata monstrose', 19.99, 10, 'CS', '');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Epiphyllum hybrids', 25.00, 10, 'CS', '');
+	VALUES(2.00, 'Cacti', 'Epiphyllum hybrids', 28.99, 10, 'CS', '');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Opuntia microdasys', 25.00, 10, 'CS', '');
+	VALUES(2.00, 'Cacti', 'Opuntia microdasys', 10.00, 10, 'CS', '');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Echinopsis', 25.00, 10, 'CS', '');
+	VALUES(2.00, 'Cacti', 'Echinopsis', 25.00, 12.99, 'CS', '');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Stenocereus pruinosus', 'CS', 25.00, 10, '');
+	VALUES(2.00, 'Cacti', 'Stenocereus pruinosus', 'CS', 19.99, 10, '');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES (0.50, 'Pink Bow', null, 3.00, 10, '');
