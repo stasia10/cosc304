@@ -64,7 +64,6 @@
 				out.println("<tr><td><a href=\"addcart.jsp?id=" + rst.getString(3) + "&name=" + rst.getString(1)
 					+ "&price=" + rst.getString(2) + "\">Add to cart</a>" + "</td><td>" + rst. getString(4) + "</td><td>" + rst.getString(1)
 					+ "</td><td>" + rst.getString(2) + "</td></tr>");
-				String cat = null;
 				while (rst.next()) {
 					String SQL2 = "SELECT species FROM Product WHERE category = 'CS'";
 					PreparedStatement pstmt2 = con.prepareStatement(SQL2);
