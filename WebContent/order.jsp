@@ -8,7 +8,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="main.css">
 <title>Fancy Cacti Order Processing</title>
 </head>
 <body>
@@ -33,13 +32,13 @@
 				out.println("<h2>Your shopping cart is empty please go back tp previos page and try again</h2>");
 			} else {
 				if (custId.matches("[0-9]+")) {
-					String SQL = "select customerId, cname, password from Customer where customerId=?";
+					String SQL = "select username, fullName, pass from Account where username=?";
 					PreparedStatement pstmt = con.prepareStatement(SQL);
 					pstmt.setString(1, custId);
 					ResultSet rst = pstmt.executeQuery();
 					if (rst.next()) {
 						if (pass.equals(rst.getString(3))) {
-							String order = "INSERT INTO Orders (customerId) VALUES (?)";
+							String order = "INSERT INTO INVOICE (accountUser) VALUES (?)";
 							PreparedStatement pstmt1 = con.prepareStatement(order, Statement.RETURN_GENERATED_KEYS);
 							pstmt1.setString(1, custId);
 							pstmt1.executeUpdate();
@@ -52,7 +51,7 @@
 									.iterator();
 							out.println("<h1>Your Order Summary</h1>");
 							out.println(
-									"<table id = 'hor-minimalist-b'><tr><td>Product Id</td><td>Product Name</td><td>Quantity</td><td>Price</td><td>Subtotal</td></tr>");
+									"<table><tr><td>Product Id</td><td>Product Name</td><td>Quantity</td><td>Price</td><td>Subtotal</td></tr>");
 							while (iterator.hasNext()) {
 								Map.Entry<String, ArrayList<Object>> entry = iterator.next();
 								ArrayList<Object> product = (ArrayList<Object>) entry.getValue();
@@ -61,21 +60,19 @@
 								double pr = Double.parseDouble(price);
 								int qty = ((Integer) product.get(3)).intValue();
 								String s = "INSERT INTO OrderedProduct VALUES(?,?,?,?)";
+								String u = "UPDATE Product SET Inventory = Inventory - ? WHERE productId = ?";
 								PreparedStatement ps = con.prepareStatement(s);
+								PreparedStatement pu = con.prepareStatement(u);
 								ps.setInt(1, orderId);
 								ps.setString(2, productId);
 								ps.setInt(3, qty);
 								ps.setDouble(4, pr);
 								ps.executeUpdate();
+								pu.setInt(1, qty);
+								pu.setString(2, productId);
 								total += qty * pr;
 								out.println("<tr><td>" + productId + "</td><td>" + product.get(1) + "</td><td>"
 										+ qty + "</td><td>" + pr + "</td><td>" + qty * pr + "</td></tr>");
-								
-								String u = "UPDATE Product SET Inventory = Inventory - ? WHERE productId = ?";
-								PreparedStatement pu = con.prepareStatement(u);
-								pu.setInt(1, qty);
-								pu.setString(2, productId);
-								pu.executeUpdate();
 							}
 
 							out.println("<tr><td colspan='4'><b>Order Total</b></td><td>" + total
