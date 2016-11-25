@@ -12,16 +12,15 @@ DROP TABLE CactiSpecies;
 
 
 CREATE TABLE Account (
-username  VARCHAR(50),
+email  VARCHAR(75) PRIMARY KEY,
 pass  VARCHAR(50) NOT NULL,
 fullName  VARCHAR(50) NOT NULL,
+phone  VARCHAR(10),
 billingAddress  VARCHAR(100) NOT NULL,
 shippingAddres  VARCHAR(100) NOT NULL,
 preferredPayment  VARCHAR(75),
-accountType  VARCHAR(10) CHECK (accountType IN ('Customer', 'Admin', 'Supervisor')),
-email  VARCHAR(75) NOT NULL,
-phone  VARCHAR(10),
-PRIMARY KEY(username));
+accountType  VARCHAR(10) CHECK (accountType IN ('Customer', 'Admin', 'Supervisor')));
+
 
 CREATE TABLE Warehouse (
      whouseName  VARCHAR(20),
@@ -128,9 +127,9 @@ INSERT INTO CactiSpecies VALUES ('Opuntia microdasys', 'Pro-Mix health Fertilize
 INSERT INTO CactiSpecies VALUES ('Echinopsis', 'Nutrition Fertilizer', 8, 8);
 INSERT INTO CactiSpecies VALUES ('Stenocereus pruinosus', 'Garden Fertilizer', 7, 1);
 
-INSERT INTO Account VALUES('bobSmith', 'pass', 'Bob Smith', '444 Fake St, Faketown, BC, Canada V1R 7K6','444 Fake St, BC, Canada V1R 7K6','NULL','Admin','bobsmith@fancycacti.com','2505551011')
-INSERT INTO Account VALUES('johnJacob', 'pass', 'John Jacob', '652 Fake Ave, Faketown, BC Canada F5F 6F5','652 Fake Ave, Faketown, BC Canada F5F 6F5','Mastercard','Customer','johnjacob@gmail.com','2506827140')
-INSERT INTO Account VALUES('janeDoe', 'pass', 'Jane Doe', '8554 Fake St, Faketown, BC Canada G7T 6F7','8554 Fake St, Faketown, BC Canada G7T 6F7','NULL','Supervisor','janedoe@fancycacti.com','2505551211')
+INSERT INTO Account VALUES('bobsmith@fancycacti.com','pass', 'Bob Smith','2505551011', '444 Fake St, Faketown, BC, Canada V1R 7K6','444 Fake St, BC, Canada V1R 7K6','NULL','Admin')
+INSERT INTO Account VALUES('johnjacob@gmail.com','pass', 'John Jacob', '2506827140', '652 Fake Ave, Faketown, BC Canada F5F 6F5','652 Fake Ave, Faketown, BC Canada F5F 6F5','Mastercard','Customer')
+INSERT INTO Account VALUES('janedoe@fancycacti.com','pass', 'Jane Doe','2505551211', '8554 Fake St, Faketown, BC Canada G7T 6F7','8554 Fake St, Faketown, BC Canada G7T 6F7','NULL','Supervisor')
 
 
 DECLARE @productId INT

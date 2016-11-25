@@ -23,7 +23,7 @@
 
 
 	<main>
-	<h1 align="center">Login to your Fancy Cacti account.</h1>
+	<h1 align="center">Login to your Fancy Cacti account</h1>
 	<div id="form-main">
 		<div id="form-div">
 			<form class="form" id="form1">
