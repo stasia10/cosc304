@@ -134,13 +134,13 @@ INSERT INTO Account VALUES('janeDoe', 'pass', 'Jane Doe', '8554 Fake St, Faketow
 
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Cereus peruvianus', 25.00, 10, 'CS', '');
+	VALUES(2.00, 'Cacti', 'Cereus peruvianus', 25.00, 10, 'CS', 'cp.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Grafted Gymnocalycium Cultivars', 25.00, 10, 'CS', '');
+	VALUES(2.00, 'Cacti', 'Grafted Gymnocalycium Cultivars', 25.00, 10, 'CS', 'ggc.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Echinopsis chamaecereus cultivar', 25.00, 10, 'CS', '');
+	VALUES(2.00, 'Cacti', 'Echinopsis chamaecereus cultivar', 25.00, 10, 'CS', 'ecc.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES(2.00, 'Cacti', 'Pilosocereus pachycladus', 25.00, 10, 'CS', '');
