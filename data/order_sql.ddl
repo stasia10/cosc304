@@ -205,18 +205,18 @@ DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES(5.00, 'Cacti Soil', null, 15.00, 10, '');
 	
-	INSERT INTO Warehouse VALUE('CactiOne', 'CactiVille')
+INSERT INTO Warehouse VALUES('CactiOne', 'CactiVille');
 
-INSERT INTO Greenhouse VALUES(1, 'CactiVille', 'CactiOne')
-INSERT INTO Greenhouse VALUES(2, 'SucculentCity', 'CactiOne')
+INSERT INTO Greenhouse VALUES(1, 'CactiVille', 'CactiOne');
+INSERT INTO Greenhouse VALUES(2, 'SucculentCity', 'CactiOne');
 
-INSERT INTO Employee VALUES(1, 'Bob Smith', 'AD', NULL, NULL)
-INSERT INTO Employee VALUES(2, 'Jane Doe', 'SP', NULL, 'CactiOne')
-INSERT INTO Employee VALUES(3, 'Kyla Reid', 'WH', 1, 'CactiOne')
-INSERT INTO Employee VALUES(4, 'Megan Kurz', 'SP', NULL, NULL)
-INSERT INTO Employee VALUES(5, 'Jared Wright', 'GH', 4, NULL)
-INSERT INTO Employee VALUES(6, 'Anastasia Skobkareva', 'GH', NULL, NULL)
-INSERT INTO Employee VALUES(7, 'McNeil Bob', 'GH', 6, NULL)
+INSERT INTO Employee VALUES(1, 'Bob Smith', 'AD', NULL, NULL);
+INSERT INTO Employee VALUES(2, 'Jane Doe', 'SP', NULL, 'CactiOne');
+INSERT INTO Employee VALUES(3, 'Kyla Reid', 'WH', 1, 'CactiOne');
+INSERT INTO Employee VALUES(4, 'Megan Kurz', 'SP', NULL, NULL);
+INSERT INTO Employee VALUES(5, 'Jared Wright', 'GH', 4, NULL);
+INSERT INTO Employee VALUES(6, 'Anastasia Skobkareva', 'GH', NULL, NULL);
+INSERT INTO Employee VALUES(7, 'McNeil Bob', 'GH', 6, NULL);
 
 
 INSERT INTO WorksAt VALUES(1,4);
