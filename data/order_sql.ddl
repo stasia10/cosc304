@@ -158,7 +158,7 @@ INSERT INTO Product (weight, productName, species, price, Inventory, category, p
 	VALUES(2.00, 'Cacti', 'Opuntia microdasys', 10.00, 10, 'CS', 'om.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Echinopsis', 25.00, 12.99, 'CS', 'e.png');
+	VALUES(2.00, 'Cacti', 'Echinopsis', 12.99, 10, 'CS', 'e.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES(2.00, 'Cacti', 'Stenocereus pruinosus', 'CS', 19.99, 10, 'sp.png');
