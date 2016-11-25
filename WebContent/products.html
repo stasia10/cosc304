@@ -73,25 +73,35 @@
             <ul class="nav sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#">
-                       Bootstrap 3
+                       Categories:
                     </a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+               
+        <form class="navbar-form" role="search">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            
+        </div>
+        </form>
+        </div>
+        </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-home"></i> All Products</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-folder"></i> Page one</a>
+                    <a href="#"><i class="fa fa-fw fa-folder"></i> Fertilizer</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-file-o"></i> Second page</a>
+                    <a href="#"><i class="fa fa-fw fa-file-o"></i> Accessories</a>
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-fw fa-cog"></i> Third page</a>
-                </li>
+            
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-plus"></i> Dropdown <span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-plus"></i> Cacti <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                    <li class="dropdown-header">Dropdown heading</li>
+                    <li class="dropdown-header">Types of Cacti</li>
                     <li><a href="#">Action</a></li>
                     <li><a href="#">Another action</a></li>
                     <li><a href="#">Something else here</a></li>
@@ -99,15 +109,7 @@
                     <li><a href="#">One more separated link</a></li>
                   </ul>
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-fw fa-bank"></i> Page four</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-fw fa-dropbox"></i> Page 5</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-fw fa-twitter"></i> Last page</a>
-                </li>
+            
             </ul>
         </nav>
         <!-- /#sidebar-wrapper -->
@@ -128,7 +130,7 @@
     <!-- Marketing messaging and featurettes
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
-
+ <div class="container">
     <div class="container marketing">
 
       <!-- START THE FEATURETTES -->
@@ -137,11 +139,41 @@
 
       <div class="row featurette">
         <div class="col-md-7">
-          <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <h2 class="featurette-heading">PULL THE PRODUCT NAME AND PUT IT HERE <span class="text-muted">PUT THE PRICE HERE</span></h2>
+          <p class="lead">
+          
+          <form>
+          <div class = "form-group">
+<label class="radio-inline">
+  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
+</label>
+
+<label class="radio-inline">
+  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 2
+</label>
+
+<label class="radio-inline">
+  <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 3
+  </label>
+
+  <label class="radio-inline">
+   <input type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4"> 4
+</label>
+<label class="radio-inline">
+  <input type="radio" name="inlineRadioOptions" id="inlineRadio5" value="option5"> 5
+</label>
+</div>
+  <div class="form-group">
+    <textarea class="form-control" inputtype="text" rows="1"></textarea>
+  </div>
+
+<button type="submit" class="btn btn-primary">Submit Review</button>
+</form>
+<br>
+Put all of the other product info here!</p>
         </div>
         <div class="col-md-5">
-          <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          <img class="featurette-image img-responsive center-block" src="PUT THE IMAGE SOURCE HERE" alt="Image Failed to Load">
         </div>
       </div>
 
@@ -172,7 +204,7 @@
       <hr class="featurette-divider">
 
       <!-- /END THE FEATURETTES -->
-</div>
+
 </div>
         <!-- /#page-content-wrapper -->
 
