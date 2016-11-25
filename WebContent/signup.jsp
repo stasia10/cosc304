@@ -45,7 +45,7 @@
 
 	<div class="container">
 
-		<form action="POST" action="signup.jsp" class="form-signup">
+		<form method="POST" action="signup.jsp" class="form-signup">
 			<h2 class="form-signup-heading">Please sign up!</h2>
 			Name<label for="inputName" class="sr-only">First and Last
 				Name</label> <input id="inputName" class="form-control"
@@ -97,14 +97,27 @@
 		} else {
 			try {
 				con = DriverManager.getConnection(url, uid, pw);
-				Statement st = con.createStatement();
-				ResultSet rs = st.executeQuery("SELECT email FROM Account");
-				while (rs.next()) {
-					if (rs.getString(1).equals(email)) {
-	%>
-	<b>Sorry this email address is already in use :( </b>
-	<%
-		}
+				String s = "SELECT pass FROM Account WHERE email = ?";
+				PreparedStatement st = con.prepareStatement(s);
+				st.setString(1, email);
+				ResultSet rs = st.executeQuery();
+				if (rs.next()) { 
+	
+	out.println("<h1><b>Sorry this email address is already in use :( </b></h1>");
+
+		} else {
+					String s2 = "INSERT INTO Account VALUES (?, ?, ?, ?, ?, ?, ?, Customer)";
+					PreparedStatement p = con.prepareStatement(s2);
+					p.setString(1, email);
+					p.setString(2, password);
+					p.setString(3, name);
+					if(number.length()==0) p.setString(4, null);
+					else p.setString(4, number);
+					p.setString(5, BAdd);
+					p.setString(6, SAdd);
+					if (Payment.length()==0) p.setString(7, null);
+					else p.setString(7, Payment);
+					p.executeUpdate();
 				}
 
 			} catch (SQLException ex) {
