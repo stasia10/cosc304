@@ -39,7 +39,7 @@ expectedDelivery  DATE,
 accountUsername  VARCHAR(50) NOT NULL,
 whouseName  VARCHAR(20) NOT NULL,
 PRIMARY KEY (orderId),
-CONSTRAINT FK_Invoice_Account FOREIGN KEY (accountUsername) REFERENCES Account(username),
+CONSTRAINT FK_Invoice_Account FOREIGN KEY (accountUsername) REFERENCES Account(email),
 CONSTRAINT FK_Invoice_Warehouse FOREIGN KEY (whouseName) REFERENCES Warehouse (whouseName));
     
  CREATE TABLE CactiSpecies (
@@ -94,7 +94,7 @@ stars  INTEGER CHECK(stars BETWEEN 0 and 5),
 review  VARCHAR(150),
 PRIMARY KEY(accountUser, productId),
 CONSTRAINT FK_Rating_Product FOREIGN KEY(productId) REFERENCES Product(productId),
-CONSTRAINT FK_Rating_Account FOREIGN KEY(accountUser) REFERENCES Account(username));
+CONSTRAINT FK_Rating_Account FOREIGN KEY(accountUser) REFERENCES Account(email));
 
 
 CREATE TABLE Employee (
