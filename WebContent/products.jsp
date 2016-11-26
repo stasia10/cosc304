@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,6 +36,14 @@
 <!-- NAVBAR
 ================================================== -->
 <body>
+	<%@ page import="java.sql.*"%>
+	<%
+		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		Connection con = null;
+		String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_kreid;";
+		String uid = "kreid";
+		String pw = "39265137";
+	%>
 	<div class="navbar-wrapper">
 		<div class="container">
 
@@ -52,7 +63,7 @@
 							<li><a href="#products.html">Plant Care</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-							<a href="checkout.html" class="btn btn-default navbar-btn"> <span
+							<a href="checkout.jsp" class="btn btn-default navbar-btn"> <span
 								class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
 							</a>
 
@@ -92,26 +103,14 @@
 			</form>
 		</div>
 	</li>
-	<li><a href="#"><i class="fa fa-fw fa-home"></i> All Products</a>
+	<li><a href="product.jsp?allProd="><i class="fa fa-fw fa-home"></i> All Products</a>
 	</li>
-	<li><a href="#"><i class="fa fa-fw fa-folder"></i> Fertilizer</a>
+	<li><a href="product.jsp?fert="><i class="fa fa-fw fa-folder"></i> Fertilizer</a>
 	</li>
-	<li><a href="#"><i class="fa fa-fw fa-file-o"></i> Accessories</a>
+	<li><a href="product.jsp?access="><i class="fa fa-fw fa-file-o"></i> Accessories</a>
 	</li>
+	<li><a href="product.jsp?cacti="><i class = "fa fa-fw fa-file-o"></i> Cacti</a>
 
-	<ul>
-		<li class="dropdown"><a href="#" class="dropdown-toggle"
-			data-toggle="dropdown"><i class="fa fa-fw fa-plus"></i> Cacti <span
-				class="caret"></span></a>
-			<ul class="dropdown-menu" role="menu">
-				<li class="dropdown-header">Types of Cacti</li>
-				<li><a href="#">Action</a></li>
-				<li><a href="#">Another action</a></li>
-				<li><a href="#">Something else here</a></li>
-				<li><a href="#">Separated link</a></li>
-				<li><a href="#">One more separated link</a></li>
-			</ul></li>
-	</ul>
 	<nav></nav>
 	<!-- /#sidebar-wrapper -->
 
@@ -136,91 +135,41 @@
 
 			<!-- START THE FEATURETTES -->
 
-			<hr class="featurette-divider">
-
-			<div class="row featurette">
-				<div class="col-md-7">
-					<h2 class="featurette-heading">
-						PULL THE PRODUCT NAME AND PUT IT HERE <span class="text-muted">PUT
-							THE PRICE HERE</span>
-					</h2>
-					<p class="lead">
-					<form>
-						<div class="form-group">
-							<label class="radio-inline"> <input type="radio"
-								name="inlineRadioOptions" id="inlineRadio1" value="option1">
-								1
-							</label> <label class="radio-inline"> <input type="radio"
-								name="inlineRadioOptions" id="inlineRadio2" value="option2">
-								2
-							</label> <label class="radio-inline"> <input type="radio"
-								name="inlineRadioOptions" id="inlineRadio3" value="option3">
-								3
-							</label> <label class="radio-inline"> <input type="radio"
-								name="inlineRadioOptions" id="inlineRadio4" value="option4">
-								4
-							</label> <label class="radio-inline"> <input type="radio"
-								name="inlineRadioOptions" id="inlineRadio5" value="option5">
-								5
-							</label>
-						</div>
-						<div class="form-group">
-							<textarea class="form-control" inputtype="text" rows="1"></textarea>
-						</div>
-
-						<button type="submit" class="btn btn-primary">Submit
-							Review</button>
-					</form>
-					<br> Put all of the other product info here!
-					</p>
-				</div>
-				<div class="col-md-5">
-					<img class="featurette-image img-responsive center-block"
-						src="PUT THE IMAGE SOURCE HERE" alt="Image Failed to Load">
-				</div>
-			</div>
-
-			<hr class="featurette-divider">
-
-			<div class="row featurette">
-				<div class="col-md-7 col-md-push-5">
-					<h2 class="featurette-heading">
-						Oh yeah, it's that good. <span class="text-muted">See for
-							yourself.</span>
-					</h2>
-					<p class="lead">Donec ullamcorper nulla non metus auctor
-						fringilla. Vestibulum id ligula porta felis euismod semper.
-						Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-						Fusce dapibus, tellus ac cursus commodo.</p>
-				</div>
-				<div class="col-md-5 col-md-pull-7">
-					<img class="featurette-image img-responsive center-block"
-						data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-				</div>
-			</div>
-
-			<hr class="featurette-divider">
-
-			<div class="row featurette">
-				<div class="col-md-7">
-					<h2 class="featurette-heading">
-						And lastly, this one. <span class="text-muted">Checkmate.</span>
-					</h2>
-					<p class="lead">Donec ullamcorper nulla non metus auctor
-						fringilla. Vestibulum id ligula porta felis euismod semper.
-						Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-						Fusce dapibus, tellus ac cursus commodo.</p>
-				</div>
-				<div class="col-md-5">
-					<img class="featurette-image img-responsive center-block"
-						data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-				</div>
-			</div>
-
-			<hr class="featurette-divider">
+			<%
+				String all = request.getParameter("allProd");
+				String fert = request.getParameter("fert");
+				String access = request.getParameter("access");
+				String cacti = request.getParameter("cacti");
+				try {
+					con = DriverManager.getConnection(url, uid, pw);
+					String SQL = "SELECT productName, productId, price, category, species FROM Product WHERE Inventory > 0";
+					PreparedStatement pstmt = con.prepareStatement(SQL);
+					ResultSet rst = pstmt.executeQuery();
+					while (rst.next()) {
+						out.println("<hr class='featurette-divider'><div class='row featurette'><div class='col-md-7'>"
+								+ "<h2 class='featurette-heading'>" + rst.getString(1) + " <span class='text-muted'> "
+								+ rst.getDouble(3) + " </span>");
+						out.println("</h2>" + "<p class='lead'>");
+						if (rst.getString(4) == "CS") {
+							out.println("<br>" + rst.getString(5) + "</p>");
+						}
+						out.println("</div>" + "<div class='col-md-5'>"
+								+ "<img class='featurette-image img-responsive center-block'"
+								+ "src='PUT THE IMAGE SOURCE HERE' alt='Image Failed to Load'>" + "</div>" + "</div>");
+					}
+				} catch (SQLException ex) {
+					out.println(ex);
+				} finally {
+					if (con != null)
+						try {
+							con.close();
+						} catch (SQLException ex) {
+							System.err.println("SQLException: " + ex);
+						}
+				}
+			%>
 
 			<!-- /END THE FEATURETTES -->
-
 		</div>
 		<!-- /#page-content-wrapper -->
 
@@ -237,7 +186,6 @@
 
 	</div>
 	<!-- /.container -->
-	
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->

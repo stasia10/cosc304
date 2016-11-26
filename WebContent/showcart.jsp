@@ -13,7 +13,7 @@
 <body>
 	<script>
 		function update(newid, newqty) {
-			window.location.href = "showcart.jsp?update=" + newid + "&newqty="
+			window.location = "showcart.jsp?update=" + newid + "&newqty="
 					+ newqty;
 		}
 	</script>
@@ -38,7 +38,7 @@
 						product = (ArrayList<Object>) productList.get(update);
 						product.set(3, (new Integer(newqty)));
 					} else {
-						productList.put(update, product);
+						productList.put(del, product);
 					}
 				}
 				if (del != null && (!del.equals(""))) {
@@ -52,16 +52,18 @@
 				out.println("<th>Price</th><th>Subtotal</th><td></td><td></td></tr>");
 
 				double total = 0;
+				int count = 0;
 
 				Iterator<Map.Entry<String, ArrayList<Object>>> iterator = productList.entrySet().iterator();
 				while (iterator.hasNext()) {
-					Map.Entry<String, ArrayList<Object>> entry = iterator.next();
-					product = (ArrayList<Object>) entry.getValue();
+					count ++;
+					Map.Entry entry = (Map.Entry)(iterator.next());
+					product = (ArrayList) entry.getValue();
 					String pid = (String) product.get(0);
 
 					out.print("<tr><td>" + pid + "</td>");
 					out.print("<td>" + product.get(1) + "</td>");
-					out.print("<td><input type=\"text\" name=\"newqty" + pid + "\" size = \"3\" value = \""
+					out.print("<td><input type=\"text\" name=\"newqty" + count + "\" size = \"3\" value = \""
 							+ product.get(3) + "\"></td>");
 					double pr = Double.parseDouble((String) product.get(2));
 					int qty = ((Integer) product.get(3)).intValue();
@@ -69,7 +71,7 @@
 					out.print("<td align=\"right\">" + currFormat.format(pr) + "</td>");
 					out.print("<td align=\"right\">" + currFormat.format(pr * qty) + "</td>");
 					out.println("<td><a href=\"showcart.jsp?delete=" + pid + "\">Remove item from cart</a>");
-					out.println("<td><input type=BUTTON OnClick=\"update(" + pid + ", document.listcart.newqty" + pid
+					out.println("<td><input type=BUTTON OnClick=\"update(" + pid + ", document.listcart.newqty" + count
 							+ ".value)\" value= \"Update Quantity\"></td>");
 					out.println("</tr>");
 					total = total + pr * qty;
@@ -78,7 +80,8 @@
 				out.println("<tr><td colspan=\"4\" align=\"right\"><b>Order Total</b></td>" + "<td align=\"right\">"
 						+ currFormat.format(total) + "</td></tr>");
 				out.println("</table>");
-
+				
+				session.setAttribute("productList", productList);
 				out.println("<h2><a href=\"checkout.jsp\">Check Out</a></h2>");
 			}
 		%>
