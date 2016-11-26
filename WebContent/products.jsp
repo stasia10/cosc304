@@ -103,13 +103,10 @@
 			</form>
 		</div>
 	</li>
-	<li><a href="product.jsp?allProd="><i class="fa fa-fw fa-home"></i> All Products</a>
-	</li>
-	<li><a href="product.jsp?fert="><i class="fa fa-fw fa-folder"></i> Fertilizer</a>
-	</li>
-	<li><a href="product.jsp?access="><i class="fa fa-fw fa-file-o"></i> Accessories</a>
-	</li>
-	<li><a href="product.jsp?cacti="><i class = "fa fa-fw fa-file-o"></i> Cacti</a>
+	<li><a href="#product.jsp"> All Products</a></li>
+	<li><a href="#product.jsp?fert"> Fertilizer</a></li>
+	<li><a href="#product.jsp?access"> Accessories</a></li>
+	<li><a href="#product.jsp?cacti"> Cacti</a></li>
 
 	<nav></nav>
 	<!-- /#sidebar-wrapper -->
@@ -135,8 +132,7 @@
 
 			<!-- START THE FEATURETTES -->
 
-			<%
-				String all = request.getParameter("allProd");
+			<%	
 				String fert = request.getParameter("fert");
 				String access = request.getParameter("access");
 				String cacti = request.getParameter("cacti");
@@ -145,12 +141,16 @@
 					String SQL = "SELECT productName, productId, price, category, species FROM Product WHERE Inventory > 0";
 					PreparedStatement pstmt = con.prepareStatement(SQL);
 					ResultSet rst = pstmt.executeQuery();
+					String cat = null;
 					while (rst.next()) {
+						cat = rst.getString(5);
 						out.println("<hr class='featurette-divider'><div class='row featurette'><div class='col-md-7'>"
 								+ "<h2 class='featurette-heading'>" + rst.getString(1) + " <span class='text-muted'> "
 								+ rst.getDouble(3) + " </span>");
-						out.println("</h2>" + "<p class='lead'>");
-						if (rst.getString(4) == "CS") {
+						out.println("</h2>" + "<h1><a href=\"addcart.jsp?id=" + rst.getString(2) + "&name="
+								+ rst.getString(1) + "&price=" + rst.getString(3)
+								+ "\">Add to cart</a></h1><p class='lead'>");
+						if (cat != null) {
 							out.println("<br>" + rst.getString(5) + "</p>");
 						}
 						out.println("</div>" + "<div class='col-md-5'>"
@@ -166,6 +166,22 @@
 						} catch (SQLException ex) {
 							System.err.println("SQLException: " + ex);
 						}
+				}
+				if (fert != null) {
+					String SQL = "SELECT productName, productId, price, category, species FROM Product WHERE Inventory > 0 AND category = 'FT'";
+					PreparedStatement pstmt = con.prepareStatement(SQL);
+					ResultSet rst = pstmt.executeQuery();
+					while (rst.next()) {
+						out.println("<hr class='featurette-divider'><div class='row featurette'><div class='col-md-7'>"
+								+ "<h2 class='featurette-heading'>" + rst.getString(1) + " <span class='text-muted'> "
+								+ rst.getDouble(3) + " </span>");
+						out.println(
+								"</h2>" + "<h1><a href=\"addcart.jsp?id=" + rst.getString(2) + "&name=" + rst.getString(1)
+										+ "&price=" + rst.getString(3) + "\">Add to cart</a></h1><p class='lead'>");
+						out.println("</div>" + "<div class='col-md-5'>"
+								+ "<img class='featurette-image img-responsive center-block'"
+								+ "src='PUT THE IMAGE SOURCE HERE' alt='Image Failed to Load'>" + "</div>" + "</div>");
+					}
 				}
 			%>
 
