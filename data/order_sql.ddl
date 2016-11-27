@@ -129,10 +129,8 @@ INSERT INTO CactiSpecies VALUES ('Opuntia microdasys', 'Pro-Mix health Fertilize
 INSERT INTO CactiSpecies VALUES ('Echinopsis', 'Nutrition Fertilizer', 8, 8);
 INSERT INTO CactiSpecies VALUES ('Stenocereus pruinosus', 'Garden Fertilizer', 7, 1);
 
-INSERT INTO Account VALUES('bobsmith@fancycacti.com','pass', 'Bob Smith','2505551011', '444 Fake St, Faketown, BC, Canada V1R 7K6','444 Fake St, BC, Canada V1R 7K6','NULL','Admin')
 INSERT INTO Account VALUES('johnjacob@gmail.com','pass', 'John Jacob', '2506827140', '652 Fake Ave, Faketown, BC Canada F5F 6F5','652 Fake Ave, Faketown, BC Canada F5F 6F5','Mastercard','Customer')
-INSERT INTO Account VALUES('janedoe@fancycacti.com','pass', 'Jane Doe','2505551211', '8554 Fake St, Faketown, BC Canada G7T 6F7','8554 Fake St, Faketown, BC Canada G7T 6F7','NULL','Supervisor')
-
+INSERT INTO Account VALUES('johndunphy@gmail.com', 'password', 'John Dunphy', '6047981524', '656 House Ave, Hell, BC Canada D6D 7H5', '656 Devil Ave, Hell, BC Canada D6D 7H5', 'Visa', 'Customer')
 
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
@@ -213,13 +211,13 @@ INSERT INTO Warehouse VALUES('CactiOne', 'CactiVille');
 INSERT INTO Greenhouse VALUES(1, 'CactiVille', 'CactiOne');
 INSERT INTO Greenhouse VALUES(2, 'SucculentCity', 'CactiOne');
 
-INSERT INTO Employee VALUES(1, 'Bob Smith', 'AD', NULL, NULL);
-INSERT INTO Employee VALUES(2, 'Jane Doe', 'SP', NULL, 'CactiOne');
-INSERT INTO Employee VALUES(3, 'Kyla Reid', 'WH', 1, 'CactiOne');
-INSERT INTO Employee VALUES(4, 'Megan Kurz', 'SP', NULL, NULL);
-INSERT INTO Employee VALUES(5, 'Jared Wright', 'GH', 4, NULL);
-INSERT INTO Employee VALUES(6, 'Anastasia Skobkareva', 'GH', NULL, NULL);
-INSERT INTO Employee VALUES(7, 'McNeil Bob', 'GH', 6, NULL);
+INSERT INTO Employee VALUES(1, 'Bob Smith', 'AD', 'bobsmith@fancycacti.com', 'pass', NULL, NULL);
+INSERT INTO Employee VALUES(2, 'Jane Doe', 'SP', 'janedoe@fancycacti.com', 'pass' NULL, 'CactiOne');
+INSERT INTO Employee VALUES(3, 'Kyla Reid', 'WH', 'kylareid@fancycacti.com', 'pass', 1, 'CactiOne');
+INSERT INTO Employee VALUES(4, 'Megan Kurz', 'SP', 'megankurz@fancycacti.com', 'pass', NULL, NULL);
+INSERT INTO Employee VALUES(5, 'Jared Wright', 'GH', 'jaredwright@fancycacti.com', 'pass', 4, NULL);
+INSERT INTO Employee VALUES(6, 'Anastasia Skobkareva', 'GH', 'anastasia.skob@fancycacti.com', 'pass', NULL, NULL);
+INSERT INTO Employee VALUES(7, 'McNeil Bob', 'GH', 'mcneilbob@fancycacti.com', 'pass', 6, NULL);
 
 
 INSERT INTO WorksAt VALUES(1,4);
