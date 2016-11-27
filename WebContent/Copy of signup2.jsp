@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
+	
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,33 +47,37 @@
 
 	<div class="container">
 
-		<form method="POST" action="signup.jsp" class="form-signup">
-				<h2 class="form-signup-heading">Please sign up!</h2>
-			Name<label for="inputName" class="sr-only">First and Last Name</label> 
-				<input name ="inputName" id="inputName" class="form-control" placeholder="First and Last Name" required="" autofocus="" type="text"> 
-			Email<label for="inputEmail" class="sr-only">Email address</label> 
-				<input name ="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" type="email">
-			Password<label for="inputPassword" class="sr-only">Password</label> 
-				<input name ="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required="" type="password"> 
-			Phone Number<label for="inputNum" class="sr-only">Phone Number</label> 
-				<input name ="inputNum" id="inputNum" class="form-control" placeholder="Phone Number" type="text"> 
-			Billing Address<label for="inputBAdd" class="sr-only">Billing Address</label> 
-				<input name ="inputBAdd" id="inputBAdd" class="form-control" placeholder="Billing Address" required="" type="text">
-			Shipping Address<label for="inputSAdd" class="sr-only">Shipping Address</label> 
-				<input name ="inputSAdd" id="inputSAdd" class="form-control" placeholder="Shipping Address" required="" type="text"> 
-			Preferred Payment<label for="inputPay" class="sr-only">Card Number and Expiry Date</label> 
-				<input name ="inputPay" id="inputPay" class="form-control" placeholder="Card Number and Expiry Date" type="text">
-			<button class="btn btn-lg btn-primary btn-block" type="submit" value="submit">Sign up </button>
-
-		</form>
+		<form method="POST" action="signup.jsp" class="form-signup" name="singUp">
+			<h2 class="form-signup-heading">Please sign up!</h2>
+			Name<label for="inputName" class="sr-only">First and Last
+				Name</label> <input id="inputName" class="form-control"
+				placeholder="First and Last Name" required="" autofocus=""
+				type="text"> Email<label for="inputEmail" class="sr-only">Email
+				address</label> <input id="inputEmail" class="form-control"
+				placeholder="Email address (which will be your user name)" required="" autofocus="" type="email">
+			Password<label for="inputPassword" class="sr-only">Password</label> <input
+				id="inputPassword" class="form-control" placeholder="Password"
+				required="" type="password"> Phone Number<label
+				for="inputNum" class="sr-only">Phone Number</label> <input
+				id="inputNum" class="form-control" placeholder="Phone Number"
+				type="text"> Billing Address<label for="inputBAdd"
+				class="sr-only">Billing Address</label> <input id="inputBAdd"
+				class="form-control" placeholder="Billing Address" required=""
+				type="text"> Shipping Address<label for="inputSAdd"
+				class="sr-only">Shipping Address</label> <input id="inputSAdd"
+				class="form-control" placeholder="Shipping Address" required=""
+				type="text"> Preferred Payment<label for="inputPay"
+				class="sr-only">Card Number and Expiry Date</label> <input
+				id="inputPay" class="form-control"
+				placeholder="Card Number and Expiry Date" type="text">
+			<button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit" onclick="checkform()" >Sign
+				up</button>
 
 		</form>
 
 	</div>
-	<!-- /container -->
-
-
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	
+	
 	<script src="signin_files/ie10-viewport-bug-workaround.js"></script>
 	<%@ page import="java.sql.*"%>
 	<%
@@ -87,38 +93,45 @@
 		String BAdd = request.getParameter("inputBAdd");
 		String SAdd = request.getParameter("inputSAdd");
 		String Payment = request.getParameter("inputPay");
-		if (email == null) {
-		} else {
+		
 			try {
 				con = DriverManager.getConnection(url, uid, pw);
-				String s = "SELECT pass FROM Account WHERE email = ?";
-				PreparedStatement st = con.prepareStatement(s);
-				st.setString(1, email);
-				ResultSet rs = st.executeQuery();
-				if (rs.next()) { %>
-	
-	<script>
-	alert("Sorry this email address is already in use :( ");
-	</script>
-
-		<%  } else {
-					String s2 = "INSERT INTO Account VALUES (?, ?, ?, ?, ?, ?, ?, 'Customer')";
+				Statement check = con.createStatement();
+				ResultSet che = check.executeQuery("select email from Account");
+				%>
+				<script>
+	function checkform() {
+    	<% while (che.next()){
+    		if ((request.getParameter("inputEmail")).equals( che.getString(1))){  %>
+    			alert("This email is already in use sorry :(");
+    			<%  break;
+    		}
+    	
+    }%>
+    
+        document.signUp.submit();
+    }
+</script>
+				
+					
+				<%
+				String s2 = "INSERT INTO Account VALUES (?, ?, ?, ?, ?, ?, ?, Customer)";
 					PreparedStatement p = con.prepareStatement(s2);
 					p.setString(1, email);
 					p.setString(2, password);
 					p.setString(3, name);
-					if(number.length()==0) p.setString(4, null);
-					else p.setString(4, number);
+					if (number.length() == 0)
+						p.setString(4, null);
+					else
+						p.setString(4, number);
 					p.setString(5, BAdd);
 					p.setString(6, SAdd);
-					if (Payment.length()==0) p.setString(7, null);
-					else p.setString(7, Payment);
-					p.executeUpdate();%>
-					<script>
-					window.location="showcart.jsp";
-					</script>
-				<%
-				}
+					if (Payment.length() == 0)
+						p.setString(7, null);
+					else
+						p.setString(7, Payment);
+					p.executeUpdate();
+				
 
 			} catch (SQLException ex) {
 				out.println(ex);
@@ -130,7 +143,7 @@
 						System.err.println("SQLException: " + ex);
 					}
 			}
-		}
+		
 	%>
 
 </body>

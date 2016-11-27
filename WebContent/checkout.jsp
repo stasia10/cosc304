@@ -13,6 +13,7 @@
 			type="text" name="password" size="50"> <input type="submit"
 			value="Submit"><input type="reset" value="Reset">
 	</form>
+	<h3>Dont already have an account sign up here</h3> <a href ="signup.jsp">Sign Up </a> 
 
 </body>
 </html>
