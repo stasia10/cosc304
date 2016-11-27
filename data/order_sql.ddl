@@ -19,7 +19,7 @@ phone  VARCHAR(10),
 billingAddress  VARCHAR(100) NOT NULL,
 shippingAddres  VARCHAR(100) NOT NULL,
 preferredPayment  VARCHAR(75),
-accountType  VARCHAR(10) CHECK (accountType IN ('Customer', 'Admin', 'Supervisor')));
+accountType  VARCHAR(10) CHECK (accountType IN ('Customer')));
 
 
 CREATE TABLE Warehouse (
@@ -101,6 +101,8 @@ CREATE TABLE Employee (
 empId  VARCHAR(50),
 empName  VARCHAR(50) NOT NULL,
 title  CHAR(2) CHECK (title IN ('AD', 'SP', 'GH', 'WH')),
+email  VARCHAR(75) NOT NULL,
+pass  VARCHAR(50) NOT NULL
 empSuperId  VARCHAR(50),
 whouseName  VARCHAR(20),
 PRIMARY KEY(empId),
