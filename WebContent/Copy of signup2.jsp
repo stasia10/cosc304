@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	
-	
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,8 +15,8 @@
 <meta name="author" content="">
 <link rel="icon" href="">
 <style type="text/css">
-:root .carbonad,:root #carbonads-container,:root #content>#right>.dose>.dosesingle,:root #content>#center>.dose>.dosesingle
-	{
+:root .carbonad, :root #carbonads-container, :root #content>#right>.dose>.dosesingle,
+	:root #content>#center>.dose>.dosesingle {
 	display: none !important;
 }
 </style>
@@ -47,15 +47,17 @@
 
 	<div class="container">
 
-		<form method="POST" action="signup.jsp" class="form-signup" name="singUp">
+		<form method="POST" action="signup.jsp" class="form-signup"
+			name="singUp">
 			<h2 class="form-signup-heading">Please sign up!</h2>
 			Name<label for="inputName" class="sr-only">First and Last
 				Name</label> <input id="inputName" class="form-control"
 				placeholder="First and Last Name" required="" autofocus=""
 				type="text"> Email<label for="inputEmail" class="sr-only">Email
 				address</label> <input id="inputEmail" class="form-control"
-				placeholder="Email address (which will be your user name)" required="" autofocus="" type="email">
-			Password<label for="inputPassword" class="sr-only">Password</label> <input
+				placeholder="Email address (which will be your user name)"
+				required="" autofocus="" type="email"> Password<label
+				for="inputPassword" class="sr-only">Password</label> <input
 				id="inputPassword" class="form-control" placeholder="Password"
 				required="" type="password"> Phone Number<label
 				for="inputNum" class="sr-only">Phone Number</label> <input
@@ -70,14 +72,14 @@
 				class="sr-only">Card Number and Expiry Date</label> <input
 				id="inputPay" class="form-control"
 				placeholder="Card Number and Expiry Date" type="text">
-			<button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit" onclick="checkform()" >Sign
-				up</button>
+			<button class="btn btn-lg btn-primary btn-block" type="submit"
+				value="Submit" onclick="checkform()">Sign up</button>
 
 		</form>
 
 	</div>
-	
-	
+
+
 	<script src="signin_files/ie10-viewport-bug-workaround.js"></script>
 	<%@ page import="java.sql.*"%>
 	<%
@@ -93,57 +95,60 @@
 		String BAdd = request.getParameter("inputBAdd");
 		String SAdd = request.getParameter("inputSAdd");
 		String Payment = request.getParameter("inputPay");
-		
-			try {
-				con = DriverManager.getConnection(url, uid, pw);
-				Statement check = con.createStatement();
-				ResultSet che = check.executeQuery("select email from Account");
-				%>
-				<script>
-	function checkform() {
-    	<% while (che.next()){
-    		if ((request.getParameter("inputEmail")).equals( che.getString(1))){  %>
-    			alert("This email is already in use sorry :(");
-    			<%  break;
-    		}
-    	
-    }%>
-    
-        document.signUp.submit();
-    }
-</script>
-				
-					
-				<%
-				String s2 = "INSERT INTO Account VALUES (?, ?, ?, ?, ?, ?, ?, Customer)";
-					PreparedStatement p = con.prepareStatement(s2);
-					p.setString(1, email);
-					p.setString(2, password);
-					p.setString(3, name);
-					if (number.length() == 0)
-						p.setString(4, null);
-					else
-						p.setString(4, number);
-					p.setString(5, BAdd);
-					p.setString(6, SAdd);
-					if (Payment.length() == 0)
-						p.setString(7, null);
-					else
-						p.setString(7, Payment);
-					p.executeUpdate();
-				
 
-			} catch (SQLException ex) {
-				out.println(ex);
-			} finally {
-				if (con != null)
-					try {
-						con.close();
-					} catch (SQLException ex) {
-						System.err.println("SQLException: " + ex);
-					}
-			}
-		
+		try {
+			con = DriverManager.getConnection(url, uid, pw);
+			Statement check = con.createStatement();
+			ResultSet che = check.executeQuery("SELECT email FROM Account");
+	%>
+	<script>
+		function checkform() {
+	<%
+		while (che.next()) {
+				if (email == che.getString(1)) {
+	%>
+		alert("This email is already in use sorry :(");
+	<%
+					break;
+				}
+	
+		}
+	%>
+			document.signUp.submit();
+		}
+	</script>
+
+	<%
+			String s2 = "INSERT INTO Account VALUES (?, ?, ?, ?, ?, ?, ?, 'Customer')";
+			PreparedStatement p = con.prepareStatement(s2);
+			if (email == null)
+				out.println("Email cannot be empty");
+			else
+				p.setString(1, "'" + email + "'");
+			p.setString(2, "'" + password + "'");
+			p.setString(3, "'" + name + "'");
+			if (number == null)
+				p.setString(4, null);
+			else
+				p.setString(4, "'" + number + "'");
+			p.setString(5, "'" + BAdd + "'");
+			p.setString(6, "'" + SAdd + "'");
+			if (Payment == null)
+				p.setString(7, null);
+			else
+				p.setString(7, "'" + Payment + "'");
+			p.executeUpdate();
+
+		} catch (SQLException ex) {
+			out.println(ex);
+		} finally {
+			if (con != null)
+				try {
+					con.close();
+				} catch (SQLException ex) {
+					System.err.println("SQLException: " + ex);
+				}
+		}
 	%>
 
 </body>

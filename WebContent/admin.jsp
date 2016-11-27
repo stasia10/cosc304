@@ -20,7 +20,7 @@
 }
 </style>
 
-<title>Staff Sign In</title>
+<title>Admin Page</title>
 
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -42,23 +42,6 @@
     <![endif]-->
 </head>
 <body>
-	<div class="container">
-
-		<form class="staff-signin" name=signIn>
-			<h2 class="form-signin-heading">Please sign in</h2>
-			<label for="inputEmail" class="sr-only">Email address</label> <input
-				id="inputEmail" class="form-control" placeholder="Email address"
-				required="" autofocus="" type="email"> <label
-				for="inputPassword" class="sr-only">Password</label> <input
-				id="inputPassword" class="form-control" placeholder="Password"
-				required="" type="password">
-			<button class="btn btn-lg btn-primary btn-block" type="submit"
-				value="Submit" onclick="checkform()">Sign in</button>
-		</form>
-	</div>
-	<!-- /container -->
-	<script src="signin_files/ie10-viewport-bug-workaround.js"></script>
-	<%@ page import="java.sql.*"%>
 	<%
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		Connection con = null;
@@ -66,26 +49,33 @@
 		String uid = "kreid";
 		String pw = "39265137";
 
-		String email = request.getParameter("inputEmail");
 		try {
 			con = DriverManager.getConnection(url, uid, pw);
-			String SQL = "SELECT email FROM Employee WHERE title = 'AD'";
-			PreparedStatement pstmt = con.prepareStatement(SQL);
-			ResultSet rst = pstmt.executeQuery();
-	%>
-	<script>
-		function checkform() {
-	<%while (rst.next()) {
-					if (email == rst.getString(1)) {%>
-		window.location.href = "admin.jsp";
-	<%} else {%>
-		window.location.href = "supervisor.jsp";
-	<%}
-				}%>
-		document.signIn.submit();
-		}
-	</script>
-	<%
+			String SQL2 = "SELECT orderId, totalAmount, orderDate, paymentType,shipDate, shipType, expectedDelivery FROM Invoice";
+			PreparedStatement pstmt2 = con.prepareStatement(SQL2);
+			ResultSet rst2 = pstmt2.executeQuery();
+			out.println("<table id='hor-minimalist-b'><tbody><th><b>Order Id</b></th><th><b>Order Date</b></th>"
+					+ "<th><b>Ship Date</b></th><th><b>Ship Type</b></th><th><b>Expected Delivery</b></th>"
+					+ "<th><b>Payment Type</b></th><th><b>Total Amount</b></th>");
+			String oid = null;
+			while (rst2.next()) {
+				oid = rst2.getString(1);
+				out.println("<tr><td>" + oid + "</td><td>" + rst2.getString(3) + "</td><td>" + rst2.getString(5)
+						+ "</td><td>" + rst2.getString(6) + "</td><td>" + rst2.getString(7) + "</td><td>"
+						+ rst2.getString(4) + "</td><td>$" + rst2.getString(2) + "</tr>");
+				out.println(
+						"<tr align='right'><td colspan='4'><table id='hor-minimalist-b'><th><b>Product Id</b></th>"
+								+ "<th><b>Quantity</b></th>");
+				String SQL3 = "SELECT productId,quantity FROM OrderedProduct WHERE orderId = ?";
+				PreparedStatement pstmt3 = con.prepareStatement(SQL3);
+				pstmt3.setString(1, oid);
+				ResultSet rst3 = pstmt3.executeQuery();
+				while (rst3.next()) {
+					out.println("<tr><td>" + rst2.getString(1) + "</td><td>" + rst2.getString(2) + "</td></tr>");
+				}
+				out.println("</tbody></table></td></tr>");
+			}
+			out.println("</tbody></table>");
 		} catch (SQLException ex) {
 			out.println(ex);
 		} finally {
