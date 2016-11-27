@@ -36,7 +36,7 @@
         String shipType = "regular"; //change this later and next line later
         String deliv = DateTimeFormatter.ofPattern("yyyy/MM/dd").format(shipDate.plusDays(5));
 
-		String custId = request.getParameter("customerId");
+		String custId = request.getParameter("email");
 		String pass = request.getParameter("password");
 		@SuppressWarnings({ "unchecked" })
 		HashMap<String, ArrayList<Object>> productList = (HashMap<String, ArrayList<Object>>) session
@@ -53,27 +53,19 @@
 			if (productList.isEmpty()) {
 				out.println("<h2>Your shopping cart is empty please go back to previos page and try again</h2>");
 			} else {
-				if (custId.matches("[0-9]+")) {
-					String SQL = "select username, fullName, pass from Account where username=?";
-					PreparedStatement pstmt = con.prepareStatement(SQL);
-					pstmt.setString(1, custId);
-					ResultSet rst = pstmt.executeQuery();
-					if (rst.next()) {
-						if (pass.equals(rst.getString(3))) {
-							String invoice = "INSERT INTO INVOICE (accountUser,orderDate, paymentType, shipDate, shipType, expectedDelivery, whouseName)" +
-									"VALUES (?,?,?,?,?,?,CactiOne)";
+					String accountCheck = "SELECT email, fullName, pass, preferredPayment FROM Account WHERE email=?";
+					PreparedStatement psAccount = con.prepareStatement(accountCheck);
+					psAccount.setString(1, custId);
+					ResultSet rstAccount = psAccount.executeQuery();
+					if (rstAccount.next()) {
+						if (pass.equals(rstAccount.getString(3))) {
+							String invoice = "INSERT INTO INVOICE (accountEmail,orderDate, paymentType, shipDate, shipType, expectedDelivery, whouseName)" +
+									"VALUES (?,?,?,?,?,?,'CactiOne')";
 							PreparedStatement psInvoice = con.prepareStatement(invoice, Statement.RETURN_GENERATED_KEYS);
-							
-							String payment = "SELECT preferredPayment FROM Account WHERE username = ?";
-							PreparedStatement psPayment = con.prepareStatement(payment);
-							psPayment.setString(1, custId);
-							
-							ResultSet payType = psPayment.executeQuery();
-							payType.next();
 							
 							psInvoice.setString(1,custId);
 							psInvoice.setString(2,ordDate);
-							psInvoice.setString(3,payType.getString(1));
+							psInvoice.setString(3,rstAccount.getString(4));
 							psInvoice.setString(4,ship);
 							psInvoice.setString(5,shipType);
 							psInvoice.setString(6,deliv);
@@ -107,10 +99,12 @@
 								PreparedStatement psUpdateProd = con.prepareStatement(updateProd);
 								
 								psGetWeight.setString(1, productId);
+								
 								psInsertProd.setString(1, productId);
 								psInsertProd.setInt(2, orderId);
 								psInsertProd.setInt(3, qty);
 								psInsertProd.setDouble(4, pr);
+								
 								psUpdateProd.setInt(1, qty);
 								psUpdateProd.setString(2, productId);
 								
@@ -121,6 +115,7 @@
 								weight.next();
 								
 								totalAmt += qty * pr;
+								totalWt += weight.getDouble(1);
 								out.println("<tr><td>" + productId + "</td><td>" + product.get(1) + "</td><td>"
 										+ qty + "</td><td>" + pr + "</td><td>" + qty * pr + "</td></tr>");
 								
@@ -129,16 +124,17 @@
 
 							out.println("<tr><td colspan='4'><b>Order Total</b></td><td>" + totalAmt
 									+ "</td></tr></table>");
-							String upOrd = "UPDATE Invoice SET totalAmount = ? WHERE orderId = ?"; 
+							String upOrd = "UPDATE Invoice SET totalAmount = ?, weight=? WHERE orderId = ?"; 
 							PreparedStatement pord = con.prepareStatement(upOrd);
+							totalAmt = Math.round(totalAmt*100.0)/100.0;
 							pord.setDouble(1, totalAmt);
-							pord.setInt(2, orderId);
+							pord.setDouble(2, totalWt);
+							pord.setInt(3, orderId);
 							pord.executeUpdate();
 
 							out.println("<h2>Order Completed. Will be shipped soon...</h2>");
 							out.println("<h2>Your reference number is: " + orderId + "</h2>");
-							out.println("<h2>Shipping to customer: " + custId + " Name: " + rst.getString("cname")
-									+ "</h2>");
+							out.println("<h2>Shipping to customer: " + rstAccount.getString("fullName")+ "</h2>");
 							session.setAttribute("productList", null);
 						} else {
 							out.println(
@@ -147,10 +143,7 @@
 					} else {
 						out.println("<h1>Invalid customer id. Go back to the previous page and try again.</h1>");
 					}
-				} else {
-					out.println("<h1>Invalid customer id. Go back to the previous page and try again.</h1>");
 				}
-			}
 		}
 
 		catch (SQLException ex) {

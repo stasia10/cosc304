@@ -36,10 +36,10 @@ paymentType  VARCHAR(50),
 shipDate  DATE NOT NULL,
 shipType  VARCHAR(50) NOT NULL,
 expectedDelivery  DATE,
-accountUsername  VARCHAR(75) NOT NULL,
+accountEmail  VARCHAR(75) NOT NULL,
 whouseName  VARCHAR(20) NOT NULL,
 PRIMARY KEY (orderId),
-CONSTRAINT FK_Invoice_Account FOREIGN KEY (accountUsername) REFERENCES Account(email),
+CONSTRAINT FK_Invoice_Account FOREIGN KEY (accountEmail) REFERENCES Account(email),
 CONSTRAINT FK_Invoice_Warehouse FOREIGN KEY (whouseName) REFERENCES Warehouse (whouseName));
     
  CREATE TABLE CactiSpecies (
@@ -65,6 +65,7 @@ CREATE TABLE OrderedProduct (
 productId    INT,
 orderId  INT,
 quantity  INTEGER CHECK (quantity >= 0),
+price INTEGER,
 PRIMARY KEY (productId, orderId),
 CONSTRAINT FK_OrderedProduct_Product FOREIGN KEY (productId) REFERENCES Product (productId),
 CONSTRAINT FK_OrderedProduct_Invoice FOREIGN KEY (orderId) REFERENCES Invoice (orderId));
