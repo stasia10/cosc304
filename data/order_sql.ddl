@@ -36,7 +36,7 @@ paymentType  VARCHAR(50),
 shipDate  DATE NOT NULL,
 shipType  VARCHAR(50) NOT NULL,
 expectedDelivery  DATE,
-accountUsername  VARCHAR(50) NOT NULL,
+accountUsername  VARCHAR(75) NOT NULL,
 whouseName  VARCHAR(20) NOT NULL,
 PRIMARY KEY (orderId),
 CONSTRAINT FK_Invoice_Account FOREIGN KEY (accountUsername) REFERENCES Account(email),
@@ -88,7 +88,7 @@ CONSTRAINT FK_Grow_CactiSpecies FOREIGN KEY (species) REFERENCES CactiSpecies (s
 
 
 CREATE TABLE Rating(
-accountUser  VARCHAR(50),
+accountUser  VARCHAR(75),
 productId  INT, 
 stars  INTEGER CHECK(stars BETWEEN 0 and 5),
 review  VARCHAR(150),
@@ -102,7 +102,7 @@ empId  VARCHAR(50),
 empName  VARCHAR(50) NOT NULL,
 title  CHAR(2) CHECK (title IN ('AD', 'SP', 'GH', 'WH')),
 email  VARCHAR(75) NOT NULL,
-pass  VARCHAR(50) NOT NULL
+pass  VARCHAR(50) NOT NULL,
 empSuperId  VARCHAR(50),
 whouseName  VARCHAR(20),
 PRIMARY KEY(empId),
@@ -212,7 +212,7 @@ INSERT INTO Greenhouse VALUES(1, 'CactiVille', 'CactiOne');
 INSERT INTO Greenhouse VALUES(2, 'SucculentCity', 'CactiOne');
 
 INSERT INTO Employee VALUES(1, 'Bob Smith', 'AD', 'bobsmith@fancycacti.com', 'pass', NULL, NULL);
-INSERT INTO Employee VALUES(2, 'Jane Doe', 'SP', 'janedoe@fancycacti.com', 'pass' NULL, 'CactiOne');
+INSERT INTO Employee VALUES(2, 'Jane Doe', 'SP', 'janedoe@fancycacti.com', 'pass', NULL, 'CactiOne');
 INSERT INTO Employee VALUES(3, 'Kyla Reid', 'WH', 'kylareid@fancycacti.com', 'pass', 1, 'CactiOne');
 INSERT INTO Employee VALUES(4, 'Megan Kurz', 'SP', 'megankurz@fancycacti.com', 'pass', NULL, NULL);
 INSERT INTO Employee VALUES(5, 'Jared Wright', 'GH', 'jaredwright@fancycacti.com', 'pass', 4, NULL);
