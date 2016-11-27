@@ -58,9 +58,9 @@
 						<ul class="nav navbar-nav">
 							<li><a href="index.html">Home</a></li>
 							<li class="active"><a href="about.html">About</a></li>
-							<li><a href="#contact.html">Contact</a></li>
-							<li><a href="#products.html">Products</a></li>
-							<li><a href="#products.html">Plant Care</a></li>
+							<li><a href="contact.html">Contact</a></li>
+							<li><a href="products.jsp">Products</a></li>
+							<li><a href="products.jsp">Plant Care</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<a href="checkout.jsp" class="btn btn-default navbar-btn"> <span
