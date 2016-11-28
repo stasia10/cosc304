@@ -7,7 +7,10 @@ body {
   color: #5a5a5a;
 }
 
-
+.btn-cancel {
+  background-color: red;
+  border-color: orange;
+}
 
 
 
@@ -54,6 +57,10 @@ body {
   margin-left: 10px;
 }
 
+.formpadding{
+  padding:55px;
+}
+
 
 /* Featurettes
 ------------------------- */
@@ -67,6 +74,9 @@ body {
   font-weight: 300;
   line-height: 1;
   letter-spacing: -1px;
+}
+.featurette-image{
+border-radius: 20%;
 }
 
 
