@@ -79,7 +79,7 @@
 			String newPay = request.getParameter("newPay");
 			String newQty = request.getParameter("newQty");
 			String newInvent = request.getParameter("newInvent");
-			
+
 			String oid = null;
 			String pid = null;
 			int ship = 0;
@@ -102,12 +102,14 @@
 						if (updateShipment != null && updatePayment != null && (!updateShipment.equals(""))
 								&& (!updatePayment.equals(""))) {
 							if (oid.equals(updateShipment)) {
-								PreparedStatement up = con.prepareStatement("UPDATE Invoice SET shipType = '?' WHERE orderId = ?");
+								PreparedStatement up = con
+										.prepareStatement("UPDATE Invoice SET shipType = '?' WHERE orderId = ?");
 								up.setString(1, "'" + newShip + "'");
 								up.setString(2, oid);
 								up.executeUpdate();
 							} else if (updatePayment.equals(oid)) {
-								PreparedStatement up = con.prepareStatement("UPDATE Invoice SET paymentType = '?' WHERE orderId = ?");
+								PreparedStatement up = con
+										.prepareStatement("UPDATE Invoice SET paymentType = '?' WHERE orderId = ?");
 								up.setString(1, "'" + newPay + "'");
 								up.setString(2, oid);
 								up.executeUpdate();
@@ -138,7 +140,8 @@
 							pid = rst2.getString(1);
 							if (updateQty != null && (!updateQty.equals(""))) {
 								if (pid.equals(updateQty)) {
-									PreparedStatement up = con.prepareStatement("UPDATE OrderedProduct SET quantity = ? WHERE productId = ?");
+									PreparedStatement up = con.prepareStatement(
+											"UPDATE OrderedProduct SET quantity = ? WHERE productId = ?");
 									up.setString(1, newQty);
 									up.setString(2, pid);
 									up.executeUpdate();
