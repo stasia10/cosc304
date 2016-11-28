@@ -72,6 +72,7 @@
 				type="text">
 			<button class="btn btn-lg btn-primary btn-block" type="submit"
 				value="submit">Sign up</button>
+			<a href="checkout.jsp" >Cancel</a>
 
 		</form>
 
