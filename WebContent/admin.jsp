@@ -107,7 +107,10 @@
 								up.setString(2, oid);
 								up.executeUpdate();
 							} else if (updatePayment.equals(oid)) {
-								rst.updateString(4, newPay);
+								PreparedStatement up = con.prepareStatement("UPDATE Invoice SET paymentType = '?' WHERE orderId = ?");
+								up.setString(1, "'" + newPay + "'");
+								up.setString(2, oid);
+								up.executeUpdate();
 							}
 						}
 						pay++;
