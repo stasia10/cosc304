@@ -12,6 +12,24 @@ body {
   border-color: orange;
 }
 
+.btn-register {
+  background-color: #0070ba;
+  border-color: #003b63;
+  color:#ffffff;
+}
+.btn-register:hover {
+  background-color: #005a96;
+ color:#ffffff; 
+}
+.btn-register:active {
+  background-color: #003b63;
+ color:#ffffff;
+}
+.btn-register:focus {
+  background-color: #003b63;
+   color:#ffffff;
+
+}
 
 
 /* CUSTOMIZE THE CAROUSEL

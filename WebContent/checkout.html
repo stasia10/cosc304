@@ -1,3 +1,6 @@
+</body>
+</html>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,7 +12,7 @@
     <meta name="author" content="">
     <link rel="icon" href="img/fav/favicon.ico">
 
-    <title>About</title>
+    <title>Checkout</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -46,7 +49,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="index.html">Home</a></li>
-            <li class="active"><a href="about.html">About</a></li>
+            <li><a href="about.html">About</a></li>
             <li><a href="products.jsp">Products</a></li>
             <li><a href="pcare.html">Plant Care</a></li>
             </ul>
@@ -69,46 +72,27 @@
     <!-- Wrap the rest of the page in another container to center all the content. -->
 
     <div class="container marketing">
+    <div class ="formpadding">
+ <form class="form-signin" method="get" action="order.jsp">
+				<div class="form-group row">
+					<label for="inputEmail" class="col-xs-2 col-form-label">Email:</label>
+					<div class="col-xs-10">
+						<input class="form-control" id="inputEmail" type="email" placeholder="Example@FancyCacti.com" ">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="inputPassword" class="col-xs-2 col-form-label">Password:</label>
+					<div class="col-xs-10">
+						<input class="form-control" id="inputPassword" type="password" placeholder="hunter2" >
+					</div>
 
-      <!-- START THE FEATURETTES -->
-
-      <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">State of the Art -<span class="text-muted"> Growing conditions tailored beyond belief.</span></h2>
-          <p class="lead">Fancy Cacti has one of the worlds most advanced greenhouses. Everything is tightly controlled to ensure your plant is in tip top condition. We manage temperature, humidity, light levels, nutrient levels and more. Our staff includes some of the worlds best horticulturalists, pedologist and, edaphologists.</p>
-        </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-responsive center-block" src="img/about1.png" alt="Generic placeholder image">
-        </div>
+				</div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <a class="btn btn-lg btn-block btn-register" href="signup.jsp">Create account</a>
+      </form>
       </div>
-
-      <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-7 col-md-push-5">
-          <h2 class="featurette-heading">Global - <span class="text-muted">Fancy Cacti ships to over 100 countries. </span></h2>
-          <p class="lead">Fancy Cacti has developed a proprietary shipping container to allow the transporation of cacti across continenets. We are constantly adding new countries as we get clearance to import plants. If your country is not supported send us an email and we will let you know when shipping is available.</p>
-        </div>
-        <div class="col-md-5 col-md-pull-7">
-          <img class="featurette-image img-responsive center-block" src="img/about2.png" alt="Generic placeholder image">
-        </div>
-      </div>
-
-      <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">Tailored - <span class="text-muted">Fancy Cacti is at the forefront of genetic engineering.</span></h2>
-          <p class="lead">At Fancy Cacti we can tailor our products to your every want and need. Thanks to the latest advancements in genetic engineering technologies such as CRISPR; We can modify your cacti to be a specific color, specially adapt it to environmental conditions and, we can even add bioluminescence. </p>
-        </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-responsive center-block" src="img/about3.png" alt="Generic placeholder image">
-        </div>
-      </div>
-
-      <hr class="featurette-divider">
+      
+     
 
       <!-- /END THE FEATURETTES -->
 
