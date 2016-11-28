@@ -47,18 +47,17 @@
 		<form class="staff-signin" name=signIn>
 			<h2 class="form-signin-heading">Please sign in</h2>
 			<label for="inputEmail" class="sr-only">Email address</label> <input
-				id="inputEmail" class="form-control" placeholder="Email address"
-				required="" autofocus="" type="email"> <label
-				for="inputPassword" class="sr-only">Password</label> <input
-				id="inputPassword" class="form-control" placeholder="Password"
-				required="" type="password">
+				id="inputEmail" name="inputEmail" class="form-control"
+				placeholder="Email address" required="" autofocus="" type="email">
+			<label for="inputPassword" class="sr-only">Password</label> <input
+				id="inputPassword" name="inputPassword" class="form-control"
+				placeholder="Password" required="" type="password">
 			<button class="btn btn-lg btn-primary btn-block" type="submit"
-				value="Submit" onclick="checkform()">Sign in</button>
+				value="Submit">Sign in</button>
 		</form>
 	</div>
 	<!-- /container -->
 	<script src="signin_files/ie10-viewport-bug-workaround.js"></script>
-	<%@ page import="java.sql.*"%>
 	<%
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		Connection con = null;
@@ -69,23 +68,27 @@
 		String email = request.getParameter("inputEmail");
 		try {
 			con = DriverManager.getConnection(url, uid, pw);
-			String SQL = "SELECT email FROM Employee WHERE title = 'AD'";
+			String SQL = "SELECT empEmail, title FROM Employee WHERE title IN ('AD','SP')";
 			PreparedStatement pstmt = con.prepareStatement(SQL);
 			ResultSet rst = pstmt.executeQuery();
+			while (rst.next()) {
+				if (rst.getString("empEmail").equalsIgnoreCase(email)) {
+					if (rst.getString("title").equalsIgnoreCase("AD")) {
 	%>
-	<script>
-		function checkform() {
-	<%while (rst.next()) {
-					if (email == rst.getString(1)) {%>
-		window.location.href = "admin.jsp";
-	<%} else {%>
-		window.location.href = "supervisor.jsp";
-	<%}
-				}%>
-		document.signIn.submit();
-		}
-	</script>
+	<jsp:forward page="admin.jsp" />
 	<%
+		} else if (rst.getString("title").equalsIgnoreCase("SP")) {
+	%>
+	<jsp:forward page="supervisor.jsp" />
+	<%
+		} else {
+	%>
+	<h2>You are not an employee!</h2>
+	<%
+		}
+					break;
+				}
+			}
 		} catch (SQLException ex) {
 			out.println(ex);
 		} finally {

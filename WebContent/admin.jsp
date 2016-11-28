@@ -19,7 +19,7 @@
 	display: none !important;
 }
 </style>
-
+<link rel="stylesheet" type="text/css" href="main.css">
 <title>Admin Page</title>
 
 <!-- Bootstrap core CSS -->
@@ -51,26 +51,26 @@
 
 		try {
 			con = DriverManager.getConnection(url, uid, pw);
-			String SQL2 = "SELECT orderId, totalAmount, orderDate, paymentType,shipDate, shipType, expectedDelivery FROM Invoice";
-			PreparedStatement pstmt2 = con.prepareStatement(SQL2);
-			ResultSet rst2 = pstmt2.executeQuery();
+			String SQL = "SELECT orderId, totalAmount, orderDate, paymentType,shipDate, shipType, expectedDelivery FROM Invoice";
+			PreparedStatement pstmt = con.prepareStatement(SQL);
+			ResultSet rst = pstmt.executeQuery();
 			out.println("<table id='hor-minimalist-b'><tbody><th><b>Order Id</b></th><th><b>Order Date</b></th>"
 					+ "<th><b>Ship Date</b></th><th><b>Ship Type</b></th><th><b>Expected Delivery</b></th>"
 					+ "<th><b>Payment Type</b></th><th><b>Total Amount</b></th>");
 			String oid = null;
-			while (rst2.next()) {
-				oid = rst2.getString(1);
-				out.println("<tr><td>" + oid + "</td><td>" + rst2.getString(3) + "</td><td>" + rst2.getString(5)
-						+ "</td><td>" + rst2.getString(6) + "</td><td>" + rst2.getString(7) + "</td><td>"
-						+ rst2.getString(4) + "</td><td>$" + rst2.getString(2) + "</tr>");
+			while (rst.next()) {
+				oid = rst.getString(1);
+				out.println("<tr><td>" + oid + "</td><td>" + rst.getString(3) + "</td><td>" + rst.getString(5)
+						+ "</td><td>" + rst.getString(6) + "</td><td>" + rst.getString(7) + "</td><td>"
+						+ rst.getString(4) + "</td><td>$" + rst.getString(2) + "</tr>");
 				out.println(
 						"<tr align='right'><td colspan='4'><table id='hor-minimalist-b'><th><b>Product Id</b></th>"
 								+ "<th><b>Quantity</b></th>");
 				String SQL3 = "SELECT productId,quantity FROM OrderedProduct WHERE orderId = ?";
-				PreparedStatement pstmt3 = con.prepareStatement(SQL3);
-				pstmt3.setString(1, oid);
-				ResultSet rst3 = pstmt3.executeQuery();
-				while (rst3.next()) {
+				PreparedStatement pstmt2 = con.prepareStatement(SQL3);
+				pstmt2.setString(1, oid);
+				ResultSet rst2 = pstmt2.executeQuery();
+				while (rst2.next()) {
 					out.println("<tr><td>" + rst2.getString(1) + "</td><td>" + rst2.getString(2) + "</td></tr>");
 				}
 				out.println("</tbody></table></td></tr>");
