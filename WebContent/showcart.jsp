@@ -86,7 +86,7 @@
 			}
 		%>
 		<h2>
-			<a href="listprod.jsp">Continue Shopping</a>
+			<a href="products.jsp">Continue Shopping</a>
 		</h2>
 	</form>
 </body>
