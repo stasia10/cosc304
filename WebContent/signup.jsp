@@ -11,7 +11,18 @@ pageEncoding="ISO-8859-1"%>
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<link rel="icon" href="">
+	
+
+<link rel="apple-touch-icon" sizes="180x180" href="img/fav/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="img/fav/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="img/fav/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="img/fav/manifest.json">
+<link rel="mask-icon" href="img/fav/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="img/fav/favicon.ico">
+<meta name="msapplication-config" content="img/fav/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+
 	<style type="text/css">
 		:root .carbonad, :root #carbonads-container, :root #content>#right>.dose>.dosesingle,
 		:root #content>#center>.dose>.dosesingle {
