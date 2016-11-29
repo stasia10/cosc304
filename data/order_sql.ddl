@@ -1,6 +1,5 @@
 DROP TABLE OrderedProduct;
 DROP TABLE Invoice;
-DROP TABLE Rating;
 DROP TABLE Grow;
 DROP TABLE WorksAt;
 DROP TABLE Greenhouse;
@@ -86,16 +85,6 @@ species  VARCHAR(50),
 PRIMARY KEY (ghouseId, species),
 CONSTRAINT FK_Grow_Greenhouse FOREIGN KEY (ghouseId) REFERENCES Greenhouse (ghouseId),
 CONSTRAINT FK_Grow_CactiSpecies FOREIGN KEY (species) REFERENCES CactiSpecies (species));
-
-
-CREATE TABLE Rating(
-accountUser  VARCHAR(75),
-productId  INT, 
-stars  INTEGER CHECK(stars BETWEEN 0 and 5),
-review  VARCHAR(150),
-PRIMARY KEY(accountUser, productId),
-CONSTRAINT FK_Rating_Product FOREIGN KEY(productId) REFERENCES Product(productId),
-CONSTRAINT FK_Rating_Account FOREIGN KEY(accountUser) REFERENCES Account(email));
 
 
 CREATE TABLE Employee (
