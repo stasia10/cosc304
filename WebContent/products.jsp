@@ -174,6 +174,7 @@
 											+ "\">Add to cart</a></h1><p class='lead'>");
 									if (spec != null) {
 										out.println("<br>" + rst.getString(5) + "</p>");
+										out.println("<br>Preferred Fertilizer: " + rst.getString("food") + "</p>");
 									}
 									out.println("</div>" + "<div class='col-md-5'>"
 											+ "<img class='featurette-image img-responsive center-block'" + "src='img\\"
@@ -196,6 +197,7 @@
 											+ "\">Add to cart</a></h1><p class='lead'>");
 									if (spec != null) {
 										out.println("<br>" + rst.getString(5) + "</p>");
+										out.println("<br>Preferred Fertilizer: " + rst.getString("food") + "</p>");
 									}
 									out.println("</div>" + "<div class='col-md-5'>"
 											+ "<img class='featurette-image img-responsive center-block'" + "src='img\\"
