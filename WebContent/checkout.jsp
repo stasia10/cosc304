@@ -1,33 +1,118 @@
 <!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="main.css">
-<title>Fancy Cacti CheckOut Line</title>
-</head>
-<body>
-<div class="container">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="img/fav/favicon.ico">
 
-      <form class="form-signin" method="get" action="order.jsp">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" type="email">
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input id="inputPassword" class="form-control" placeholder="Password" required="" type="password">
+    <title>Checkout</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <link href="css/carousel.css" rel="stylesheet">
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body>
+      <div class="navbar-wrapper">
+      <div class="container">
+
+   <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+
+          <a class="navbar-brand" href="index.html">Fancy Cacti</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="products.jsp">Products</a></li>
+            <li><a href="pcare.html">Plant Care</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            <a href="checkout.html" class="btn btn-default navbar-btn">
+          <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart 
+          </a>
+
+          </ul>
+        
+        </div><!--/.nav-collapse -->
+
+      </div>
+    </nav>
+
+      </div>
+    </div>
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+    <div class ="formpadding">
+ <form class="form-signin" method="get" action="order.jsp">
+				<div class="form-group row">
+					<label for="inputEmail" class="col-xs-2 col-form-label">Email:</label>
+					<div class="col-xs-10">
+						<input class="form-control" id="inputEmail" type="email" placeholder="Example@FancyCacti.com" ">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="inputPassword" class="col-xs-2 col-form-label">Password:</label>
+					<div class="col-xs-10">
+						<input class="form-control" id="inputPassword" type="password" placeholder="hunter2" >
+					</div>
+
+				</div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <a class="btn btn-lg btn-primary btn-block" href="signup.jsp">Create account</a>
+        <a class="btn btn-lg btn-block btn-register" href="signup.jsp">Create account</a>
       </form>
+      </div>
+      
+     
 
-    </div> <!-- /container -->
-	<h1>Enter your customer id and password to complete the transaction:</h1>
+      <!-- /END THE FEATURETTES -->
 
-	<form method="get" action="order.jsp">
-		<input type="text" name="email" size="50">
-		 <input type="text" name="password" size="50">
-		  <input type="submit" value="Submit">
-			<input type="reset" value="Reset">
-	</form>
-	<h3>Dont already have an account sign up here</h3> <a href ="Copy of signup2.jsp">Sign Up </a> 
+        <!-- /#page-content-wrapper -->
 
-</body>
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2016 Fancy Cacti, Inc. &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a></p>
+      </footer>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>
-
