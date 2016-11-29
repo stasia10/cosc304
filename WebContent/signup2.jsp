@@ -94,7 +94,7 @@
 	<!-- Main Content -->
 	<!-- /container -->
 	<div class="container marketing formpadding">
-		<form method="POST" action="products.jsp" class="form-signup">
+		<form method="POST" action="signup2.jsp" class="form-signup">
 
 			<div class="form-group row">
 				<label for="inputName" class="col-xs-2 col-form-label">Name:</label>
@@ -132,7 +132,7 @@
 					Address:</label>
 				<div class="col-xs-10">
 					<input class="form-control" name="inputBAdd" type="text"
-						placeholder="First and Last Name">
+						placeholder="1234 Example St, Kelowna BC, Canada.">
 				</div>
 			</div>
 
@@ -141,7 +141,7 @@
 					Address:</label>
 				<div class="col-xs-10">
 					<input class="form-control" name="inputSAdd" type="text"
-						placeholder="First and Last Name">
+						placeholder="1000 Example St, Kelowna BC, Canada.">
 				</div>
 			</div>
 
@@ -158,12 +158,17 @@
 				value="submit">Sign up</button>
 
 
-			<button class="btn btn-lg btn-block" href="checkout.jsp">Cancel</button>
+			<button class="btn btn-lg btn-block" type="button" onClick="cancel()"> 
+			Cancel
+			</button>
 
 
 		</form>
 	</div>
-
+	<script> 
+	function cancel(){
+		location.href = 'index.html';
+	}</script>
 
 
 	<!-- FOOTER -->
