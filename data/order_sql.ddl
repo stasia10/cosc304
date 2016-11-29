@@ -87,6 +87,7 @@ CONSTRAINT FK_Grow_Greenhouse FOREIGN KEY (ghouseId) REFERENCES Greenhouse (ghou
 CONSTRAINT FK_Grow_CactiSpecies FOREIGN KEY (species) REFERENCES CactiSpecies (species));
 
 
+
 CREATE TABLE Employee (
 empId  VARCHAR(50),
 empName  VARCHAR(50) NOT NULL,
