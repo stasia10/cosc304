@@ -64,6 +64,13 @@
 			int invent = 0;
 			try {
 				con = DriverManager.getConnection(url, uid, pw);
+				if (update != null && (!update.equals(""))){
+					PreparedStatement up = con
+							.prepareStatement("UPDATE Product SET Inventory = ? WHERE productId = ?");
+					up.setString(1, newInvent);
+					up.setString(2, update);
+					up.executeUpdate();
+				}
 				if ("products".equalsIgnoreCase(select)) {
 					String SQL = "SELECT * FROM Product";
 					PreparedStatement pstmt = con.prepareStatement(SQL);
@@ -75,14 +82,6 @@
 					String spec = null;
 					while (rst.next()) {
 						invent++;
-						if(update != null && (!update.equals(""))){
-							if(rst.getString("productId").equals(update)){
-								PreparedStatement up = con.prepareStatement("UPDATE Product SET Inventory = ? WHERE productId = ?");
-								up.setString(1, newInvent);
-								up.setString(2, rst.getString("productId"));
-								up.executeUpdate();
-							}
-						}
 						spec = rst.getString("species");
 						out.println("<tr><td>" + rst.getString("productId") + "</td><td>" + rst.getString("productName")
 								+ "</td><td>" + rst.getString("weight") + "</td><td>$" + rst.getString("price")
