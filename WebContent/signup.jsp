@@ -120,14 +120,14 @@ pageEncoding="ISO-8859-1"%>
 				<div class="form-group row">
 					<label for="inputBAdd" class="col-xs-2 col-form-label">Billing Address:</label>
 					<div class="col-xs-10">
-						<input class="form-control" name="inputBAdd" type="text" placeholder="First and Last Name" >
+						<input class="form-control" name="inputBAdd" type="text" placeholder="1234 Example St, Kelowna BC, Canada." >
 					</div>
 				</div>
 
 				<div class="form-group row">
 					<label for="inputSAdd" class="col-xs-2 col-form-label">Shipping Address:</label>
 					<div class="col-xs-10">
-						<input class="form-control" name="inputSAdd" type="text" placeholder="First and Last Name">
+						<input class="form-control" name="inputSAdd" type="text" placeholder="1000 Example St, Kelowna BC, Canada.">
 					</div>
 				</div>
 
