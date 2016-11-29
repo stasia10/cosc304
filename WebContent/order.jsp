@@ -62,18 +62,162 @@
 		String deliv = DateTimeFormatter.ofPattern("yyyy/MM/dd").format(delivDay);
 		String custId = request.getParameter("inputEmail");
 		String pass = request.getParameter("inputPassword");
+		String custName = request.getParameter("inputName");
+		String number = request.getParameter("inputNum");
+		String BAdd = request.getParameter("inputBAdd");
+		String SAdd = request.getParameter("inputSAdd");
+		String payment = request.getParameter("inputPay");
 
 		try {
 			con = DriverManager.getConnection(url, uid, pw);
 			if (productList.isEmpty()) {
 				out.println("<h2>Your shopping cart is empty please go back to previos page and try again</h2>");
-			} else {
+			} else if(custName != null){
+				String check = "SELECT pass FROM Account WHERE email = ?";
+				PreparedStatement psCheck = con.prepareStatement(check);
+				psCheck.setString(1, custId);
+				ResultSet rsCheck = psCheck.executeQuery();
+				if (rsCheck.next()) {
+				%>
+
+				<script>
+					alert("Sorry this email address is already in use! Please use a different email to check out ");
+					location.href = "signup.jsp";
+				</script>
+
+				<%
+				} else {
+					String createNew = "INSERT INTO Account VALUES (?, ?, ?, ?, ?, ?, ?, 'Customer')";
+					PreparedStatement psCreateNew = con.prepareStatement(createNew);
+					psCreateNew.setString(1, custId);
+					psCreateNew.setString(2, pass);
+					psCreateNew.setString(3, custName);
+					if (number.length() == 0)
+						psCreateNew.setString(4, null);
+					else
+						psCreateNew.setString(4, number);
+					psCreateNew.setString(5, BAdd);
+					psCreateNew.setString(6, SAdd);
+					if (payment.length() == 0)
+						psCreateNew.setString(7, null);
+					else
+						psCreateNew.setString(7, payment);
+					psCreateNew.executeUpdate();
+					
+					
+
+					String invoice = "INSERT INTO INVOICE (accountEmail,orderDate, paymentType, shipDate, shipType, expectedDelivery, whouseName)"
+							+ "VALUES (?,?,?,?,?,?,'CactiOne')";
+					PreparedStatement psInvoice = con.prepareStatement(invoice,
+							Statement.RETURN_GENERATED_KEYS);
+
+					psInvoice.setString(1, custId);
+					psInvoice.setString(2, ordDate);
+					psInvoice.setString(3, payment);
+					psInvoice.setString(4, ship);
+					psInvoice.setString(5, shipType);
+					psInvoice.setString(6, deliv);
+
+					psInvoice.executeUpdate();
+					ResultSet keys = psInvoice.getGeneratedKeys();
+					keys.next();
+					int orderId = keys.getInt(1);
+					double totalAmt = shipCost;
+					double totalWt = 0;
+
+					Iterator<Map.Entry<String, ArrayList<Object>>> iterator = productList.entrySet().iterator();
+					out.println("<h1>Your Order Summary</h1>");
+					out.println(
+							"<table><tr><td>Product Id</td><td>Product Name</td><td>Quantity</td><td>Price</td><td>Subtotal</td></tr>");
+					while (iterator.hasNext()) {
+						Map.Entry<String, ArrayList<Object>> entry = iterator.next();
+						ArrayList<Object> product = (ArrayList<Object>) entry.getValue();
+						String productId = (String) product.get(0);
+						String price = (String) product.get(2);
+						double pr = Double.parseDouble(price);
+						int qty = ((Integer) product.get(3)).intValue();
+						String insertProd = "INSERT INTO OrderedProduct VALUES(?,?,?,?)";
+						String updateProd = "UPDATE Product SET Inventory = Inventory - ? WHERE productId = ?";
+						String getWeight = "SELECT weight FROM Product WHERE productID = ?";
+
+						PreparedStatement psGetWeight = con.prepareStatement(getWeight);
+						PreparedStatement psInsertProd = con.prepareStatement(insertProd);
+						PreparedStatement psUpdateProd = con.prepareStatement(updateProd);
+
+						psGetWeight.setString(1, productId);
+
+						psInsertProd.setString(1, productId);
+						psInsertProd.setInt(2, orderId);
+						psInsertProd.setInt(3, qty);
+						psInsertProd.setDouble(4, pr);
+
+						psUpdateProd.setInt(1, qty);
+						psUpdateProd.setString(2, productId);
+
+						psInsertProd.executeUpdate();
+						psUpdateProd.executeUpdate();
+						ResultSet weight = psGetWeight.executeQuery();
+						weight.next();
+
+						totalAmt += qty * pr;
+						totalWt += weight.getDouble(1);
+						out.println("<tr><td>" + productId + "</td><td>" + product.get(1) + "</td><td>" + qty
+								+ "</td><td>" + pr + "</td><td>" + qty * pr + "</td></tr>");
+
+					}
+					
+					out.println("<tr><td colspan='4'>Shipping Cost </td><td>" + shipCost
+							+  "</td></tr>");
+
+					totalAmt = Math.round(totalAmt * 100.0) / 100.0;
+					
+					out.println("<tr><td colspan='4'><b>Order Total </b></td><td>" + totalAmt
+							+  "</td></tr></table>");
+					String upOrd = "UPDATE Invoice SET totalAmount = ?, weight=? WHERE orderId = ?";
+					PreparedStatement pord = con.prepareStatement(upOrd);
+					
+					
+					pord.setDouble(1, totalAmt);
+					pord.setDouble(2, totalWt);
+					pord.setInt(3, orderId);
+					pord.executeUpdate();
+
+					out.println("<h2>Order Completed. Will be shipped on "+ ship +"</h2>");
+					out.println("<h2>Your expected delivery date is "+ deliv +"</h2>");
+					out.println("<h2>Your reference number is: " + orderId + "</h2>");
+					out.println("<h2>Shipping to customer: " + custName + "</h2>");
+					session.setAttribute("productList", null);
+					}
+				
+			}
+			else {
 				String accountCheck = "SELECT email, fullName, pass, preferredPayment FROM Account WHERE email=?";
 				PreparedStatement psAccount = con.prepareStatement(accountCheck);
 				psAccount.setString(1, custId);
 				ResultSet rstAccount = psAccount.executeQuery();
-				if (rstAccount.next()) {
-					if (pass.equals(rstAccount.getString(3))) {
+				if (!(rstAccount.next())) {
+					%>
+
+					<script>
+						alert("Invalid email! Please use a different email to check out ");
+						location.href = "checkout.jsp";
+					</script>
+
+					<%
+				}
+				else{
+					
+					payment = rstAccount.getString(4);
+					if (!pass.equals(rstAccount.getString(3))) {
+						%>
+						<script>
+							alert("Invalid password!");
+							location.href = "checkout.jsp";
+						</script>	<%
+						
+					}
+					else{
+
 						String invoice = "INSERT INTO INVOICE (accountEmail,orderDate, paymentType, shipDate, shipType, expectedDelivery, whouseName)"
 								+ "VALUES (?,?,?,?,?,?,'CactiOne')";
 						PreparedStatement psInvoice = con.prepareStatement(invoice,
@@ -81,7 +225,7 @@
 
 						psInvoice.setString(1, custId);
 						psInvoice.setString(2, ordDate);
-						psInvoice.setString(3, rstAccount.getString(4));
+						psInvoice.setString(3, payment);
 						psInvoice.setString(4, ship);
 						psInvoice.setString(5, shipType);
 						psInvoice.setString(6, deliv);
@@ -155,15 +299,10 @@
 						out.println("<h2>Your reference number is: " + orderId + "</h2>");
 						out.println("<h2>Shipping to customer: " + rstAccount.getString("fullName") + "</h2>");
 						session.setAttribute("productList", null);
-					} else {
-						out.println(
-								"<h1> You have entered the wrong password please go back to the previous page and try again.</h1>");
 					}
-				} else {
-					out.println("<h1>Invalid customer id. Go back to the previous page and try again.</h1>");
 				}
 			}
-		}
+				}
 
 		catch (SQLException ex) {
 			out.println(ex);

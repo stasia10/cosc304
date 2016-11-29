@@ -11,18 +11,7 @@ pageEncoding="ISO-8859-1"%>
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<meta name="description" content="">
 	<meta name="author" content="">
-	
-
-<link rel="apple-touch-icon" sizes="180x180" href="img/fav/apple-touch-icon.png">
-<link rel="icon" type="image/png" href="img/fav/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="img/fav/favicon-16x16.png" sizes="16x16">
-<link rel="manifest" href="img/fav/manifest.json">
-<link rel="mask-icon" href="img/fav/safari-pinned-tab.svg" color="#5bbad5">
-<link rel="shortcut icon" href="img/fav/favicon.ico">
-<meta name="msapplication-config" content="img/fav/browserconfig.xml">
-<meta name="theme-color" content="#ffffff">
-
-
+	<link rel="icon" href="">
 	<style type="text/css">
 		:root .carbonad, :root #carbonads-container, :root #content>#right>.dose>.dosesingle,
 		:root #content>#center>.dose>.dosesingle {
@@ -120,14 +109,14 @@ pageEncoding="ISO-8859-1"%>
 				<div class="form-group row">
 					<label for="inputBAdd" class="col-xs-2 col-form-label">Billing Address:</label>
 					<div class="col-xs-10">
-						<input class="form-control" name="inputBAdd" type="text" placeholder="1234 Example St, Kelowna BC, Canada." >
+						<input class="form-control" name="inputBAdd" type="text" placeholder="First and Last Name" >
 					</div>
 				</div>
 
 				<div class="form-group row">
 					<label for="inputSAdd" class="col-xs-2 col-form-label">Shipping Address:</label>
 					<div class="col-xs-10">
-						<input class="form-control" name="inputSAdd" type="text" placeholder="1000 Example St, Kelowna BC, Canada.">
+						<input class="form-control" name="inputSAdd" type="text" placeholder="First and Last Name">
 					</div>
 				</div>
 
@@ -137,12 +126,18 @@ pageEncoding="ISO-8859-1"%>
 						<input class="form-control" name="inputPay" type="text" placeholder="123412451236 - 5/2017" >
 					</div>
 				</div>
+				<label class="btn btn-primary active">
+				<input type="radio" name="shipping" value="reg" autocomplete="off" checked> 
+				Regular 10-day shipping $3.00 </label> <br/>
+				<label class="btn btn-primary">
+				<input type="radio" name="shipping" value="exp" autocomplete="off"> 
+				Expedited 3-day shipping $10.00 </label>
 			
 						<button class="btn btn-lg btn-primary btn-block" type="submit"
 						value="submit">Sign up</button>
 				
 					
-						<button class="btn btn-lg btn-block" href="checkout.jsp">Cancel</button>
+						<button class="btn btn-lg btn-block" href="signin.jsp">Cancel</button>
 			
 				
 			</form>
@@ -176,72 +171,5 @@ pageEncoding="ISO-8859-1"%>
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="signin_files/ie10-viewport-bug-workaround.js"></script>
-<%@ page import="java.sql.*"%>
-<%
-Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-Connection con = null;
-String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_kreid;";
-String uid = "kreid";
-String pw = "39265137";
-String name = request.getParameter("inputName");
-String email = request.getParameter("inputEmail");
-String password = request.getParameter("inputPassword");
-String number = request.getParameter("inputNum");
-String BAdd = request.getParameter("inputBAdd");
-String SAdd = request.getParameter("inputSAdd");
-String Payment = request.getParameter("inputPay");
-if (email == null) {
-} else {
-try {
-con = DriverManager.getConnection(url, uid, pw);
-String s = "SELECT pass FROM Account WHERE email = ?";
-PreparedStatement st = con.prepareStatement(s);
-st.setString(1, email);
-ResultSet rs = st.executeQuery();
-if (rs.next()) {
-%>
-
-<script>
-	alert("Sorry this email address is already in use :( ");
-</script>
-
-<%
-} else {
-String s2 = "INSERT INTO Account VALUES (?, ?, ?, ?, ?, ?, ?, 'Customer')";
-PreparedStatement p = con.prepareStatement(s2);
-p.setString(1, email);
-p.setString(2, password);
-p.setString(3, name);
-if (number.length() == 0)
-p.setString(4, null);
-else
-p.setString(4, number);
-p.setString(5, BAdd);
-p.setString(6, SAdd);
-if (Payment.length() == 0)
-p.setString(7, null);
-else
-p.setString(7, Payment);
-p.executeUpdate();
-%>
-<script>
-	window.location = "order.jsp";
-</script>
-<%
-}
-
-} catch (SQLException ex) {
-out.println(ex);
-} finally {
-if (con != null)
-try {
-con.close();
-} catch (SQLException ex) {
-System.err.println("SQLException: " + ex);
-}
-}
-}
-%>
-
 </body>
 </html>
