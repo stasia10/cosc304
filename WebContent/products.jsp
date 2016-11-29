@@ -139,7 +139,7 @@
 						try {
 							con = DriverManager.getConnection(url, uid, pw);
 							if (cat == null && search == null) {
-								String SQL = "SELECT productName, productId, price, category, P.species, picture, sunLevel, waterLevel, food FROM Product P INNER JOIN "
+								String SQL = "SELECT productName, productId, price, category, P.species, picture, sunLevel, waterLevel, food FROM Product P LEFT OUTER JOIN "
 										+ " CactiSpecies C ON P.species = C.species WHERE Inventory > 0";
 								PreparedStatement pstmt = con.prepareStatement(SQL);
 								ResultSet rst = pstmt.executeQuery();
@@ -157,28 +157,27 @@
 										water = rst.getInt("waterLevel");
 										out.println("<br>" + rst.getString(5));
 										out.println("<br>Preferred Fertilizer: " + rst.getString("food") + "</p>");
-										out.println("<div class=\"container\">");
 										out.println("<h2>Ideal Plant Conditions</h2>");
 
 										out.println("<p>Water Level: </p>");
 										out.println("<div class=\"progress\">");
 										out.println(
-												"<div class=\"progress-bar progress-bar-info progress-bar-striped active\" role=\"progressbar\" aria-valuenow=\"" + water + "\" aria-valuemin=\"0\" aria-valuemax=\"10\" style=\"width:40%\">");
+												"<div class=\"progress-bar progress-bar-info progress-bar-striped active\" role=\"progressbar\" style=\"width:" + water + "0%\">");
 										out.println(water + "/10");
 										out.println("</div></div>");
 										out.println("<p>Sun Level:</p>");
 										out.println("<div class=\"progress\">");
 										out.println(
-												"<div class=\"progress-bar progress-bar-warning progress-bar-striped active\" role=\"progressbar\" aria-valuenow=\"" + sun + "\" aria-valuemin=\"0\" aria-valuemax=\"10\" style=\"width:40%\">");
+												"<div class=\"progress-bar progress-bar-warning progress-bar-striped active\" role=\"progressbar\" style=\"width:" + sun + "0%\">");
 										out.println(sun + "/10");
-										out.println("</div></div></div>");
+										out.println("</div></div>");
 									}
 									out.println("</div>" + "<div class='col-md-5'>"
 											+ "<img class='featurette-image img-responsive center-block'" + "src='img\\"
 											+ rst.getString(6) + "' alt='Image Failed to Load'>" + "</div>" + "</div>");
 								}
 							} else if (search != null) {
-								String SQL = "SELECT productName, productId, price, category, P.species, picture, sunLevel, waterLevel, food FROM Product P INNER JOIN "
+								String SQL = "SELECT productName, productId, price, category, P.species, picture, sunLevel, waterLevel, food FROM Product P LEFT OUTER JOIN "
 										+ " CactiSpecies C ON P.species = C.species WHERE Inventory > 0 AND productName LIKE ?";
 								PreparedStatement pstmt = con.prepareStatement(SQL);
 								pstmt.setString(1, "%" + search + "%");
@@ -193,15 +192,31 @@
 											+ rst.getString(1) + "&price=" + rst.getString(3)
 											+ "\">Add to cart</a></h1><p class='lead'>");
 									if (spec != null) {
-										out.println("<br>" + rst.getString(5) + "</p>");
+										sun = rst.getInt("sunLevel");
+										water = rst.getInt("waterLevel");
+										out.println("<br>" + rst.getString(5));
 										out.println("<br>Preferred Fertilizer: " + rst.getString("food") + "</p>");
+										out.println("<h2>Ideal Plant Conditions</h2>");
+
+										out.println("<p>Water Level: </p>");
+										out.println("<div class=\"progress\">");
+										out.println(
+												"<div class=\"progress-bar progress-bar-info progress-bar-striped active\" role=\"progressbar\" style=\"width:" + water + "0%\">");
+										out.println(water + "/10");
+										out.println("</div></div>");
+										out.println("<p>Sun Level:</p>");
+										out.println("<div class=\"progress\">");
+										out.println(
+												"<div class=\"progress-bar progress-bar-warning progress-bar-striped active\" role=\"progressbar\" style=\"width:" + sun + "0%\">");
+										out.println(sun + "/10");
+										out.println("</div></div>");
 									}
 									out.println("</div>" + "<div class='col-md-5'>"
 											+ "<img class='featurette-image img-responsive center-block'" + "src='img\\"
 											+ rst.getString(6) + "' alt='Image Failed to Load'>" + "</div>" + "</div>");
 								}
 							} else {
-								String SQL = "SELECT productName, productId, price, category, P.species, picture, sunLevel, waterLevel, food FROM Product P INNER JOIN "
+								String SQL = "SELECT productName, productId, price, category, P.species, picture, sunLevel, waterLevel, food FROM Product P LEFT OUTER JOIN "
 										+ " CactiSpecies C ON P.species = C.species WHERE Inventory > 0 AND category = ?";
 								PreparedStatement pstmt = con.prepareStatement(SQL);
 								pstmt.setString(1, cat);
@@ -216,8 +231,24 @@
 											+ rst.getString(1) + "&price=" + rst.getString(3)
 											+ "\">Add to cart</a></h1><p class='lead'>");
 									if (spec != null) {
-										out.println("<br>" + rst.getString(5) + "</p>");
+										sun = rst.getInt("sunLevel");
+										water = rst.getInt("waterLevel");
+										out.println("<br>" + rst.getString(5));
 										out.println("<br>Preferred Fertilizer: " + rst.getString("food") + "</p>");
+										out.println("<h2>Ideal Plant Conditions</h2>");
+
+										out.println("<p>Water Level: </p>");
+										out.println("<div class=\"progress\">");
+										out.println(
+												"<div class=\"progress-bar progress-bar-info progress-bar-striped active\" role=\"progressbar\" style=\"width:" + water + "0%\">");
+										out.println(water + "/10");
+										out.println("</div></div>");
+										out.println("<p>Sun Level:</p>");
+										out.println("<div class=\"progress\">");
+										out.println(
+												"<div class=\"progress-bar progress-bar-warning progress-bar-striped active\" role=\"progressbar\" style=\"width:" + sun + "0%\">");
+										out.println(sun + "/10");
+										out.println("</div></div>");
 									}
 									out.println("</div>" + "<div class='col-md-5'>"
 											+ "<img class='featurette-image img-responsive center-block'" + "src='img\\"
