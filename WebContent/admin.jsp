@@ -130,9 +130,9 @@
 						out.println(
 								"<tr align='right'><td colspan='7'><table id='hor-minimalist-b'><th><b>Product Id</b></th><th><b>Product Name</b></th>"
 										+ "<th><b>Quantity</b></th><th><b>Price</b></th>");
-						String SQL3 = "SELECT O.productId, quantity, O.price, productName FROM OrderedProduct O INNER JOIN Product P ON O.productId = P.productId "
+						String SQL2 = "SELECT O.productId, quantity, O.price, productName FROM OrderedProduct O INNER JOIN Product P ON O.productId = P.productId "
 								+ " WHERE orderId = ?";
-						PreparedStatement pstmt2 = con.prepareStatement(SQL3);
+						PreparedStatement pstmt2 = con.prepareStatement(SQL2);
 						pstmt2.setString(1, oid);
 						ResultSet rst2 = pstmt2.executeQuery();
 						while (rst2.next()) {
@@ -168,6 +168,14 @@
 					String spec = null;
 					while (rst.next()) {
 						invent++;
+						if(update != null && (!update.equals(""))){
+							if(rst.getString("productId").equals(update)){
+								PreparedStatement up = con.prepareStatement("UPDATE Product SET Inventory = ? WHERE productId = ?");
+								up.setString(1, newInvent);
+								up.setString(2, rst.getString("productId"));
+								up.executeUpdate();
+							}
+						}
 						spec = rst.getString("species");
 						out.println("<tr><td>" + rst.getString("productId") + "</td><td>" + rst.getString("productName")
 								+ "</td><td>" + rst.getString("weight") + "</td><td>$" + rst.getString("price")

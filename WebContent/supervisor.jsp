@@ -66,8 +66,7 @@
 				con = DriverManager.getConnection(url, uid, pw);
 				if ("products".equalsIgnoreCase(select)) {
 					String SQL = "SELECT * FROM Product";
-					PreparedStatement pstmt = con.prepareStatement(SQL, ResultSet.TYPE_SCROLL_SENSITIVE,
-							ResultSet.CONCUR_UPDATABLE);
+					PreparedStatement pstmt = con.prepareStatement(SQL);
 					ResultSet rst = pstmt.executeQuery();
 					out.println(
 							"<table id='hor-minimalist-b'><tbody><th><b>Product Id</b></th><th align='center'><b>Product Name</b></th>"
@@ -78,7 +77,10 @@
 						invent++;
 						if(update != null && (!update.equals(""))){
 							if(rst.getString("productId").equals(update)){
-								rst.updateString("Inventory", newInvent);
+								PreparedStatement up = con.prepareStatement("UPDATE Product SET Inventory = ? WHERE productId = ?");
+								up.setString(1, newInvent);
+								up.setString(2, rst.getString("productId"));
+								up.executeUpdate();
 							}
 						}
 						spec = rst.getString("species");
