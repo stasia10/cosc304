@@ -48,7 +48,7 @@
 							<li><a href="index.html">Home</a></li>
 							<li><a href="about.html">About</a></li>
 							<li><a href="products.jsp">Products</a></li>
-							<li><a href="pcare.html">Plant Care</a></li>
+							<li><a href="staff.jsp">Staff</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<a href="checkout.html" class="btn btn-default navbar-btn"> <span
@@ -72,12 +72,7 @@
 	<div class="container marketing">
 		<div class="formpadding">
 			<form class="form-signin" method="POST" action="order.jsp">
-			<label class="btn btn-primary active">
-				<input type="radio" name="shipping" value="reg" autocomplete="off" checked> 
-				Regular 10-day shipping $3.00 </label>
-				<label class="btn btn-primary">
-				<input type="radio" name="shipping" value="exp" autocomplete="off"> 
-				Expedited 3-day shipping $10.00 </label>
+			
 				<div class="form-group row">
 					<label for="inputEmail" class="col-xs-2 col-form-label">Email:</label>
 					<div class="col-xs-10">
@@ -85,21 +80,47 @@
 							placeholder="Example@FancyCacti.com"">
 					</div>
 				</div>
-				<div class="form-group row">
+
+					<div class="form-group row">
 					<label for="inputPassword" class="col-xs-2 col-form-label">Password:</label>
 					<div class="col-xs-10">
 						<input class="form-control" name="inputPassword" type="password"
 							placeholder="hunter2">
 					</div>
-
 				</div>
-				<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
-					in</button>
+				
+				
+				<label> Choose A Shipping Method: </label>
+				<div class="form-group row">
+				<div class="col-xs-10">
+				<input type="radio" name="shipping" value="reg" autocomplete="off" checked> 
+				Regular 10-day shipping: Free 
+				</div>
+				</div>
+				<div class="form-group row">
+				<div class="col-xs-10">
+				<input type="radio" name="shipping" value="exp" autocomplete="off"> 
+				Expedited 3-day shipping $10.00 
+				</div>
+				</div>
+				<div class="form-group row">
+				<div class="col-m-10">
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Confirm Order</button>
+	</div>
+	</div>
+	<div class="form-group row">
+				<div class="col-m-10">
 				<a class="btn btn-lg btn-block btn-register" href="signup.jsp">Create
 					account</a>
+					</div>
+					</div>
+					
 			</form>
-		</div>
-
+				</div>
+				
+				
+				
+		
 
 
 		<!-- /END THE FEATURETTES -->
