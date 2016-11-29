@@ -136,7 +136,8 @@
 						try {
 							con = DriverManager.getConnection(url, uid, pw);
 							if (cat == null && search == null) {
-								String SQL = "SELECT productName, productId, price, category, species, picture FROM Product WHERE Inventory > 0";
+								String SQL = "SELECT productName, productId, price, category, P.species, picture, sunLevel, waterLevel, food FROM Product P INNER JOIN "
+										+ " CactiSpecies C ON P.species = C.species WHERE Inventory > 0";
 								PreparedStatement pstmt = con.prepareStatement(SQL);
 								ResultSet rst = pstmt.executeQuery();
 								String spec = null;
@@ -149,7 +150,8 @@
 											+ rst.getString(1) + "&price=" + rst.getString(3)
 											+ "\">Add to cart</a></h1><p class='lead'>");
 									if (spec != null) {
-										out.println("<br>" + rst.getString(5) + "</p>");
+										out.println("<br>" + rst.getString(5));
+										out.println("<br>Preferred Fertilizer: " + rst.getString("food") + "</p>");
 									}
 									out.println("</div>" + "<div class='col-md-5'>"
 											+ "<img class='featurette-image img-responsive center-block'" + "src='img\\"
