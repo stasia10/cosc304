@@ -167,30 +167,11 @@
 
 			<button class="btn btn-lg btn-block" href="checkout.jsp">Cancel</button>
 
-<<<<<<< HEAD
-=======
 		<!-- FOOTER -->
 		<footer>
 			<p class="pull-right"><a href="#">Back to top</a></p>
 			<p>&copy; 2016 Fancy Cacti, Inc. &middot; <a href="privacy.html">Privacy</a> &middot; <a href="legal.html">Legal</a></p>
 		</footer>
->>>>>>> origin/site
-
-		</form>
-	</div>
-
-
-
-	<!-- FOOTER -->
-	<footer>
-		<p class="pull-right">
-			<a href="#">Back to top</a>
-		</p>
-		<p>
-			&copy; 2016 Fancy Cacti, Inc. &middot; <a href="privacy.html">Privacy</a>
-			&middot; <a href="terms.html">Terms</a>
-		</p>
-	</footer>
 
 	</div>
 	<!-- /.container -->
