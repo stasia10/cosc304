@@ -151,7 +151,7 @@ pageEncoding="ISO-8859-1"%>
 			out.println("<br>" + rst.getString(5) + "</p>");
 		}
 		out.println("</div>" + "<div class='col-md-5'>"
-		+ "<img class='featurette-image img-responsive center-block'" + "src='"
+		+ "<img class='featurette-image img-responsive center-block'" + "src='img\\"
 		+ rst.getString(6) + "' alt='Image Failed to Load'>" + "</div>" + "</div>");
 	}
 } else {
@@ -172,7 +172,7 @@ if (spec != null) {
 out.println("<br>" + rst.getString(5) + "</p>");
 }
 out.println("</div>" + "<div class='col-md-5'>"
-+ "<img class='featurette-image img-responsive center-block'" + "src='"
++ "<img class='featurette-image img-responsive center-block'" + "src='img\\"
 + rst.getString(6) + "' alt='Image Failed to Load'>" + "</div>" + "</div>");
 }
 }

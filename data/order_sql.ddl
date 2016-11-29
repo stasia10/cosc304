@@ -177,25 +177,25 @@ INSERT INTO Product (weight, productName, species, price, Inventory, category, p
 	VALUES (1.00, 'Red Pot', null, 15.00, 10, 'AC', 'pot1.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES (0.50, 'Decorative Stone Pot', null, 55.00, 10, 'AC', 'png2.png');
+	VALUES (0.50, 'Decorative Stone Pot', null, 55.00, 10, 'AC', 'pot2.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES (0.50, 'Hempen Pot', null, 9.00, 10, 'AC', 'png3.png');
+	VALUES (0.50, 'Hempen Pot', null, 9.00, 10, 'AC', 'pot3.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES (4.00, 'Large Canadian Pot', null, 100.00, 10, 'AC', 'png4.png');
+	VALUES (4.00, 'Large Canadian Pot', null, 100.00, 10, 'AC', 'pot4.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES (0.50, 'Black Sandstone Pot', null, 13.00, 10, 'AC', 'png5.png');
+	VALUES (0.50, 'Black Sandstone Pot', null, 13.00, 10, 'AC', 'pot5.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES (1.00, 'White Glazed Pot', null, 20.00, 10, 'AC', 'png6.png');
+	VALUES (1.00, 'White Glazed Pot', null, 20.00, 10, 'AC', 'pot6.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES (0.50, 'Cottage Pot', null, 34.00, 10, 'AC', 'png7.png');
+	VALUES (0.50, 'Cottage Pot', null, 34.00, 10, 'AC', 'pot7.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES (0.50, 'Woven Pot', null, 8.00, 10, 'AC', 'png8.png');
+	VALUES (0.50, 'Woven Pot', null, 8.00, 10, 'AC', 'pot8.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES (0.50, 'Black Tie', null, 4.50, 10, 'AC', 'bt.png');
