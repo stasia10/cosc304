@@ -89,7 +89,7 @@ pageEncoding="ISO-8859-1"%>
 		<!-- Main Content -->
 		<!-- /container -->
 		<div class="container marketing formpadding">
-			<form method="POST" action="signup.jsp" class="form-signup">
+			<form method="POST" action="order.jsp" class="form-signup">
 
 				<div class="form-group row">
 					<label for="inputName" class="col-xs-2 col-form-label">Name:</label>
@@ -142,7 +142,7 @@ pageEncoding="ISO-8859-1"%>
 						value="submit">Sign up</button>
 				
 					
-						<button class="btn btn-lg btn-block" href="signin.jsp">Cancel</button>
+						<button class="btn btn-lg btn-block" href="checkout.jsp">Cancel</button>
 			
 				
 			</form>
