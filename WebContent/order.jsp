@@ -150,7 +150,8 @@
 						pord.setInt(3, orderId);
 						pord.executeUpdate();
 
-						out.println("<h2>Order Completed. Will be shipped soon...</h2>");
+						out.println("<h2>Order Completed. Will be shipped on "+ ship +"</h2>");
+						out.println("<h2>Your expected delivery date is "+ deliv +"</h2>");
 						out.println("<h2>Your reference number is: " + orderId + "</h2>");
 						out.println("<h2>Shipping to customer: " + rstAccount.getString("fullName") + "</h2>");
 						session.setAttribute("productList", null);
