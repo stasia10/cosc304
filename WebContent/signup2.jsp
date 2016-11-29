@@ -99,21 +99,21 @@
 			<div class="form-group row">
 				<label for="inputName" class="col-xs-2 col-form-label">Name:</label>
 				<div class="col-xs-10">
-					<input class="form-control" name="inputName" type="text"
+					<input required="" class="form-control" name="inputName" type="text"
 						placeholder="First and Last Name">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="inputEmail" class="col-xs-2 col-form-label">Email:</label>
 				<div class="col-xs-10">
-					<input class="form-control" name="inputEmail" type="email"
+					<input required="" class="form-control" name="inputEmail" type="email"
 						placeholder="Example@FancyCacti.com"">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="inputPassword" class="col-xs-2 col-form-label">Password:</label>
 				<div class="col-xs-10">
-					<input class="form-control" name="inputPassword" type="password"
+					<input required="" class="form-control" name="inputPassword" type="password"
 						placeholder="hunter2">
 				</div>
 
@@ -131,7 +131,7 @@
 				<label for="inputBAdd" class="col-xs-2 col-form-label">Billing
 					Address:</label>
 				<div class="col-xs-10">
-					<input class="form-control" name="inputBAdd" type="text"
+					<input required="" class="form-control" name="inputBAdd" type="text"
 						placeholder="1234 Example St, Kelowna BC, Canada.">
 				</div>
 			</div>
@@ -140,7 +140,7 @@
 				<label for="inputSAdd" class="col-xs-2 col-form-label">Shipping
 					Address:</label>
 				<div class="col-xs-10">
-					<input class="form-control" name="inputSAdd" type="text"
+					<input required="" class="form-control" name="inputSAdd" type="text"
 						placeholder="1000 Example St, Kelowna BC, Canada.">
 				</div>
 			</div>
