@@ -76,7 +76,7 @@
 
 		</div>
 	</div>
-	<
+	
 	<div id="wrapper">
 		<div class="overlay"></div>
 
