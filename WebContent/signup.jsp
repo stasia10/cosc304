@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -128,12 +129,21 @@
 				</div>
 			</div>
 
-			<div class="form-group row">
+		<div class="form-group row">
 				<label for="inputBAdd" class="col-xs-2 col-form-label">Billing
 					Address:</label>
 				<div class="col-xs-10">
 					<input class="form-control" name="inputBAdd" type="text"
 						placeholder="1234 Example St, Kelowna BC, Canada.">
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="inputSAdd" class="col-xs-2 col-form-label">Shipping
+					Address:</label>
+				<div class="col-xs-10">
+					<input class="form-control" name="inputSAdd" type="text"
+						placeholder="1000 Example St, Kelowna BC, Canada.">
 				</div>
 			</div>
 
@@ -156,6 +166,7 @@
 			<button class="btn btn-lg btn-primary btn-block" type="submit"
 				value="submit">Sign up</button>
 
+
 			<button class="btn btn-lg btn-block" href="checkout.jsp">Cancel</button>
 
 		<!-- FOOTER -->
@@ -164,6 +175,7 @@
 			<p>&copy; 2016 Fancy Cacti, Inc. &middot; <a href="privacy.html">Privacy</a> &middot; <a href="legal.html">Legal</a></p>
 		</footer>
 
+	</div>
 	<!-- /.container -->
 
 
