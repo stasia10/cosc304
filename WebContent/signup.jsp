@@ -83,47 +83,47 @@ pageEncoding="ISO-8859-1"%>
 				<div class="form-group row">
 					<label for="inputName" class="col-xs-2 col-form-label">Name:</label>
 					<div class="col-xs-10">
-						<input class="form-control" id="inputName" type="text" placeholder="First and Last Name" >
+						<input class="form-control" name="inputName" type="text" placeholder="First and Last Name" >
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="inputEmail" class="col-xs-2 col-form-label">Email:</label>
 					<div class="col-xs-10">
-						<input class="form-control" id="inputEmail" type="email" placeholder="Example@FancyCacti.com" ">
+						<input class="form-control" name="inputEmail" type="email" placeholder="Example@FancyCacti.com" ">
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="inputPassword" class="col-xs-2 col-form-label">Password:</label>
 					<div class="col-xs-10">
-						<input class="form-control" id="inputPassword" type="password" placeholder="hunter2" >
+						<input class="form-control" name="inputPassword" type="password" placeholder="hunter2" >
 					</div>
 
 				</div>
 				<div class="form-group row">
 					<label for="inputNum" class="col-xs-2 col-form-label">Phone Number:</label>
 					<div class="col-xs-10">
-						<input class="form-control" id="inputNum" type="tel" placeholder="1-(555)-555-5555" >
+						<input class="form-control" name="inputNum" type="tel" placeholder="1-(555)-555-5555" >
 					</div>
 				</div>
 
 				<div class="form-group row">
 					<label for="inputBAdd" class="col-xs-2 col-form-label">Billing Address:</label>
 					<div class="col-xs-10">
-						<input class="form-control" id="inputBAdd" type="text" placeholder="First and Last Name" >
+						<input class="form-control" name="inputBAdd" type="text" placeholder="First and Last Name" >
 					</div>
 				</div>
 
 				<div class="form-group row">
 					<label for="inputSAdd" class="col-xs-2 col-form-label">Shipping Address:</label>
 					<div class="col-xs-10">
-						<input class="form-control" id="inputSAdd" type="text" placeholder="First and Last Name">
+						<input class="form-control" name="inputSAdd" type="text" placeholder="First and Last Name">
 					</div>
 				</div>
 
 				<div class="form-group row">
 					<label for="inputPay" class="col-xs-2 col-form-label">Payment Information:</label>
 					<div class="col-xs-10">
-						<input class="form-control" id="inputPay" type="text" placeholder="123412451236 - 5/2017" >
+						<input class="form-control" name="inputPay" type="text" placeholder="123412451236 - 5/2017" >
 					</div>
 				</div>
 			
@@ -131,7 +131,7 @@ pageEncoding="ISO-8859-1"%>
 						value="submit">Sign up</button>
 				
 					
-						<button class="btn btn-lg btn-block" href="checkout.jsp">Cancel</button>
+						<button class="btn btn-lg btn-block" href="signin.jsp">Cancel</button>
 			
 				
 			</form>
