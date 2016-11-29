@@ -4,22 +4,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<<<<<<< HEAD
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<link rel="icon" href="">
-	<style type="text/css">
-		:root .carbonad, :root #carbonads-container, :root #content>#right>.dose>.dosesingle,
-		:root #content>#center>.dose>.dosesingle {
-			display: none !important;
-		}
-	</style>
-=======
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -134,13 +118,6 @@
 						placeholder="hunter2">
 				</div>
 
-<<<<<<< HEAD
-				<div class="form-group row">
-					<label for="inputBAdd" class="col-xs-2 col-form-label">Billing Address:</label>
-					<div class="col-xs-10">
-						<input class="form-control" name="inputBAdd" type="text" placeholder="First and Last Name" >
-					</div>
-=======
 			</div>
 			<div class="form-group row">
 				<label for="inputNum" class="col-xs-2 col-form-label">Phone
@@ -148,52 +125,16 @@
 				<div class="col-xs-10">
 					<input class="form-control" name="inputNum" type="tel"
 						placeholder="1-(555)-555-5555">
->>>>>>> origin/site
 				</div>
 			</div>
 
-<<<<<<< HEAD
-				<div class="form-group row">
-					<label for="inputSAdd" class="col-xs-2 col-form-label">Shipping Address:</label>
-					<div class="col-xs-10">
-						<input class="form-control" name="inputSAdd" type="text" placeholder="First and Last Name">
-					</div>
-=======
 			<div class="form-group row">
 				<label for="inputBAdd" class="col-xs-2 col-form-label">Billing
 					Address:</label>
 				<div class="col-xs-10">
 					<input class="form-control" name="inputBAdd" type="text"
 						placeholder="1234 Example St, Kelowna BC, Canada.">
->>>>>>> origin/site
 				</div>
-			</div>
-
-			<div class="form-group row">
-				<label for="inputSAdd" class="col-xs-2 col-form-label">Shipping
-					Address:</label>
-				<div class="col-xs-10">
-					<input class="form-control" name="inputSAdd" type="text"
-						placeholder="1000 Example St, Kelowna BC, Canada.">
-				</div>
-<<<<<<< HEAD
-				<label class="btn btn-primary active">
-				<input type="radio" name="shipping" value="reg" autocomplete="off" checked> 
-				Regular 10-day shipping $3.00 </label> <br/>
-				<label class="btn btn-primary">
-				<input type="radio" name="shipping" value="exp" autocomplete="off"> 
-				Expedited 3-day shipping $10.00 </label>
-			
-						<button class="btn btn-lg btn-primary btn-block" type="submit"
-						value="submit">Sign up</button>
-				
-					
-						<button class="btn btn-lg btn-block" href="signin.jsp">Cancel</button>
-			
-				
-			</form>
-		</div>
-=======
 			</div>
 
 			<div class="form-group row">
@@ -214,8 +155,6 @@
 
 			<button class="btn btn-lg btn-primary btn-block" type="submit"
 				value="submit">Sign up</button>
->>>>>>> origin/site
-
 
 			<button class="btn btn-lg btn-block" href="checkout.jsp">Cancel</button>
 
@@ -225,7 +164,6 @@
 			<p>&copy; 2016 Fancy Cacti, Inc. &middot; <a href="privacy.html">Privacy</a> &middot; <a href="legal.html">Legal</a></p>
 		</footer>
 
-	</div>
 	<!-- /.container -->
 
 
@@ -251,69 +189,5 @@
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="signin_files/ie10-viewport-bug-workaround.js"></script>
-<<<<<<< HEAD
-=======
-<%@ page import="java.sql.*"%>
-<%
-	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-	Connection con = null;
-	String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_kreid;";
-	String uid = "kreid";
-	String pw = "39265137";
-	String name = request.getParameter("inputName");
-	String email = request.getParameter("inputEmail");
-	String password = request.getParameter("inputPassword");
-	String number = request.getParameter("inputNum");
-	String BAdd = request.getParameter("inputBAdd");
-	String SAdd = request.getParameter("inputSAdd");
-	String Payment = request.getParameter("inputPay");
-	if (email == null) {
-	} else {
-		try {
-			con = DriverManager.getConnection(url, uid, pw);
-			String s = "SELECT pass FROM Account WHERE email = ?";
-			PreparedStatement st = con.prepareStatement(s);
-			st.setString(1, email);
-			ResultSet rs = st.executeQuery();
-			if (rs.next()) {
-%>
-
-<script>
-	alert("Sorry this email address is already in use :( ");
-</script>
-
-<%
-			} else {
-				String s2 = "INSERT INTO Account VALUES (?, ?, ?, ?, ?, ?, ?, 'Customer')";
-				PreparedStatement p = con.prepareStatement(s2);
-				p.setString(1, email);
-				p.setString(2, password);
-				p.setString(3, name);
-				if (number.length() == 0)
-					p.setString(4, null);
-				else
-					p.setString(4, number);
-				p.setString(5, BAdd);
-				p.setString(6, SAdd);
-				if (Payment.length() == 0)
-					p.setString(7, null);
-				else
-					p.setString(7, Payment);
-				p.executeUpdate();
-			}		
-		} catch (SQLException ex) {
-			out.println(ex);
-		} finally {
-			if (con != null)
-				try {
-					con.close();
-				} catch (SQLException ex) {
-					System.err.println("SQLException: " + ex);
-				}
-		}
-	}
-%>
-
->>>>>>> origin/site
 </body>
 </html>
