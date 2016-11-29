@@ -58,7 +58,7 @@
 						<ul class="nav navbar-nav">
 							<li><a href="index.html">Home</a></li>
 							<li><a href="about.html">About</a></li>
-							<li><a class="active" href="products.jsp">Products</a></li>
+							<li class="active"><a href="products.jsp">Products</a></li>
 							<li><a href="staff.jsp">Staff</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
@@ -147,15 +147,17 @@
 								while (rst.next()) {
 									spec = rst.getString(5);
 									out.println("<hr class='featurette-divider'><div class='row featurette'><div class='col-md-7'>"
-											+ "<h2 class='featurette-heading'>" + rst.getString(1) + " <span class='text-muted'> "
-											+ rst.getDouble(3) + " </span>");
-									out.println("</h2>" + "<h1><a href=\"addcart.jsp?id=" + rst.getString(2) + "&name="
+											+ "<h2 class='featurette-heading'>" + rst.getString(1) + " <span class='text-muted'><br>"
+											+ "$" + rst.getString(3) + "</h2></span>");
+									out.println("<h1><a href=\"addcart.jsp?id=" + rst.getString(2) + "&name="
+											// rst.getString changed from rst.getDouble so that the trailing zeros would be included in the output
+											// Stored as double in the database.
 											+ rst.getString(1) + "&price=" + rst.getString(3)
 											+ "\">Add to cart</a></h1><p class='lead'>");
 									if (spec != null) {
 										sun = rst.getInt("sunLevel");
 										water = rst.getInt("waterLevel");
-										out.println("<br>" + rst.getString(5));
+										out.println(rst.getString(5));
 										out.println("<br>Preferred Fertilizer: " + rst.getString("food") + "</p>");
 										out.println("<h2>Ideal Plant Conditions</h2>");
 
@@ -186,15 +188,15 @@
 								while (rst.next()) {
 									spec = rst.getString(5);
 									out.println("<hr class='featurette-divider'><div class='row featurette'><div class='col-md-7'>"
-											+ "<h2 class='featurette-heading'>" + rst.getString(1) + " <span class='text-muted'> "
-											+ rst.getDouble(3) + " </span>");
+											+ "<h2 class='featurette-heading'>" + rst.getString(1) + " <span class='text-muted'><br> "
+											+ "$"+rst.getString(3) + " </span>");
 									out.println("</h2>" + "<h1><a href=\"addcart.jsp?id=" + rst.getString(2) + "&name="
 											+ rst.getString(1) + "&price=" + rst.getString(3)
 											+ "\">Add to cart</a></h1><p class='lead'>");
 									if (spec != null) {
 										sun = rst.getInt("sunLevel");
 										water = rst.getInt("waterLevel");
-										out.println("<br>" + rst.getString(5));
+										out.println(rst.getString(5));
 										out.println("<br>Preferred Fertilizer: " + rst.getString("food") + "</p>");
 										out.println("<h2>Ideal Plant Conditions</h2>");
 
@@ -225,8 +227,8 @@
 								while (rst.next()) {
 									spec = rst.getString(5);
 									out.println("<hr class='featurette-divider'><div class='row featurette'><div class='col-md-7'>"
-											+ "<h2 class='featurette-heading'>" + rst.getString(1) + " <span class='text-muted'> "
-											+ rst.getDouble(3) + " </span>");
+											+ "<h2 class='featurette-heading'>" + rst.getString(1) + " <span class='text-muted'><br>"
+											+"$"+ rst.getString(3) + " </span>");
 									out.println("</h2>" + "<h1><a href=\"addcart.jsp?id=" + rst.getString(2) + "&name="
 											+ rst.getString(1) + "&price=" + rst.getString(3)
 											+ "\">Add to cart</a></h1><p class='lead'>");

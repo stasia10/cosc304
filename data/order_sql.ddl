@@ -130,19 +130,19 @@ INSERT INTO Account VALUES('johndunphy@gmail.com', 'password', 'John Dunphy', '6
 
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Green Swirlers', 'Cereus peruvianus', 12.99, 10, 'CS', 'cac1.png');
+	VALUES(2.00, 'Green Swirlers', 'Cereus peruvianus', 12.00, 10, 'CS', 'cac1.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Alligator Mouths', 'Grafted Gymnocalycium Cultivars', 18.99, 10, 'CS', 'cac2.png');
+	VALUES(2.00, 'Alligator Mouths', 'Grafted Gymnocalycium Cultivars', 18.00, 10, 'CS', 'cac2.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Mauve Danglers', 'Echinopsis chamaecereus cultivar', 24.99, 10, 'CS', 'cac3.png');
+	VALUES(2.00, 'Mauve Danglers', 'Echinopsis chamaecereus cultivar', 24.00, 10, 'CS', 'cac3.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Swoop Whoops', 'Pilosocereus pachycladus', 12.99, 10, 'CS', 'cac4.png');
+	VALUES(2.00, 'Swoop Whoops', 'Pilosocereus pachycladus', 12.00, 10, 'CS', 'cac4.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Blue Cheese Echeveria', 'Cereus tetragonus', 28.99, 10, 'CS', 'cac5.png');
+	VALUES(2.00, 'Blue Cheese Echeveria', 'Cereus tetragonus', 28.00, 10, 'CS', 'cac5.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES(2.00, 'Veiny Spikeleaf', 'Austrocylindropuntia subulata monstrose', 10.00, 10, 'CS', 'cac6.png');
@@ -151,10 +151,10 @@ INSERT INTO Product (weight, productName, species, price, Inventory, category, p
 	VALUES(2.00, 'Red Headed Silverneedle', 'Epiphyllum hybrids', 22.00, 10, 'CS', 'cac7.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Sunbloom Echeveria', 'Opuntia microdasys', 12.99, 10, 'CS', 'cac8.png');
+	VALUES(2.00, 'Sunbloom Echeveria', 'Opuntia microdasys', 12.00, 10, 'CS', 'cac8.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Rolling Blackneedle', 'Echinopsis', 28.99, 10, 'CS', 'cac9.png');
+	VALUES(2.00, 'Rolling Blackneedle', 'Echinopsis', 28.00, 10, 'CS', 'cac9.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES(2.00, 'Silvermoon Echeveria', 'Stenocereus pruinosus', 10.00, 10, 'CS', 'cac10.png');
@@ -163,13 +163,13 @@ INSERT INTO Product (weight, productName, species, price, Inventory, category, p
 	VALUES(2.00, 'Wooly Bugger', 'Opuntia pruinosus', 10.00, 10, 'CS', 'cac11.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Agave', 'Cereus pruinosus', 10.00, 10, 'CS', 'cac12.png');
+	VALUES(2.00, 'Agave', 'Cereus pruinosus', 12.00, 10, 'CS', 'cac12.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES(2.00, 'Snowtongued Evergreen', 'Hybridia pruinosus', 10.00, 10, 'CS', 'cac13.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Bloody Echeveria', 'Opuntia tetragonus', 10.00, 10, 'CS', 'cac14.png');
+	VALUES(2.00, 'Bloody Echeveria', 'Opuntia tetragonus', 18.00, 10, 'CS', 'cac14.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES (0.50, 'Sky Blue Seersucker Bow', null, 5.00, 10, 'AC', 'bow1.png');
@@ -264,7 +264,11 @@ INSERT INTO Grow VALUES(1,'Cereus tetragonus');
 INSERT INTO Grow VALUES(1,'Opuntia microdasys');
 INSERT INTO Grow VALUES(1,'Echinopsis');
 INSERT INTO Grow VALUES(1,'Stenocereus pruinosus');
+INSERT INTO Grow VALUES(1,'Opuntia pruinosus');
+INSERT INTO Grow VALUES(1,'Cereus pruinosus');
 
+INSERT INTO Grow VALUES (2,'Hybridia pruinosus');
+INSERT INTO Grow VALUES (2,'Opuntia tetragonus');
 INSERT INTO Grow VALUES(2,'Cereus peruvianus');
 INSERT INTO Grow VALUES(2,'Echinopsis chamaecereus cultivar');
 INSERT INTO Grow VALUES(2,'Cereus tetragonus');
