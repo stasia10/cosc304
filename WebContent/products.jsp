@@ -151,6 +151,22 @@
 											+ "\">Add to cart</a></h1><p class='lead'>");
 									if (spec != null) {
 										out.println("<br>" + rst.getString(5));
+										<div class="container">
+  out.println("<h2>Ideal Plant Conditions:</h2>")
+  out.println("<p>Sun Level:</p>")
+ out.println("<div class="progress>""
+    + "<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow=" +rst.getInteger("sunLevel")+" aria-valuemin="0" aria-valuemax="10" style="width:40%">"
+      + "4 / 10"
+    + "</div>"
+  + "</div>"
+  + "<p>Water Level:</p> "
+  + "<div class="progress">"
+    +"<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow=" + rst.getInteger("waterLevel") + " aria-valuemin="0" aria-valuemax="100" style="width:40%">"
+     +" 4 / 10"
+    + "</div> "
+  + "</div> "
++"</div>"
+
 										out.println("<br>Preferred Fertilizer: " + rst.getString("food") + "</p>");
 									}
 									out.println("</div>" + "<div class='col-md-5'>"
