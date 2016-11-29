@@ -135,34 +135,46 @@ INSERT INTO Account VALUES('johndunphy@gmail.com', 'password', 'John Dunphy', '6
 
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Cereus peruvianus', 12.99, 10, 'CS', 'cp.png');
+	VALUES(2.00, 'Green Swirlers', 'Cereus peruvianus', 12.99, 10, 'CS', 'cac1.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Grafted Gymnocalycium Cultivars', 18.99, 10, 'CS', 'ggc.png');
+	VALUES(2.00, 'Alligator Mouths', 'Grafted Gymnocalycium Cultivars', 18.99, 10, 'CS', 'cac2.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Echinopsis chamaecereus cultivar', 24.99, 10, 'CS', 'ecc.png');
+	VALUES(2.00, 'Mauve Danglers', 'Echinopsis chamaecereus cultivar', 24.99, 10, 'CS', 'cac3.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Pilosocereus pachycladus', 12.99, 10, 'CS', 'pp.png');
+	VALUES(2.00, 'Swoop Whoops', 'Pilosocereus pachycladus', 12.99, 10, 'CS', 'cac4.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Cereus tetragonus', 28.99, 10, 'CS', 'ct.png');
+	VALUES(2.00, 'Blue Cheese Echeveria', 'Cereus tetragonus', 28.99, 10, 'CS', 'cac5.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Austrocylindropuntia subulata monstrose', 10.00, 10, 'CS', 'asm.png');
+	VALUES(2.00, 'Veiny Spikeleaf', 'Austrocylindropuntia subulata monstrose', 10.00, 10, 'CS', 'cac6.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Epiphyllum hybrids', 22.00, 10, 'CS', 'eh.png');
+	VALUES(2.00, 'Red Headed Silverneedle', 'Epiphyllum hybrids', 22.00, 10, 'CS', 'cac7.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Opuntia microdasys', 12.99, 10, 'CS', 'om.png');
+	VALUES(2.00, 'Sunbloom Echeveria', 'Opuntia microdasys', 12.99, 10, 'CS', 'cac8.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Echinopsis', 28.99, 10, 'CS', 'e.png');
+	VALUES(2.00, 'Rolling Blackneedle', 'Echinopsis', 28.99, 10, 'CS', 'cac9.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Cacti', 'Stenocereus pruinosus', 10.00, 10, 'CS', 'sp.png');
+	VALUES(2.00, 'Silvermoon Echeveria', 'Stenocereus pruinosus', 10.00, 10, 'CS', 'cac10.png');
+DECLARE @productId INT
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
+	VALUES(2.00, 'Wooly Bugger', 'Opuntia pruinosus', 10.00, 10, 'CS', 'cac11.png');
+DECLARE @productId INT
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
+	VALUES(2.00, 'Agave', 'Cereus pruinosus', 10.00, 10, 'CS', 'cac12.png');
+DECLARE @productId INT
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
+	VALUES(2.00, 'Snowtongued Evergreen', 'hybridia pruinosus', 10.00, 10, 'CS', 'cac13.png');
+DECLARE @productId INT
+INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
+	VALUES(2.00, 'Bloody Echeveria', 'Opuntia tetragonus', 10.00, 10, 'CS', 'cac14.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES (0.50, 'Pink Bow', null, 3.00, 10, 'AC', 'pb.png');
