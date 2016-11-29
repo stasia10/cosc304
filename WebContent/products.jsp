@@ -158,8 +158,8 @@
 											+ rst.getString(6) + "' alt='Image Failed to Load'>" + "</div>" + "</div>");
 								}
 							} else if (search != null){
-								String SQL = "SELECT productName, productId, price, category, species, picture FROM Product " 
-										+ " WHERE Inventory > 0 AND productName LIKE ?";
+								String SQL = "SELECT productName, productId, price, category, P.species, picture, sunLevel, waterLevel, food FROM Product P INNER JOIN "
+										+ " CactiSpecies C ON P.species = C.species WHERE Inventory > 0 AND productName LIKE ?";
 								PreparedStatement pstmt = con.prepareStatement(SQL);
 								pstmt.setString(1, "%" + search + "%");
 								ResultSet rst = pstmt.executeQuery();
@@ -182,7 +182,8 @@
 								}
 							}
 							else {
-								String SQL = "SELECT productName, productId, price, category, species, picture FROM Product WHERE Inventory > 0 AND category = ?";
+								String SQL = "SELECT productName, productId, price, category, P.species, picture, sunLevel, waterLevel, food FROM Product P INNER JOIN "
+										+ " CactiSpecies C ON P.species = C.species WHERE Inventory > 0 AND category = ?";
 								PreparedStatement pstmt = con.prepareStatement(SQL);
 								pstmt.setString(1, cat);
 								ResultSet rst = pstmt.executeQuery();
