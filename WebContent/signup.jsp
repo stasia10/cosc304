@@ -75,10 +75,10 @@
 							<li><a class="active" href="index.html">Home</a></li>
 							<li><a href="about.html">About</a></li>
 							<li><a href="products.jsp">Products</a></li>
-							<li><a href="pcare.html">Plant Care</a></li>
+							<li><a href="staff.jsp">Staff</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-							<a href="checkout.html" class="btn btn-default navbar-btn"> <span
+							<a href="showcart.jsp" class="btn btn-default navbar-btn"> <span
 								class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
 							</a>
 
@@ -154,13 +154,20 @@
 						placeholder="123412451236 - 5/2017">
 				</div>
 			</div>
-			<label class="btn btn-primary active"> <input type="radio"
-				name="shipping" value="reg" autocomplete="off" checked>
-				Regular 10-day shipping $3.00
-			</label> <label class="btn btn-primary"> <input type="radio"
-				name="shipping" value="exp" autocomplete="off"> Expedited
-				3-day shipping $10.00
-			</label>
+				<label> Choose A Shipping Method: </label>
+				<div class="form-group row">
+				<div class="col-xs-10">
+				<input type="radio" name="shipping" value="reg" autocomplete="off" checked> 
+				Regular 10-day shipping: Free 
+				</div>
+				</div>
+				<div class="form-group row">
+				<div class="col-xs-10">
+				<input type="radio" name="shipping" value="exp" autocomplete="off"> 
+				Expedited 3-day shipping $10.00 
+				</div>
+				</div>
+
 
 			<button class="btn btn-lg btn-primary btn-block" type="submit"
 				value="submit">Sign up</button>

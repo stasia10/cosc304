@@ -62,7 +62,7 @@
 							<li><a href="staff.jsp">Staff</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-							<a href="checkout.jsp" class="btn btn-default navbar-btn"> <span
+							<a href="showcart.jsp" class="btn btn-default navbar-btn"> <span
 								class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
 							</a>
 

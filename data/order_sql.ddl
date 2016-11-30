@@ -236,7 +236,7 @@ INSERT INTO Product (weight, productName, species, price, Inventory, category, p
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES(5.00, 'Cacti Soil', null, 15.00, 10, 'FT', 'fert.png');
-	
+
 	
 INSERT INTO Warehouse VALUES('CactiOne', 'CactiVille');
 
