@@ -150,8 +150,6 @@
 											+ "<h2 class='featurette-heading'>" + rst.getString(1) + " <span class='text-muted'><br>"
 											+ "$" + rst.getString(3) + "</h2></span>");
 									out.println("<h1><a href=\"addcart.jsp?id=" + rst.getString(2) + "&name="
-											// rst.getString changed from rst.getDouble so that the trailing zeros would be included in the output
-											// Stored as double in the database.
 											+ rst.getString(1) + "&price=" + rst.getString(3)
 											+ "\">Add to cart</a></h1><p class='lead'>");
 									if (spec != null) {

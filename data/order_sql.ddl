@@ -130,7 +130,7 @@ INSERT INTO Account VALUES('johndunphy@gmail.com', 'password', 'John Dunphy', '6
 
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
-	VALUES(2.00, 'Green Swirlers', 'Cereus peruvianus', 12.00, 10, 'CS', 'cac1.png');
+	VALUES(2.00, 'Green Swirlers', 'Cereus peruvianus', 12.90, 10, 'CS', 'cac1.png');
 DECLARE @productId INT
 INSERT INTO Product (weight, productName, species, price, Inventory, category, picture)
 	VALUES(2.00, 'Alligator Mouths', 'Grafted Gymnocalycium Cultivars', 18.00, 10, 'CS', 'cac2.png');
