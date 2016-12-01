@@ -74,7 +74,7 @@
 							<li><a class="active" href="index.html">Home</a></li>
 							<li><a href="about.html">About</a></li>
 							<li><a href="products.jsp">Products</a></li>
-							<li><a href="pcare.html">Plant Care</a></li>
+							<li><a href="staff.jsp">Staff</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<a href="showcart.jsp" class="btn btn-default navbar-btn"> <span

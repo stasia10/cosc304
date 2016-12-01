@@ -100,22 +100,22 @@
 			<div class="form-group row">
 				<label for="inputName" class="col-xs-2 col-form-label">Name:</label>
 				<div class="col-xs-10">
-					<input required="" class="form-control" name="inputName" type="text"
-						placeholder="First and Last Name">
+					<input required="" class="form-control" name="inputName"
+						type="text" placeholder="First and Last Name">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="inputEmail" class="col-xs-2 col-form-label">Email:</label>
 				<div class="col-xs-10">
-					<input required="" class="form-control" name="inputEmail" type="email"
-						placeholder="Example@FancyCacti.com">
+					<input required="" class="form-control" name="inputEmail"
+						type="email" placeholder="Example@FancyCacti.com">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="inputPassword" class="col-xs-2 col-form-label">Password:</label>
 				<div class="col-xs-10">
-					<input required="" class="form-control" name="inputPassword" type="password"
-						placeholder="hunter2">
+					<input required="" class="form-control" name="inputPassword"
+						type="password" placeholder="hunter2">
 				</div>
 
 			</div>
@@ -128,12 +128,12 @@
 				</div>
 			</div>
 
-		<div class="form-group row">
+			<div class="form-group row">
 				<label for="inputBAdd" class="col-xs-2 col-form-label">Billing
 					Address:</label>
 				<div class="col-xs-10">
-					<input required="" class="form-control" name="inputBAdd" type="text"
-						placeholder="1234 Example St, Kelowna BC, Canada.">
+					<input required="" class="form-control" name="inputBAdd"
+						type="text" placeholder="1234 Example St, Kelowna BC, Canada.">
 				</div>
 			</div>
 
@@ -141,8 +141,8 @@
 				<label for="inputSAdd" class="col-xs-2 col-form-label">Shipping
 					Address:</label>
 				<div class="col-xs-10">
-					<input required="" class="form-control" name="inputSAdd" type="text"
-						placeholder="1000 Example St, Kelowna BC, Canada.">
+					<input required="" class="form-control" name="inputSAdd"
+						type="text" placeholder="1000 Example St, Kelowna BC, Canada.">
 				</div>
 			</div>
 
@@ -154,19 +154,19 @@
 						placeholder="123412451236 - 5/2017">
 				</div>
 			</div>
-				<label> Choose A Shipping Method: </label>
-				<div class="form-group row">
+			<label> Choose A Shipping Method: </label>
+			<div class="form-group row">
 				<div class="col-xs-10">
-				<input type="radio" name="shipping" value="reg" autocomplete="off" checked> 
-				Regular 10-day shipping: Free 
+					<input type="radio" name="shipping" value="reg" autocomplete="off"
+						checked> Regular 10-day shipping: Free
 				</div>
-				</div>
-				<div class="form-group row">
+			</div>
+			<div class="form-group row">
 				<div class="col-xs-10">
-				<input type="radio" name="shipping" value="exp" autocomplete="off"> 
-				Expedited 3-day shipping $10.00 
+					<input type="radio" name="shipping" value="exp" autocomplete="off">
+					Expedited 3-day shipping $10.00
 				</div>
-				</div>
+			</div>
 
 
 			<button class="btn btn-lg btn-primary btn-block" type="submit"
@@ -175,18 +175,24 @@
 
 			<button class="btn btn-lg btn-block" type="button" onClick="cancel()">Cancel</button>
 
-		<!-- FOOTER -->
-		<footer>
-			<p class="pull-right"><a href="#">Back to top</a></p>
-			<p>&copy; 2016 Fancy Cacti, Inc. &middot; <a href="privacy.html">Privacy</a> &middot; <a href="legal.html">Legal</a></p>
-		</footer>
-		
+			<!-- FOOTER -->
+			<footer>
+				<p class="pull-right">
+					<a href="#">Back to top</a>
+				</p>
+				<p>
+					&copy; 2016 Fancy Cacti, Inc. &middot; <a href="privacy.html">Privacy</a>
+					&middot; <a href="legal.html">Legal</a>
+				</p>
+			</footer>
+			</form>
 	</div>
-	<script> 
-	function cancel(){
-		location.href = 'checkout.jsp';
-	}</script>
-	
+	<script>
+		function cancel() {
+			location.href = 'checkout.jsp';
+		}
+	</script>
+
 	<!-- /.container -->
 
 

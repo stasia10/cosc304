@@ -1,7 +1,6 @@
-<%@ page import="java.sql.*"%>
-<%@ page import="java.text.NumberFormat"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +11,22 @@
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" href="">
+
+
+<link rel="apple-touch-icon" sizes="180x180"
+	href="img/fav/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="img/fav/favicon-32x32.png"
+	sizes="32x32">
+<link rel="icon" type="image/png" href="img/fav/favicon-16x16.png"
+	sizes="16x16">
+<link rel="manifest" href="img/fav/manifest.json">
+<link rel="mask-icon" href="img/fav/safari-pinned-tab.svg"
+	color="#5bbad5">
+<link rel="shortcut icon" href="img/fav/favicon.ico">
+<meta name="msapplication-config" content="img/fav/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+
 <style type="text/css">
 :root .carbonad, :root #carbonads-container, :root #content>#right>.dose>.dosesingle,
 	:root #content>#center>.dose>.dosesingle {
@@ -20,13 +34,18 @@
 }
 </style>
 <link rel="stylesheet" type="text/css" href="main.css">
-<title>Admin Page</title>
+
+<title>Register</title>
 
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <link href=csss/ie10-viewport-bug-workaround.css " rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="css/signin.css" rel="stylesheet">
+<link href="css/carousel.css" rel="stylesheet">
 
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -36,12 +55,46 @@
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+      <![endif]-->
 </head>
+<!-- NAVBAR
+	================================================== -->
 <body>
+	<div class="navbar-wrapper">
+		<div class="container">
+
+			<!-- Fixed navbar -->
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header">
+
+						<a class="navbar-brand" href="index.html">Fancy Cacti</a>
+					</div>
+					<div id="navbar" class="navbar-collapse collapse">
+						<ul class="nav navbar-nav">
+							<li><a class="active" href="index.html">Home</a></li>
+							<li><a href="about.html">About</a></li>
+							<li><a href="products.jsp">Products</a></li>
+							<li><a href="staff.jsp">Staff</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<a href="showcart.jsp" class="btn btn-default navbar-btn"> <span
+								class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+							</a>
+
+						</ul>
+
+					</div>
+					<!--/.nav-collapse -->
+
+				</div>
+			</nav>
+
+		</div>
+	</div>
 	<div>
-		<a href="admin.jsp?view=orders">View Orders</a> <a
-			href="admin.jsp?view=products">Edit Products</a>
+	<input type="button" OnClick="window.location='admin.jsp?view=orders'" value= "View Orders">
+	<input type="button" OnClick="window.location='admin.jsp?view=products'" value= "Edit Products">
 	</div>
 	<script>
 		function updateShipment(newId, newShip) {
@@ -61,6 +114,8 @@
 					+ "&newInvent=" + newInvent;
 		}
 	</script>
+	<script src="signin_files/ie10-viewport-bug-workaround.js"></script>
+	<%@ page import="java.sql.*"%>
 	<form name="listadmin">
 		<%
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -111,30 +166,34 @@
 					int quantity = Integer.parseInt(newQty);
 					int difference = quantity - oldQ;
 
-					PreparedStatement up = con.prepareStatement(
-							"UPDATE OrderedProduct SET quantity = ? WHERE productId = ? AND orderId = ?");
-					up.setString(1, newQty);
-					up.setString(2, updateQty);
-					up.setString(3, orderId);
-					up.executeUpdate();
-
 					PreparedStatement up2 = con
-							.prepareStatement("SELECT weight, price FROM Product WHERE productId = ?");
+							.prepareStatement("SELECT weight, price, Inventory FROM Product WHERE productId = ?");
 					up2.setString(1, updateQty);
 					ResultSet get = up2.executeQuery();
 					get.next();
 					Double weight = get.getDouble(1);
 					Double price = get.getDouble(2);
+					int inventory = get.getInt(3);
 
-					Double NewWeight = difference * weight;
-					Double NewPrice = price * difference;
+					if (quantity > inventory) {
+						out.println("<h2>Not enough product in stock<h2>");
+					} else {
+						PreparedStatement up = con.prepareStatement(
+								"UPDATE OrderedProduct SET quantity = ? WHERE productId = ? AND orderId = ?");
+						up.setString(1, newQty);
+						up.setString(2, updateQty);
+						up.setString(3, orderId);
+						up.executeUpdate();
 
-					PreparedStatement newI = con.prepareStatement(
-							"UPDATE Invoice SET weight = weight + ?, totalAmount = totalAmount + ? WHERE orderId = ?");
-					newI.setDouble(1, NewWeight);
-					newI.setDouble(2, NewPrice);
-					newI.setString(3, orderId);
-					newI.executeUpdate();
+						Double NewWeight = difference * weight;
+						Double NewPrice = price * difference;
+						PreparedStatement newI = con.prepareStatement(
+								"UPDATE Invoice SET weight = weight + ?, totalAmount = totalAmount + ? WHERE orderId = ?");
+						newI.setDouble(1, NewWeight);
+						newI.setDouble(2, NewPrice);
+						newI.setString(3, orderId);
+						newI.executeUpdate();
+					}
 				} else if (update != null && (!update.equals(""))) {
 					PreparedStatement up = con.prepareStatement("UPDATE Product SET Inventory = ? WHERE productId = ?");
 					up.setString(1, newInvent);
@@ -178,7 +237,7 @@
 							out.println("<tr align='center'><td>" + rst2.getString(1) + "</td><td>" + rst2.getString(4)
 									+ "</td><td><input type =\"text\" name =\"newQty" + qty + "\" size = \"3\" value=\""
 									+ rst2.getString(2) + "\"></td><td>$" + rst2.getDouble(3) + "</td>");
-							out.println("<td><input type=BUTTON OnClick=\"updateQty(" + pid+ "," + oid
+							out.println("<td><input type=BUTTON OnClick=\"updateQty(" + pid + "," + oid
 									+ ", document.listadmin.newQty" + qty
 									+ ".value)\" value= \"Update Quantity\"></td></tr>");
 						}
@@ -210,6 +269,8 @@
 							out.println("<tr><td>" + spec + "</td></tr></tbody></table>");
 						}
 					}
+					out.println(
+							"<td><input type=BUTTON OnClick=\"window.location='addproduct.jsp'\" value = \"Add New Product\"");
 					out.println("</tbody></table>");
 				}
 			} catch (SQLException ex) {
