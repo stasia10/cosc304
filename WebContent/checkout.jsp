@@ -47,7 +47,7 @@
 						<ul class="nav navbar-nav">
 							<li><a href="index.html">Home</a></li>
 							<li><a href="about.html">About</a></li>
-							<li><a href="products.jsp">Products</a></li>
+							<li class="active"><a href="products.jsp">Products</a></li>
 							<li><a href="staff.jsp">Staff</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
