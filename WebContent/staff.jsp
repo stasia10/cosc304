@@ -13,7 +13,7 @@
 <meta name="author" content="">
 <link rel="icon" href="img/fav/favicon.ico">
 
-<title>Checkout</title>
+<title>Staff Login</title>
 
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">

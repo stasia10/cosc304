@@ -1,7 +1,6 @@
-<%@ page import="java.sql.*"%>
-<%@ page import="java.text.NumberFormat"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +11,22 @@
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" href="">
+
+
+<link rel="apple-touch-icon" sizes="180x180"
+	href="img/fav/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="img/fav/favicon-32x32.png"
+	sizes="32x32">
+<link rel="icon" type="image/png" href="img/fav/favicon-16x16.png"
+	sizes="16x16">
+<link rel="manifest" href="img/fav/manifest.json">
+<link rel="mask-icon" href="img/fav/safari-pinned-tab.svg"
+	color="#5bbad5">
+<link rel="shortcut icon" href="img/fav/favicon.ico">
+<meta name="msapplication-config" content="img/fav/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+
 <style type="text/css">
 :root .carbonad, :root #carbonads-container, :root #content>#right>.dose>.dosesingle,
 	:root #content>#center>.dose>.dosesingle {
@@ -20,6 +34,7 @@
 }
 </style>
 <link rel="stylesheet" type="text/css" href="main.css">
+
 <title>Supervisor Page</title>
 
 <!-- Bootstrap core CSS -->
@@ -27,6 +42,10 @@
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <link href=csss/ie10-viewport-bug-workaround.css " rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="css/signin.css" rel="stylesheet">
+<link href="css/carousel.css" rel="stylesheet">
 
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -36,19 +55,58 @@
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+      <![endif]-->
 </head>
+<!-- NAVBAR
+	================================================== -->
 <body>
+	<div class="navbar-wrapper">
+		<div class="container">
+
+			<!-- Fixed navbar -->
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header">
+
+						<a class="navbar-brand" href="index.html">Fancy Cacti</a>
+					</div>
+					<div id="navbar" class="navbar-collapse collapse">
+						<ul class="nav navbar-nav">
+							<li><a class="active" href="index.html">Home</a></li>
+							<li><a href="about.html">About</a></li>
+							<li><a href="products.jsp">Products</a></li>
+							<li><a href="staff.jsp">Staff</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<a href="showcart.jsp" class="btn btn-default navbar-btn"> <span
+								class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+							</a>
+
+						</ul>
+
+					</div>
+					<!--/.nav-collapse -->
+
+				</div>
+			</nav>
+
+		</div>
+	</div>
+	<script src="signin_files/ie10-viewport-bug-workaround.js"></script>
+	<%@ page import="java.sql.*"%>
 	<%
-	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-	Connection con = null;
-	String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_kreid;";
-	String uid = "kreid";
-	String pw = "39265137";
+		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		Connection con = null;
+		String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_kreid;";
+		String uid = "kreid";
+		String pw = "39265137";
 	%>
 	<div>
-		<a href="supervisor.jsp?view=orders">View Orders</a> <a
-			href="supervisor.jsp?view=products">Edit Products</a>
+		<input type="button"
+			OnClick="window.location='supervisor.jsp?view=orders'"
+			value="View Orders"> <input type="button"
+			OnClick="window.location='supervisor.jsp?view=products'"
+			value="Edit Products">
 	</div>
 	<script>
 		function update(newId, newInvent) {
@@ -64,12 +122,20 @@
 			int invent = 0;
 			try {
 				con = DriverManager.getConnection(url, uid, pw);
-				if (update != null && (!update.equals(""))){
-					PreparedStatement up = con
-							.prepareStatement("UPDATE Product SET Inventory = ? WHERE productId = ?");
-					up.setString(1, newInvent);
-					up.setString(2, update);
-					up.executeUpdate();
+				if (update != null && (!update.equals(""))) {
+					if (Integer.parseInt(newInvent) >= 0) {
+						PreparedStatement up = con
+								.prepareStatement("UPDATE Product SET Inventory = ? WHERE productId = ?");
+						up.setString(1, newInvent);
+						up.setString(2, update);
+						up.executeUpdate();
+					} else {
+						PreparedStatement up = con
+								.prepareStatement("UPDATE Product SET Inventory = Inventory + ? WHERE productId = ?");
+						up.setString(1, newInvent);
+						up.setString(2, update);
+						up.executeUpdate();
+					}
 				}
 				if ("products".equalsIgnoreCase(select)) {
 					String SQL = "SELECT * FROM Product";
@@ -85,10 +151,11 @@
 						spec = rst.getString("species");
 						out.println("<tr><td>" + rst.getString("productId") + "</td><td>" + rst.getString("productName")
 								+ "</td><td>" + rst.getString("weight") + "</td><td>$" + rst.getString("price")
-								+ "</td><td><input type=\"text\" name=\"newInvent" + invent + "\" size=\"3\" value=\"" + rst.getString("Inventory") 
-								+ "\"></td><td>" + rst.getString("category") + "</td>");
+								+ "</td><td><input type=\"text\" name=\"newInvent" + invent + "\" size=\"3\" value=\""
+								+ rst.getString("Inventory") + "\"></td><td>" + rst.getString("category") + "</td>");
 						out.println("<td><input type=BUTTON OnClick=\"update(" + rst.getString("productId")
-								+ ", document.listsuper.newInvent" + invent + ".value)\"value=\"Update Inventory\"></td></tr>");
+								+ ", document.listsuper.newInvent" + invent
+								+ ".value)\"value=\"Update Inventory\"></td></tr>");
 						if (spec != null) {
 							out.println(
 									"<tr align='right'><td colspan='6'><table id='hor-minimalist-b'><th><b>Species</b></th>");
@@ -96,7 +163,7 @@
 						}
 					}
 					out.println("</tbody></table>");
-				} else if ("orders".equalsIgnoreCase(select))	{
+				} else if ("orders".equalsIgnoreCase(select)) {
 					String SQL = "SELECT orderId, totalAmount, orderDate, paymentType, shipDate, shipType, expectedDelivery FROM Invoice";
 					PreparedStatement pstmt = con.prepareStatement(SQL);
 					ResultSet rst = pstmt.executeQuery();
