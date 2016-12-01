@@ -11,99 +11,97 @@ DROP TABLE CactiSpecies;
 
 
 CREATE TABLE Account (
-email  VARCHAR(75) PRIMARY KEY,
-pass  VARCHAR(50) NOT NULL,
-fullName  VARCHAR(50) NOT NULL,
-phone  VARCHAR(10),
-billingAddress  VARCHAR(100) NOT NULL,
-shippingAddres  VARCHAR(100) NOT NULL,
-preferredPayment  VARCHAR(75),
-accountType  VARCHAR(10) CHECK (accountType IN ('Customer')));
+email VARCHAR(75) PRIMARY KEY,
+pass VARCHAR(50) NOT NULL,
+fullName VARCHAR(50) NOT NULL,
+phone VARCHAR(10),
+billingAddress VARCHAR(100) NOT NULL,
+shippingAddres VARCHAR(100) NOT NULL,
+preferredPayment VARCHAR(75),
+accountType VARCHAR(10) CHECK (accountType IN ('Customer')));
 
 
 CREATE TABLE Warehouse (
-     whouseName  VARCHAR(20),
-     whouseLocation  VARCHAR(80) NOT NULL,
-     PRIMARY KEY (whouseName));
+whouseName VARCHAR(20),
+whouseLocation VARCHAR(80) NOT NULL,
+PRIMARY KEY (whouseName));
 
 CREATE TABLE Invoice (
-orderId  INT IDENTITY NOT NULL,
-totalAmount  DECIMAL(9,2) CHECK (totalAmount>=0),
-weight  DECIMAL(9, 3) CHECK (weight>=0),
-orderDate  DATE NOT NULL,
-paymentType  VARCHAR(50),
-shipDate  DATE NOT NULL,
-shipType  VARCHAR(50) NOT NULL,
-expectedDelivery  DATE,
-accountEmail  VARCHAR(75) NOT NULL,
-whouseName  VARCHAR(20) NOT NULL,
+orderId INT IDENTITY NOT NULL,
+totalAmount DECIMAL(9,2) CHECK(totalAmount>=0),
+weight DECIMAL(9, 3) CHECK(weight>=0),
+orderDate DATE NOT NULL,
+paymentType VARCHAR(50),
+shipDate DATE NOT NULL,
+shipType VARCHAR(50) NOT NULL,
+expectedDelivery DATE,
+accountEmail VARCHAR(75) NOT NULL,
+whouseName VARCHAR(20) NOT NULL,
 PRIMARY KEY (orderId),
 CONSTRAINT FK_Invoice_Account FOREIGN KEY (accountEmail) REFERENCES Account(email),
 CONSTRAINT FK_Invoice_Warehouse FOREIGN KEY (whouseName) REFERENCES Warehouse (whouseName));
     
  CREATE TABLE CactiSpecies (
-species  VARCHAR(50) PRIMARY KEY,
-food  VARCHAR(50) NOT NULL,
-sunLevel  INTEGER CHECK (sunLevel BETWEEN 1 and 10),
-waterLevel  INTEGER CHECK (waterLevel BETWEEN 1 and 10));   
+species VARCHAR(50) PRIMARY KEY,
+food VARCHAR(50) NOT NULL,
+sunLevel INT CHECK(sunLevel BETWEEN 1 and 10),
+waterLevel INT CHECK(waterLevel BETWEEN 1 and 10));   
 
 CREATE TABLE Product (
-productId  INT IDENTITY NOT NULL,
-weight  DECIMAL(5,2) NOT NULL,
-productName  VARCHAR(50) NOT NULL,
+productId INT IDENTITY NOT NULL,
+weight DECIMAL(5,2) CHECK(weight>=0) NOT NULL,
+productName VARCHAR(50) NOT NULL,
 species VARCHAR(50),
-price  DECIMAL (9,2) NOT NULL,
-Inventory  INTEGER,
-category CHAR(2) CHECK (category IN ('AC', 'FT', 'CS')),
+price DECIMAL (9,2) CHECK(price>=0) NOT NULL,
+Inventory INT CHECK(Inventory>=0),
+category CHAR(2) CHECK(category IN ('AC', 'FT', 'CS')),
 picture VARCHAR(50),	
 PRIMARY KEY (productId),
 CONSTRAINT FK_Product_CactiSpecies FOREIGN KEY (species) REFERENCES CactiSpecies (species));
 
 
 CREATE TABLE OrderedProduct (
-productId    INT,
-orderId  INT,
-quantity  INTEGER CHECK (quantity >= 0),
-price INTEGER,
+productId INT,
+orderId INT,
+quantity INT CHECK(quantity>= 0),
+price INT CHECK(price>=0),
 PRIMARY KEY (productId, orderId),
 CONSTRAINT FK_OrderedProduct_Product FOREIGN KEY (productId) REFERENCES Product (productId),
 CONSTRAINT FK_OrderedProduct_Invoice FOREIGN KEY (orderId) REFERENCES Invoice (orderId));
 
 
-
 CREATE TABLE Greenhouse (
-ghouseId   VARCHAR(50),
-ghouseLocation   VARCHAR(80) NOT NULL,
+ghouseId VARCHAR(50),
+ghouseLocation VARCHAR(80) NOT NULL,
 whouseName VARCHAR(20) NOT NULL,
 PRIMARY KEY (ghouseId),
 CONSTRAINT FK_Greenhouse_Warehouse FOREIGN KEY (whouseName) REFERENCES Warehouse (whouseName));
     
 
 CREATE TABLE Grow (
-ghouseId  VARCHAR(50),
-species  VARCHAR(50),
+ghouseId VARCHAR(50),
+species VARCHAR(50),
 PRIMARY KEY (ghouseId, species),
 CONSTRAINT FK_Grow_Greenhouse FOREIGN KEY (ghouseId) REFERENCES Greenhouse (ghouseId),
 CONSTRAINT FK_Grow_CactiSpecies FOREIGN KEY (species) REFERENCES CactiSpecies (species));
 
 
-
 CREATE TABLE Employee (
-empId  VARCHAR(50),
-empName  VARCHAR(50) NOT NULL,
-title  CHAR(2) CHECK (title IN ('AD', 'SP', 'GH', 'WH')),
-empEmail  VARCHAR(75) NOT NULL,
-empPass  VARCHAR(50) NOT NULL,
-empSuperId  VARCHAR(50),
-whouseName  VARCHAR(20),
+empId VARCHAR(50),
+empName VARCHAR(50) NOT NULL,
+title CHAR(2) CHECK(title IN ('AD', 'SP', 'GH', 'WH')),
+empEmail VARCHAR(75) NOT NULL,
+empPass VARCHAR(50) NOT NULL,
+empSuperId VARCHAR(50),
+whouseName VARCHAR(20),
 PRIMARY KEY(empId),
 CONSTRAINT FK_Employee_Warehouse FOREIGN KEY (whouseName) REFERENCES Warehouse(whouseName),
 CONSTRAINT FK_Employee_Employee FOREIGN KEY (empSuperId) REFERENCES Employee(empId));
     
     
 CREATE TABLE WorksAt (
-ghouseId  VARCHAR(50),
-empId  VARCHAR(50),
+ghouseId VARCHAR(50),
+empId VARCHAR(50),
 PRIMARY KEY(ghouseId, empId),
 CONSTRAINT FK_WorksAt_Greenhouse FOREIGN KEY (ghouseId) REFERENCES Greenhouse (ghouseId),
 CONSTRAINT FK_WorksAt_Employee FOREIGN KEY (empId) REFERENCES Employee (empId));
