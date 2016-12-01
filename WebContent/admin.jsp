@@ -93,8 +93,10 @@
 		</div>
 	</div>
 	<div>
-	<input type="button" OnClick="window.location='admin.jsp?view=orders'" value= "View Orders">
-	<input type="button" OnClick="window.location='admin.jsp?view=products'" value= "Edit Products">
+		<input type="button" OnClick="window.location='admin.jsp?view=orders'"
+			value="View Orders"> <input type="button"
+			OnClick="window.location='admin.jsp?view=products'"
+			value="Edit Products">
 	</div>
 	<script>
 		function updateShipment(newId, newShip) {
@@ -164,7 +166,6 @@
 					rstOld.next();
 					int oldQ = rstOld.getInt(1);
 					int quantity = Integer.parseInt(newQty);
-					int difference = quantity - oldQ;
 
 					PreparedStatement up2 = con
 							.prepareStatement("SELECT weight, price, Inventory FROM Product WHERE productId = ?");
@@ -176,7 +177,30 @@
 					int inventory = get.getInt(3);
 
 					if (quantity > inventory) {
-						out.println("<h2>Not enough product in stock<h2>");
+						%>
+						<script>
+							alert("Sorry there is not enough of this item in stock!");
+						</script>
+						<%
+					} else if (quantity < 0 || quantity < oldQ){
+						PreparedStatement up = con.prepareStatement(
+								"UPDATE OrderedProduct SET quantity = ? WHERE productId = ? AND orderId = ?");
+						up.setString(1, newQty);
+						up.setString(2, updateQty);
+						up.setString(3, orderId);
+						up.executeUpdate();
+						
+						int difference = oldQ + quantity;
+
+						Double NewWeight = difference * weight;
+						Double NewPrice = price * difference;
+
+						PreparedStatement newI = con.prepareStatement(
+								"UPDATE Invoice SET weight = weight + ?, totalAmount = totalAmount - ? WHERE orderId = ?");
+						newI.setDouble(1, NewWeight);
+						newI.setDouble(2, NewPrice);
+						newI.setString(3, orderId);
+						newI.executeUpdate();
 					} else {
 						PreparedStatement up = con.prepareStatement(
 								"UPDATE OrderedProduct SET quantity = ? WHERE productId = ? AND orderId = ?");
@@ -184,9 +208,15 @@
 						up.setString(2, updateQty);
 						up.setString(3, orderId);
 						up.executeUpdate();
+						
+						int difference = quantity - oldQ;
+						if (difference < 0){
+							difference = difference * -1;
+						}
 
 						Double NewWeight = difference * weight;
 						Double NewPrice = price * difference;
+
 						PreparedStatement newI = con.prepareStatement(
 								"UPDATE Invoice SET weight = weight + ?, totalAmount = totalAmount + ? WHERE orderId = ?");
 						newI.setDouble(1, NewWeight);
