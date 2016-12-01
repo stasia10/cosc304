@@ -24,7 +24,9 @@
 		String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_kreid;";
 		String uid = "kreid";
 		String pw = "39265137";
-
+		
+		NumberFormat currFormat = NumberFormat.getCurrencyInstance();
+		
 		LocalDate localDate = LocalDate.now();
 		String ordDate = DateTimeFormatter.ofPattern("yyyy/MM/dd").format(localDate);
 		String name = localDate.getDayOfWeek().name();
@@ -48,7 +50,7 @@
 			shipCost = 10.00;
 		} else {
 			typeAdd = 10;
-			shipCost = 3.00;
+			shipCost = 0.00;
 		}
 		
 		LocalDate delivDay = shipDate.plusDays(typeAdd);
@@ -87,6 +89,7 @@
 
 				<%
 				} else {
+
 					String createNew = "INSERT INTO Account VALUES (?, ?, ?, ?, ?, ?, ?, 'Customer')";
 					PreparedStatement psCreateNew = con.prepareStatement(createNew);
 					psCreateNew.setString(1, custId);
@@ -169,9 +172,8 @@
 					out.println("<tr><td colspan='4'>Shipping Cost </td><td>" + shipCost
 							+  "</td></tr>");
 
-					totalAmt = Math.round(totalAmt * 100.0) / 100.0;
 					
-					out.println("<tr><td colspan='4'><b>Order Total </b></td><td>" + totalAmt
+					out.println("<tr><td colspan='4'><b>Order Total </b></td><td>" + currFormat.format(totalAmt)
 							+  "</td></tr></table>");
 					String upOrd = "UPDATE Invoice SET totalAmount = ?, weight=? WHERE orderId = ?";
 					PreparedStatement pord = con.prepareStatement(upOrd);
@@ -281,9 +283,8 @@
 						out.println("<tr><td colspan='4'>Shipping Cost </td><td>" + shipCost
 								+  "</td></tr>");
 
-						totalAmt = Math.round(totalAmt * 100.0) / 100.0;
 						
-						out.println("<tr><td colspan='4'><b>Order Total </b></td><td>" + totalAmt
+						out.println("<tr><td colspan='4'><b>Order Total </b></td><td>" + currFormat.format(totalAmt)
 								+  "</td></tr></table>");
 						String upOrd = "UPDATE Invoice SET totalAmount = ?, weight=? WHERE orderId = ?";
 						PreparedStatement pord = con.prepareStatement(upOrd);
