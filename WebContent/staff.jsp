@@ -75,7 +75,7 @@
 
 	<div class="container formpadding">
 
-		<form method="POST" action="staff2.jsp" class="staff-signin" name=signIn>
+		<form method="POST" action="staff.jsp" class="staff-signin" name=signIn>
 			<h2 class="form-signin-heading">Please sign in</h2>
 			<label for="inputEmail" class="sr-only">Email address</label> <input
 				id="inputEmail" name="inputEmail" class="form-control"
