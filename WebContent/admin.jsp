@@ -91,6 +91,35 @@
 
 		</div>
 	</div>
+	
+	<div class="container marketing">
+		<div class="formpadding">
+			<div class="form-group row">
+				<div class="col-m-10">
+					<button class="btn btn-lg btn-register btn-block" type="button"
+						OnClick="window.location='admin.jsp?view=orders'"
+						value="Edit Orders">Edit Orders</button>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-m-10">
+					<a class="btn btn-lg btn-block btn-register"
+						OnClick="window.location='admin.jsp?view=products'"
+						value="Edit Products">Edit Products</a>
+				</div>
+			</div>
+			
+			
+			<div class="form-group row">
+				<div class="col-m-10">
+					<a class="btn btn-lg btn-block btn-register"
+						href="addproduct.jsp"
+						value="Add New Product">Add Products</a>
+				</div>
+			</div>
+		</div>
+
+	
 	<div>
 		<input type="button" OnClick="window.location='admin.jsp?view=orders'"
 			value="View Orders"> <input type="button"
@@ -283,33 +312,33 @@
 					}
 					out.println("</tbody></table>");
 				} else if ("products".equalsIgnoreCase(select)) {
+					// PLT = Product Listing Table
+					StringBuilder PLT = new StringBuilder(1000);
 					String SQL = "SELECT * FROM Product";
 					PreparedStatement pstmt = con.prepareStatement(SQL);
 					ResultSet rst = pstmt.executeQuery();
-					out.println(
-							"<table id='hor-minimalist-b'><tbody><th><b>Product Id</b></th><th align='center'><b>Product Name</b></th>"
-									+ "<th><b>Weight</b></th><th><b>Price</b></th><th><b>Inventory</b></th>"
-									+ "<th><b>Category</b></th>");
+					PLT.append("<div class=\"table-responsive\">"); 
+					PLT.append("<table class=\"table\">");
+					PLT.append(" <thead><tr><th> Product Id </th><th> Product Name </th><th> Weight </th><th> Price </th><th> Inventory </th><th> Category </th></tr></thead>");
+					
+
 					String spec = null;
 					while (rst.next()) {
 						invent++;
 						spec = rst.getString("species");
-						out.println("<tr><td>" + rst.getString("productId") + "</td><td>" + rst.getString("productName")
-								+ "</td><td>" + rst.getString("weight") + "</td><td>$" + rst.getString("price")
-								+ "</td><td><input type=\"text\" name=\"newInvent" + invent + "\" size=\"3\" value=\""
-								+ rst.getString("Inventory") + "\"></td><td>" + rst.getString("category") + "</td>");
-						out.println("<td><input type=BUTTON OnClick=\"update(" + rst.getString("productId")
-								+ ", document.listadmin.newInvent" + invent
-								+ ".value)\"value=\"Update Inventory\"></td></tr>");
-						if (spec != null) {
-							out.println(
-									"<tr align='right'><td colspan='6'><table id='hor-minimalist-b'><th><b>Species</b></th>");
-							out.println("<tr><td>" + spec + "</td></tr></tbody></table>");
-						}
+						PLT.append("<tbody>");
+						PLT.append("<tr><td>" + rst.getString("productId") + "</td><td>" + rst.getString("productName"));
+						PLT.append("</td><td>" + rst.getString("weight") + "</td><td>$" + rst.getString("price"));
+						PLT.append("</td><td><input type=\"text\" name=\"newInvent" + invent + "\" size=\"3\" value=\"");
+						PLT.append(rst.getString("Inventory") + "\"></td><td>" + rst.getString("category") + "</td>");
+						PLT.append("<td><input type=BUTTON OnClick=\"update(" + rst.getString("productId"));
+						PLT.append(", document.listsuper.newInvent" + invent);
+						PLT.append(".value)\"value=\"Update Inventory\"></td></tr>");
+						
 					}
-					out.println(
-							"<td><input type=BUTTON OnClick=\"window.location='addproduct.jsp'\" value = \"Add New Product\"");
+					
 					out.println("</tbody></table>");
+					out.print(PLT.toString());
 				}
 			} catch (SQLException ex) {
 				out.println(ex);

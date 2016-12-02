@@ -171,11 +171,7 @@
 							PLT.append(", document.listsuper.newInvent" + invent);
 							PLT.append(".value)\"value=\"Update Inventory\"></td></tr>");
 							
-							//if (spec != null) {
-							//	PLT.append(
-							//			"<tr align='right'><td colspan='6'><table id='hor-minimalist-b'><th><b>Species</b></th>");
-							//	PLT.append("<tr><td>" + spec + "</td></tr></tbody></table>");
-							//}
+							
 						}
 						PLT.append("</tbody></table>");
 						PLT.append("</div>");
