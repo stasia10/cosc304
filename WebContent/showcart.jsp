@@ -62,53 +62,61 @@
       <![endif]-->
 </head>
 <body>
-<div class="container marketing">
-	
-	<div class="navbar-wrapper">
-		<div class="container">
+	<%@ page import="java.sql.*"%>
+	<div class="container marketing">
 
-			<!-- Fixed navbar -->
-			<nav class="navbar navbar-default navbar-fixed-top">
-				<div class="container">
-					<div class="navbar-header">
+		<div class="navbar-wrapper">
+			<div class="container">
 
-						<a class="navbar-brand" href="index.html">Fancy Cacti</a>
+				<!-- Fixed navbar -->
+				<nav class="navbar navbar-default navbar-fixed-top">
+					<div class="container">
+						<div class="navbar-header">
+
+							<a class="navbar-brand" href="index.html">Fancy Cacti</a>
+						</div>
+						<div id="navbar" class="navbar-collapse collapse">
+							<ul class="nav navbar-nav">
+								<li><a href="index.html">Home</a></li>
+								<li><a href="about.html">About</a></li>
+								<li><a href="products.jsp">Products</a></li>
+								<li><a href="staff.jsp">Staff</a></li>
+							</ul>
+							<ul class="nav navbar-nav navbar-right">
+								<a href="showcart.jsp" class="btn btn-default navbar-btn active">
+									<span class="glyphicon glyphicon-shopping-cart"></span>
+									Shopping Cart
+								</a>
+
+							</ul>
+
+						</div>
+						<!--/.nav-collapse -->
+
 					</div>
-					<div id="navbar" class="navbar-collapse collapse">
-						<ul class="nav navbar-nav">
-							<li><a href="index.html">Home</a></li>
-							<li><a href="about.html">About</a></li>
-							<li><a href="products.jsp">Products</a></li>
-							<li><a href="staff.jsp">Staff</a></li>
-						</ul>
-						<ul class="nav navbar-nav navbar-right">
-							<a href="showcart.jsp" class="btn btn-default navbar-btn active"> <span
-								class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
-							</a>
+				</nav>
 
-						</ul>
-
-					</div>
-					<!--/.nav-collapse -->
-
-				</div>
-			</nav>
-
+			</div>
 		</div>
-	</div>
-	<script src="signin_files/ie10-viewport-bug-workaround.js"></script>
-	<script>
-		function update(newid, newqty) {
-			window.location = "showcart.jsp?update=" + newid + "&newqty="
-					+ newqty;
-		}
-	</script>
-	<form name="listcart">
-		<%// Get the current list of products
+		<script src="signin_files/ie10-viewport-bug-workaround.js"></script>
+		<script>
+			function update(newid, newqty) {
+				window.location = "showcart.jsp?update=" + newid + "&newqty="
+						+ newqty;
+			}
+		</script>
+		<form name="listcart">
+			<%// Get the current list of products
 		@SuppressWarnings({ "unchecked" })
 		HashMap<String, ArrayList<Object>> productList = (HashMap<String, ArrayList<Object>>) session
 				.getAttribute("productList");
 		ArrayList<Object> product = new ArrayList<Object>();
+		
+		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		Connection con = null;
+		String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_kreid;";
+		String uid = "kreid";
+		String pw = "39265137";
 		
 		String del = request.getParameter("delete");
 		String update = request.getParameter("update");
@@ -118,15 +126,36 @@
 			productList = new HashMap<String, ArrayList<Object>>();
 		} else {
 			NumberFormat currFormat = NumberFormat.getCurrencyInstance();
-
+			try {
+				con = DriverManager.getConnection(url, uid, pw);
+				
 			if (update != null && (!update.equals(""))) {
+				String checkInventory = "SELECT Inventory FROM Product WHERE productId=?";
+				PreparedStatement ptCheck = con.prepareStatement(checkInventory);
+				ptCheck.setString(1, update);
+				ResultSet rstCheck = ptCheck.executeQuery();
+				rstCheck.next();
+				int realInv = rstCheck.getInt(1);
+				int Qty =  (new Integer(newqty));
+				if(realInv < Qty){
+					%>
+
+					<script>
+						alert("Sorry we do not have that much in stock");
+					</script>
+
+					<%
+				}
+				else{
 				if (productList.containsKey(update)) {
 					product = (ArrayList<Object>) productList.get(update);
-					product.set(3, (new Integer(newqty)));
+					product.set(3,Qty);
 				} else {
 					productList.put(del, product);
 				}
 			}
+			}
+			
 			if (del != null && (!del.equals(""))) {
 				if (productList.containsKey(del)) {
 					productList.remove(del);
@@ -177,20 +206,31 @@
 
 			out.println("<h2><a href=\"checkout.jsp\">Check Out</a></h2>");
 		}
+			catch (SQLException ex) {
+				out.println(ex);
+			} finally {
+				if (con != null)
+					try {
+						con.close();
+					} catch (SQLException ex) {
+						System.err.println("SQLException: " + ex);
+					}
+			}
+		}
 		%>
-		<h2>
-			<a href="products.jsp">Continue Shopping</a>
-		</h2>
-	</form>
+			<h2>
+				<a href="products.jsp">Continue Shopping</a>
+			</h2>
+		</form>
 		<footer>
-				<p class="pull-right">
-					<a href="#">Back to top</a>
-				</p>
-				<p>
-					&copy; 2016 Fancy Cacti, Inc. &middot; <a href="privacy.html">Privacy</a>
-					&middot; <a href="legal.html">Legal</a>
-				</p>
-			</footer>
+			<p class="pull-right">
+				<a href="#">Back to top</a>
+			</p>
+			<p>
+				&copy; 2016 Fancy Cacti, Inc. &middot; <a href="privacy.html">Privacy</a>
+				&middot; <a href="legal.html">Legal</a>
+			</p>
+		</footer>
 	</div>
 </body>
 </html>
