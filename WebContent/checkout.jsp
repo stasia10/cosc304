@@ -111,8 +111,7 @@
 	</div>
 	<div class="form-group row">
 				<div class="col-m-10">
-				<a class="btn btn-lg btn-block btn-register" href="signup.jsp">Create
-					account</a>
+				<a class="btn btn-lg btn-block btn-register" href="signup.jsp">Register & Place Order</a>
 					</div>
 					</div>
 					

@@ -171,7 +171,7 @@
 
 
 			<button class="btn btn-lg btn-primary btn-block" type="submit"
-				value="submit">Sign up</button>
+				value="submit">Register and Place Order</button>
 
 
 			<button class="btn btn-lg btn-block" type="button" onClick="cancel()">Cancel</button>
