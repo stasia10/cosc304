@@ -94,43 +94,41 @@
 	<script src="signin_files/ie10-viewport-bug-workaround.js"></script>
 	<%@ page import="java.sql.*"%>
 	<form name="listsuper">
-	<%
-		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		Connection con = null;
-		String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_kreid;";
-		String uid = "kreid";
-		String pw = "39265137";
-	%>
-	<div class="container marketing">
-		<div class="formpadding">
-			<div class="form-group row">
-				<div class="col-m-10">
-					<button class="btn btn-lg btn-register btn-block" type="button"
-						OnClick="window.location='supervisor.jsp?view=orders'"
-						value="View Orders">View Orders</button>
+		<%
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Connection con = null;
+			String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_kreid;";
+			String uid = "kreid";
+			String pw = "39265137";
+		%>
+		<div class="container marketing">
+			<div class="formpadding">
+				<div class="form-group row">
+					<div class="col-m-10">
+						<button class="btn btn-lg btn-register btn-block" type="button"
+							OnClick="window.location='supervisor.jsp?view=orders'"
+							value="View Orders">View Orders</button>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-m-10">
+						<a class="btn btn-lg btn-block btn-register"
+							OnClick="window.location='supervisor.jsp?view=products'"
+							value="Edit Products">Edit Products</a>
+					</div>
 				</div>
 			</div>
-			<div class="form-group row">
-				<div class="col-m-10">
-					<a class="btn btn-lg btn-block btn-register"
-						OnClick="window.location='supervisor.jsp?view=products'"
-						value="Edit Products">Edit Products</a>
-				</div>
-			</div>
-		</div>
 
 
 
-		<script>
-			function update(newId, newInvent) {
-				window.location = "supervisor.jsp?view=products&update="
-						+ newId + "&newInvent=" + newInvent;
-			}
-		</script>
-		
+			<script>
+				function update(newId, newInvent) {
+					window.location = "supervisor.jsp?view=products&update="
+							+ newId + "&newInvent=" + newInvent;
+				}
+			</script>
+
 			<%
-			
-			
 				String update = request.getParameter("update");
 				String newInvent = request.getParameter("newInvent");
 				String select = request.getParameter("view");
@@ -140,46 +138,42 @@
 					StringBuilder PLT = new StringBuilder(1000);
 					con = DriverManager.getConnection(url, uid, pw);
 					if (update != null && (!update.equals(""))) {
-							PreparedStatement up = con
-									.prepareStatement("UPDATE Product SET Inventory = ? WHERE productId = ?");
-							up.setString(1, newInvent);
-							up.setString(2, update);
-							up.executeUpdate();
+						PreparedStatement up = con.prepareStatement("UPDATE Product SET Inventory = ? WHERE productId = ?");
+						up.setString(1, newInvent);
+						up.setString(2, update);
+						up.executeUpdate();
 					}
-		
+
 					if ("products".equalsIgnoreCase(select)) {
 						String SQL = "SELECT * FROM Product";
 						PreparedStatement pstmt = con.prepareStatement(SQL);
 						ResultSet rst = pstmt.executeQuery();
-						
-								
-								PLT.append("<div class=\"table-responsive\">"); 
-								PLT.append("<table class=\"table\">");
-								PLT.append(" <thead><tr><th> Product Id </th><th> Product Name </th><th> Weight </th><th> Price </th><th> Inventory </th><th> Category </th></tr></thead>");
-								
+
+						PLT.append("<div class=\"table-responsive\">");
+						PLT.append("<table class=\"table\">");
+						PLT.append(
+								" <thead><tr><th> Product Id </th><th> Product Name </th><th> Weight </th><th> Price </th><th> Inventory </th><th> Category </th></tr></thead>");
 
 						String spec = null;
 						while (rst.next()) {
 							invent++;
 							spec = rst.getString("species");
 							PLT.append("<tbody>");
-							PLT.append("<tr><td>" + rst.getString("productId") + "</td><td>" + rst.getString("productName"));
+							PLT.append(
+									"<tr><td>" + rst.getString("productId") + "</td><td>" + rst.getString("productName"));
 							PLT.append("</td><td>" + rst.getString("weight") + "</td><td>$" + rst.getString("price"));
-							PLT.append("</td><td><input type=\"text\" name=\"newInvent" + invent + "\" size=\"3\" value=\"");
+							PLT.append(
+									"</td><td><input type=\"text\" name=\"newInvent" + invent + "\" size=\"3\" value=\"");
 							PLT.append(rst.getString("Inventory") + "\"></td><td>" + rst.getString("category") + "</td>");
 							PLT.append("<td><input type=BUTTON OnClick=\"update(" + rst.getString("productId"));
 							PLT.append(", document.listsuper.newInvent" + invent);
 							PLT.append(".value)\"value=\"Update Inventory\"></td></tr>");
-							
-							
+
 						}
 						PLT.append("</tbody></table>");
 						PLT.append("</div>");
 						out.print(PLT.toString());
-						
-						
-						
-						
+
 					} else if ("orders".equalsIgnoreCase(select)) {
 						String SQL = "SELECT orderId, totalAmount, orderDate, paymentType, shipDate, shipType, expectedDelivery FROM Invoice";
 						PreparedStatement pstmt = con.prepareStatement(SQL);
@@ -231,7 +225,7 @@
 					&middot; <a href="legal.html">Legal</a>
 				</p>
 			</footer>
-	</div>
+		</div>
 	</form>
 </body>
 </html>

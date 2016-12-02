@@ -91,7 +91,7 @@
 
 		</div>
 	</div>
-	
+
 	<div class="container marketing">
 		<div class="formpadding">
 			<div class="form-group row">
@@ -108,234 +108,235 @@
 						value="Edit Products">Edit Products</a>
 				</div>
 			</div>
-			
-			
+
+
 			<div class="form-group row">
 				<div class="col-m-10">
-					<a class="btn btn-lg btn-block btn-register"
-						href="addproduct.jsp"
+					<a class="btn btn-lg btn-block btn-register" href="addproduct.jsp"
 						value="Add New Product">Add Products</a>
 				</div>
 			</div>
 		</div>
 
-	<script>
-		function updateShipment(newId, newShip) {
-			window.location = "admin.jsp?view=orders&updateShipment=" + newId
-					+ "&newShip=" + newShip;
-		}
-		function updatePayment(newId, newPay) {
-			window.location = "admin.jsp?view=orders&updatePayment=" + newId
-					+ "&newPay=" + newPay;
-		}
-		function updateQty(newId, orderId, newQty) {
-			window.location = "admin.jsp?view=orders&updateQty=" + newId
-					+ "&orderId=" + orderId + "&newQty=" + newQty;
-		}
-		function update(newId, newInvent) {
-			window.location = "admin.jsp?view=products&update=" + newId
-					+ "&newInvent=" + newInvent;
-		}
-	</script>
-	<script src="signin_files/ie10-viewport-bug-workaround.js"></script>
-	<%@ page import="java.sql.*"%>
-	<form name="listadmin">
-		<%
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			Connection con = null;
-			String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_kreid;";
-			String uid = "kreid";
-			String pw = "39265137";
+		<script>
+			function updateShipment(newId, newShip) {
+				window.location = "admin.jsp?view=orders&updateShipment="
+						+ newId + "&newShip=" + newShip;
+			}
+			function updatePayment(newId, newPay) {
+				window.location = "admin.jsp?view=orders&updatePayment="
+						+ newId + "&newPay=" + newPay;
+			}
+			function updateQty(newId, orderId, newQty) {
+				window.location = "admin.jsp?view=orders&updateQty=" + newId
+						+ "&orderId=" + orderId + "&newQty=" + newQty;
+			}
+			function update(newId, newInvent) {
+				window.location = "admin.jsp?view=products&update=" + newId
+						+ "&newInvent=" + newInvent;
+			}
+		</script>
+		<script src="signin_files/ie10-viewport-bug-workaround.js"></script>
+		<%@ page import="java.sql.*"%>
+		<form name="listadmin">
+			<%
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				Connection con = null;
+				String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_kreid;";
+				String uid = "kreid";
+				String pw = "39265137";
 
-			String select = request.getParameter("view");
+				String select = request.getParameter("view");
 
-			String updateShipment = request.getParameter("updateShipment");
-			String updatePayment = request.getParameter("updatePayment");
-			String updateQty = request.getParameter("updateQty");
-			String update = request.getParameter("update");
-			String newShip = request.getParameter("newShip");
-			String newPay = request.getParameter("newPay");
-			String newQty = request.getParameter("newQty");
-			String newInvent = request.getParameter("newInvent");
-			String orderId = request.getParameter("orderId");
+				String updateShipment = request.getParameter("updateShipment");
+				String updatePayment = request.getParameter("updatePayment");
+				String updateQty = request.getParameter("updateQty");
+				String update = request.getParameter("update");
+				String newShip = request.getParameter("newShip");
+				String newPay = request.getParameter("newPay");
+				String newQty = request.getParameter("newQty");
+				String newInvent = request.getParameter("newInvent");
+				String orderId = request.getParameter("orderId");
 
-			String oid = null;
-			String pid = null;
-			int ship = 0;
-			int pay = 0;
-			int qty = 0;
-			int invent = 0;
+				String oid = null;
+				String pid = null;
+				int ship = 0;
+				int pay = 0;
+				int qty = 0;
+				int invent = 0;
 
-			try {
-				con = DriverManager.getConnection(url, uid, pw);
-				if (updateShipment != null && (!updateShipment.equals(""))) {
-					PreparedStatement up = con.prepareStatement("UPDATE Invoice SET shipType = ? WHERE orderId = ?");
-					up.setString(1, newShip);
-					up.setString(2, updateShipment);
-					up.executeUpdate();
-				} else if (updatePayment != null && (!updatePayment.equals(""))) {
-					PreparedStatement up = con.prepareStatement("UPDATE Invoice SET paymentType = ? WHERE orderId = ?");
-					up.setString(1, newPay);
-					up.setString(2, updatePayment);
-					up.executeUpdate();
-				} else if (updateQty != null && (!updateQty.equals(""))) {
-					PreparedStatement old = con.prepareStatement(
-							"SELECT quantity FROM OrderedProduct WHERE productId = ? AND orderId = ?");
-					old.setString(1, updateQty);
-					old.setString(2, orderId);
-					ResultSet rstOld = old.executeQuery();
-					rstOld.next();
-					int oldQ = rstOld.getInt(1);
-					int quantity = Integer.parseInt(newQty);
-
-					PreparedStatement up2 = con
-							.prepareStatement("SELECT weight, price, Inventory FROM Product WHERE productId = ?");
-					up2.setString(1, updateQty);
-					ResultSet get = up2.executeQuery();
-					get.next();
-					Double weight = get.getDouble(1);
-					Double price = get.getDouble(2);
-					int inventory = get.getInt(3);
-
-					if (quantity > inventory) {
-						%>
-						<script>
-							alert("Sorry there is not enough of this item in stock!");
-						</script>
-						<%
-					} else if (quantity < 0 || quantity < oldQ){
-						PreparedStatement up = con.prepareStatement(
-								"UPDATE OrderedProduct SET quantity = ? WHERE productId = ? AND orderId = ?");
-						up.setString(1, newQty);
-						up.setString(2, updateQty);
-						up.setString(3, orderId);
+				try {
+					con = DriverManager.getConnection(url, uid, pw);
+					if (updateShipment != null && (!updateShipment.equals(""))) {
+						PreparedStatement up = con.prepareStatement("UPDATE Invoice SET shipType = ? WHERE orderId = ?");
+						up.setString(1, newShip);
+						up.setString(2, updateShipment);
 						up.executeUpdate();
-						
-						int difference = oldQ + quantity;
-
-						Double NewWeight = difference * weight;
-						Double NewPrice = price * difference;
-
-						PreparedStatement newI = con.prepareStatement(
-								"UPDATE Invoice SET weight = weight + ?, totalAmount = totalAmount - ? WHERE orderId = ?");
-						newI.setDouble(1, NewWeight);
-						newI.setDouble(2, NewPrice);
-						newI.setString(3, orderId);
-						newI.executeUpdate();
-					} else {
-						PreparedStatement up = con.prepareStatement(
-								"UPDATE OrderedProduct SET quantity = ? WHERE productId = ? AND orderId = ?");
-						up.setString(1, newQty);
-						up.setString(2, updateQty);
-						up.setString(3, orderId);
+					} else if (updatePayment != null && (!updatePayment.equals(""))) {
+						PreparedStatement up = con.prepareStatement("UPDATE Invoice SET paymentType = ? WHERE orderId = ?");
+						up.setString(1, newPay);
+						up.setString(2, updatePayment);
 						up.executeUpdate();
-						
-						int difference = quantity - oldQ;
-						if (difference < 0){
-							difference = difference * -1;
+					} else if (updateQty != null && (!updateQty.equals(""))) {
+						PreparedStatement old = con.prepareStatement(
+								"SELECT quantity FROM OrderedProduct WHERE productId = ? AND orderId = ?");
+						old.setString(1, updateQty);
+						old.setString(2, orderId);
+						ResultSet rstOld = old.executeQuery();
+						rstOld.next();
+						int oldQ = rstOld.getInt(1);
+						int quantity = Integer.parseInt(newQty);
+
+						PreparedStatement up2 = con
+								.prepareStatement("SELECT weight, price, Inventory FROM Product WHERE productId = ?");
+						up2.setString(1, updateQty);
+						ResultSet get = up2.executeQuery();
+						get.next();
+						Double weight = get.getDouble(1);
+						Double price = get.getDouble(2);
+						int inventory = get.getInt(3);
+
+						if (quantity > inventory) {
+			%>
+			<script>
+				alert("Sorry there is not enough of this item in stock!");
+			</script>
+			<%
+				} else if (quantity < 0 || quantity < oldQ) {
+							PreparedStatement up = con.prepareStatement(
+									"UPDATE OrderedProduct SET quantity = ? WHERE productId = ? AND orderId = ?");
+							up.setString(1, newQty);
+							up.setString(2, updateQty);
+							up.setString(3, orderId);
+							up.executeUpdate();
+
+							int difference = oldQ + quantity;
+
+							Double NewWeight = difference * weight;
+							Double NewPrice = price * difference;
+
+							PreparedStatement newI = con.prepareStatement(
+									"UPDATE Invoice SET weight = weight + ?, totalAmount = totalAmount - ? WHERE orderId = ?");
+							newI.setDouble(1, NewWeight);
+							newI.setDouble(2, NewPrice);
+							newI.setString(3, orderId);
+							newI.executeUpdate();
+						} else {
+							PreparedStatement up = con.prepareStatement(
+									"UPDATE OrderedProduct SET quantity = ? WHERE productId = ? AND orderId = ?");
+							up.setString(1, newQty);
+							up.setString(2, updateQty);
+							up.setString(3, orderId);
+							up.executeUpdate();
+
+							int difference = quantity - oldQ;
+							if (difference < 0) {
+								difference = difference * -1;
+							}
+
+							Double NewWeight = difference * weight;
+							Double NewPrice = price * difference;
+
+							PreparedStatement newI = con.prepareStatement(
+									"UPDATE Invoice SET weight = weight + ?, totalAmount = totalAmount + ? WHERE orderId = ?");
+							newI.setDouble(1, NewWeight);
+							newI.setDouble(2, NewPrice);
+							newI.setString(3, orderId);
+							newI.executeUpdate();
 						}
-
-						Double NewWeight = difference * weight;
-						Double NewPrice = price * difference;
-
-						PreparedStatement newI = con.prepareStatement(
-								"UPDATE Invoice SET weight = weight + ?, totalAmount = totalAmount + ? WHERE orderId = ?");
-						newI.setDouble(1, NewWeight);
-						newI.setDouble(2, NewPrice);
-						newI.setString(3, orderId);
-						newI.executeUpdate();
-					}
-				} else if (update != null && (!update.equals(""))) {
-						PreparedStatement up = con
-								.prepareStatement("UPDATE Product SET Inventory = ? WHERE productId = ?");
+					} else if (update != null && (!update.equals(""))) {
+						PreparedStatement up = con.prepareStatement("UPDATE Product SET Inventory = ? WHERE productId = ?");
 						up.setString(1, newInvent);
 						up.setString(2, update);
 						up.executeUpdate();
-				}
+					}
 
-				if ("orders".equalsIgnoreCase(select)) {
-					String SQL = "SELECT orderId, totalAmount, orderDate, paymentType, shipDate, shipType, expectedDelivery FROM Invoice";
-					PreparedStatement pstmt = con.prepareStatement(SQL);
-					ResultSet rst = pstmt.executeQuery();
-					out.println("<table id='hor-minimalist-b'><tbody><th><b>Order Id</b></th><th><b>Order Date</b></th>"
-							+ "<th><b>Ship Date</b></th><th><b>Ship Type</b></th><th><b>Expected Delivery</b></th>"
-							+ "<th><b>Payment Type</b></th><th><b>Total Amount</b></th>");
+					if ("orders".equalsIgnoreCase(select)) {
+						String SQL = "SELECT orderId, totalAmount, orderDate, paymentType, shipDate, shipType, expectedDelivery FROM Invoice";
+						PreparedStatement pstmt = con.prepareStatement(SQL);
+						ResultSet rst = pstmt.executeQuery();
+						out.println("<table id='hor-minimalist-b'><tbody><th><b>Order Id</b></th><th><b>Order Date</b></th>"
+								+ "<th><b>Ship Date</b></th><th><b>Ship Type</b></th><th><b>Expected Delivery</b></th>"
+								+ "<th><b>Payment Type</b></th><th><b>Total Amount</b></th>");
 
-					while (rst.next()) {
-						oid = rst.getString(1);
-						pay++;
-						ship++;
-						out.println("<tr align='center'><td>" + oid + "</td><td>" + rst.getString(3) + "</td><td>"
-								+ rst.getString(5) + "</td><td><input type=\"text\" name=\"newShip" + ship
-								+ "\" size=\"25\" value=\"" + rst.getString(6) + "\"></td><td>" + rst.getString(7)
-								+ "</td><td><input type=\"text\" name=\"newPay" + pay + "\" size= \"25\" value=\""
-								+ rst.getString(4) + "\"></td><td>$" + rst.getString(2));
-						out.println("<td><input type=BUTTON OnClick=\"updateShipment(" + oid
-								+ ", document.listadmin.newShip" + ship + ".value)\"value=\"Update Shipment\"></td>");
-						out.println(
-								"<td><input type=BUTTON OnClick=\"updatePayment(" + oid + ", document.listadmin.newPay"
-										+ pay + ".value)\" value= \"Update Payment\"></td></tr>");
-						out.println(
-								"<tr align='right'><td colspan='7'><table id='hor-minimalist-b'><th><b>Product Id</b></th><th><b>Product Name</b></th>"
-										+ "<th><b>Quantity</b></th><th><b>Price</b></th>");
-						String SQL2 = "SELECT O.productId, quantity, O.price, productName FROM OrderedProduct O INNER JOIN Product P ON O.productId = P.productId "
-								+ " WHERE orderId = ?";
-						PreparedStatement pstmt2 = con.prepareStatement(SQL2);
-						pstmt2.setString(1, oid);
-						ResultSet rst2 = pstmt2.executeQuery();
-						while (rst2.next()) {
-							qty++;
-							pid = rst2.getString(1);
-							out.println("<tr align='center'><td>" + rst2.getString(1) + "</td><td>" + rst2.getString(4)
-									+ "</td><td><input type =\"text\" name =\"newQty" + qty + "\" size = \"3\" value=\""
-									+ rst2.getString(2) + "\"></td><td>$" + rst2.getDouble(3) + "</td>");
-							out.println("<td><input type=BUTTON OnClick=\"updateQty(" + pid + "," + oid
-									+ ", document.listadmin.newQty" + qty
-									+ ".value)\" value= \"Update Quantity\"></td></tr>");
+						while (rst.next()) {
+							oid = rst.getString(1);
+							pay++;
+							ship++;
+							out.println("<tr align='center'><td>" + oid + "</td><td>" + rst.getString(3) + "</td><td>"
+									+ rst.getString(5) + "</td><td><input type=\"text\" name=\"newShip" + ship
+									+ "\" size=\"25\" value=\"" + rst.getString(6) + "\"></td><td>" + rst.getString(7)
+									+ "</td><td><input type=\"text\" name=\"newPay" + pay + "\" size= \"25\" value=\""
+									+ rst.getString(4) + "\"></td><td>$" + rst.getString(2));
+							out.println("<td><input type=BUTTON OnClick=\"updateShipment(" + oid
+									+ ", document.listadmin.newShip" + ship + ".value)\"value=\"Update Shipment\"></td>");
+							out.println(
+									"<td><input type=BUTTON OnClick=\"updatePayment(" + oid + ", document.listadmin.newPay"
+											+ pay + ".value)\" value= \"Update Payment\"></td></tr>");
+							out.println(
+									"<tr align='right'><td colspan='7'><table id='hor-minimalist-b'><th><b>Product Id</b></th><th><b>Product Name</b></th>"
+											+ "<th><b>Quantity</b></th><th><b>Price</b></th>");
+							String SQL2 = "SELECT O.productId, quantity, O.price, productName FROM OrderedProduct O INNER JOIN Product P ON O.productId = P.productId "
+									+ " WHERE orderId = ?";
+							PreparedStatement pstmt2 = con.prepareStatement(SQL2);
+							pstmt2.setString(1, oid);
+							ResultSet rst2 = pstmt2.executeQuery();
+							while (rst2.next()) {
+								qty++;
+								pid = rst2.getString(1);
+								out.println("<tr align='center'><td>" + rst2.getString(1) + "</td><td>" + rst2.getString(4)
+										+ "</td><td><input type =\"text\" name =\"newQty" + qty + "\" size = \"3\" value=\""
+										+ rst2.getString(2) + "\"></td><td>$" + rst2.getDouble(3) + "</td>");
+								out.println("<td><input type=BUTTON OnClick=\"updateQty(" + pid + "," + oid
+										+ ", document.listadmin.newQty" + qty
+										+ ".value)\" value= \"Update Quantity\"></td></tr>");
+							}
+							out.println("</tbody></table></td></tr>");
 						}
-						out.println("</tbody></table></td></tr>");
-					}
-					out.println("</tbody></table>");
-				} else if ("products".equalsIgnoreCase(select)) {
-					// PLT = Product Listing Table
-					StringBuilder PLT = new StringBuilder(1000);
-					String SQL = "SELECT * FROM Product";
-					PreparedStatement pstmt = con.prepareStatement(SQL);
-					ResultSet rst = pstmt.executeQuery();
-					PLT.append("<div class=\"table-responsive\">"); 
-					PLT.append("<table class=\"table\">");
-					PLT.append(" <thead><tr><th> Product Id </th><th> Product Name </th><th> Weight </th><th> Price </th><th> Inventory </th><th> Category </th></tr></thead>");
-					
+						out.println("</tbody></table>");
+					} else if ("products".equalsIgnoreCase(select)) {
+						// PLT = Product Listing Table
+						StringBuilder PLT = new StringBuilder(1000);
+						String SQL = "SELECT * FROM Product";
+						PreparedStatement pstmt = con.prepareStatement(SQL);
+						ResultSet rst = pstmt.executeQuery();
 
-					String spec = null;
-					while (rst.next()) {
-						invent++;
-						spec = rst.getString("species");
-						PLT.append("<tbody>");
-						PLT.append("<tr><td>" + rst.getString("productId") + "</td><td>" + rst.getString("productName"));
-						PLT.append("</td><td>" + rst.getString("weight") + "</td><td>$" + rst.getString("price"));
-						PLT.append("</td><td><input type=\"text\" name=\"newInvent" + invent + "\" size=\"3\" value=\"");
-						PLT.append(rst.getString("Inventory") + "\"></td><td>" + rst.getString("category") + "</td>");
-						PLT.append("<td><input type=BUTTON OnClick=\"update(" + rst.getString("productId"));
-						PLT.append(", document.listsuper.newInvent" + invent);
-						PLT.append(".value)\"value=\"Update Inventory\"></td></tr>");
-						
+						PLT.append("<div class=\"table-responsive\">");
+						PLT.append("<table class=\"table\">");
+						PLT.append(
+								" <thead><tr><th> Product Id </th><th> Product Name </th><th> Weight </th><th> Price </th><th> Inventory </th><th> Category </th></tr></thead>");
+
+						String spec = null;
+						while (rst.next()) {
+							invent++;
+							spec = rst.getString("species");
+							PLT.append("<tbody>");
+							PLT.append(
+									"<tr><td>" + rst.getString("productId") + "</td><td>" + rst.getString("productName"));
+							PLT.append("</td><td>" + rst.getString("weight") + "</td><td>$" + rst.getString("price"));
+							PLT.append(
+									"</td><td><input type=\"text\" name=\"newInvent" + invent + "\" size=\"3\" value=\"");
+							PLT.append(rst.getString("Inventory") + "\"></td><td>" + rst.getString("category") + "</td>");
+							PLT.append("<td><input type=BUTTON OnClick=\"update(" + rst.getString("productId"));
+							PLT.append(", document.listadmin.newInvent" + invent);
+							PLT.append(".value)\"value=\"Update Inventory\"></td></tr>");
+
+						}
+						PLT.append("</tbody></table>");
+						PLT.append("</div>");
+						out.print(PLT.toString());
 					}
-					
-					out.println("</tbody></table>");
-					out.print(PLT.toString());
+				} catch (SQLException ex) {
+					out.println(ex);
+				} finally {
+					if (con != null)
+						try {
+							con.close();
+						} catch (SQLException ex) {
+							System.err.println("SQLException: " + ex);
+						}
 				}
-			} catch (SQLException ex) {
-				out.println(ex);
-			} finally {
-				if (con != null)
-					try {
-						con.close();
-					} catch (SQLException ex) {
-						System.err.println("SQLException: " + ex);
-					}
-			}
-		%>
-	</form>
+			%>
+		</form>
 </body>
 </html>
