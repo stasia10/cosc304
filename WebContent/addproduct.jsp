@@ -203,9 +203,9 @@
 	if (submit != null) {
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		Connection con = null;
-		String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_kreid;";
-		String uid = "kreid";
-		String pw = "39265137";
+		String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_mkurz;";
+		String uid = "mkurz";
+		String pw = "33205121";
 
 		String weight = request.getParameter("inputWeight");
 		String name = request.getParameter("inputName");

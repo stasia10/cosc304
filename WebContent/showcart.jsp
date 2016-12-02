@@ -18,7 +18,7 @@
 <meta name="author" content="">
 
 
-<link rel="apple-touch-icon" sizes="180x180"
+<link rel="apple-touch-icon" sizes="180x180"0
 	href="img/fav/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="img/fav/favicon-32x32.png"
 	sizes="32x32">
@@ -115,9 +115,9 @@
 		
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		Connection con = null;
-		String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_kreid;";
-		String uid = "kreid";
-		String pw = "39265137";
+		String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_mkurz;";
+		String uid = "mkurz";
+		String pw = "33205121";
 		
 		String del = request.getParameter("delete");
 		String update = request.getParameter("update");
