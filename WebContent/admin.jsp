@@ -262,18 +262,18 @@
 						String SQL = "SELECT orderId, totalAmount, orderDate, paymentType, shipDate, shipType, expectedDelivery FROM Invoice";
 						PreparedStatement pstmt = con.prepareStatement(SQL);
 						ResultSet rst = pstmt.executeQuery();
-					// Starting the class and the header of the first table
+					
 						
 						while (rst.next()) {
 							oid = rst.getString(1);
 							pay++;
 							ship++;
-							// First table body
+							// Starting the class and the header of the first table
 							ORD.append("<div class=\"table-responsive \">");
 						ORD.append("<table class=\"table table-hover\">");
 						ORD.append(
 								"<thead><tr><th> Order Id </th><th> Order Date </th><th> Ship Date </th><th> Shipment Type </th><th> ETA </th><th> Payment Type </th><th>Total</th></tr></thead>");
-
+						// First table body
 							ORD.append("<tbody><tr><td>" + oid + "</td><td>" + rst.getString(3) + "</td><td>");
 							ORD.append(rst.getString(5) + "</td><td><input type=\"text\" name=\"newShip" + ship);
 							ORD.append("\" size=\"11\" value=\"" + rst.getString(6) + "\"></td><td>" + rst.getString(7));
