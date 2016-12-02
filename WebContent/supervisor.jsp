@@ -75,7 +75,7 @@
 							<li><a href="about.html">About</a></li>
 							<li><a href="products.jsp">Products</a></li>
 							<li class="active"><a href="staff.jsp">Staff</a></li>
-									<li><a href="showorder-login.jsp">Purchases</a></li>
+							<li><a href="showorder-login.jsp">Purchases</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<a href="showcart.jsp" class="btn btn-default navbar-btn"> <span
@@ -133,6 +133,8 @@
 				String update = request.getParameter("update");
 				String newInvent = request.getParameter("newInvent");
 				String select = request.getParameter("view");
+				
+				String oid = null;
 				int invent = 0;
 				try {
 					// PLT = Product Listing Table
@@ -176,34 +178,40 @@
 						out.print(PLT.toString());
 
 					} else if ("orders".equalsIgnoreCase(select)) {
+						StringBuilder ORD = new StringBuilder();
 						String SQL = "SELECT orderId, totalAmount, orderDate, paymentType, shipDate, shipType, expectedDelivery FROM Invoice";
 						PreparedStatement pstmt = con.prepareStatement(SQL);
 						ResultSet rst = pstmt.executeQuery();
-						out.println("<table id='hor-minimalist-b'><tbody><th><b>Order Id</b></th><th><b>Order Date</b></th>"
-								+ "<th><b>Ship Date</b></th><th><b>Ship Type</b></th><th><b>Expected Delivery</b></th>"
-								+ "<th><b>Payment Type</b></th><th><b>Total Amount</b></th>");
-						String oid = null;
-
+					
+						
 						while (rst.next()) {
 							oid = rst.getString(1);
-							out.println("<tr align='center'><td>" + oid + "</td><td>" + rst.getString(3) + "</td><td>"
-									+ rst.getString(5) + "</td><td>" + rst.getString(6) + "</td><td>" + rst.getString(7)
-									+ "</td><td>" + rst.getString(4) + "</td><td>$" + rst.getString(2));
-							out.println(
-									"<tr align='right'><td colspan='7'><table id='hor-minimalist-b'><th><b>Product Id</b></th><th><b>Product Name</b></th>"
-											+ "<th><b>Quantity</b></th><th><b>Price</b></th>");
-							String SQL3 = "SELECT O.productId, quantity, O.price, productName FROM OrderedProduct O INNER JOIN Product P ON O.productId = P.productId "
+							// Starting the class and the header of the first table
+							ORD.append("<div class=\"table-responsive \">");
+						ORD.append("<table class=\"table table-hover\">");
+						ORD.append(
+								"<thead><tr><th> Order Id </th><th> Order Date </th><th> Ship Date </th><th> Shipment Type </th><th> ETA </th><th> Payment Type </th><th>Total</th></tr></thead>");
+						// First table body
+							ORD.append("<tbody><tr><td>" + oid + "</td><td>" + rst.getString(3) + "</td><td>");
+							ORD.append(rst.getString(5) + "</td><td>");
+							ORD.append(rst.getString(6) + "</td><td>" + rst.getString(7));
+							ORD.append("</td><td>");
+							ORD.append(rst.getString(4) + "</td><td>$" + rst.getString(2));
+							ORD.append("</tbody></table>");
+							// Heading of the sub table
+							ORD.append("<table class = \"table table hover\"><thead><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th><th>Price</th></tr></thead>");
+							String SQL2 = "SELECT O.productId, quantity, O.price, productName FROM OrderedProduct O INNER JOIN Product P ON O.productId = P.productId "
 									+ " WHERE orderId = ?";
-							PreparedStatement pstmt2 = con.prepareStatement(SQL3);
+							PreparedStatement pstmt2 = con.prepareStatement(SQL2);
 							pstmt2.setString(1, oid);
 							ResultSet rst2 = pstmt2.executeQuery();
 							while (rst2.next()) {
-								out.println("<tr align='center'><td>" + rst2.getString(1) + "</td><td>" + rst2.getString(4)
+								ORD.append("<tbdody><tr><td>" + rst2.getString(1) + "</td><td>" + rst2.getString(4)
 										+ "</td><td>" + rst2.getString(2) + "</td><td>$" + rst2.getDouble(3) + "</td>");
 							}
-							out.println("</tbody></table></td></tr>");
+							ORD.append("</tbody></table></div>");
 						}
-						out.println("</tbody></table>");
+						out.print(ORD.toString());
 					}
 				} catch (SQLException ex) {
 					out.println(ex);
