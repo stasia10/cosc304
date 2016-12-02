@@ -13,6 +13,38 @@
 <title>Fancy Cacti Order Processing</title>
 </head>
 <body>
+ <div class="navbar-wrapper">
+      <div class="container">
+
+  <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+
+          <a class="navbar-brand" href="index.html">Fancy Cacti</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="products.jsp">Products</a></li>
+            <li><a href="staff.jsp">Staff</a></li>
+            <li><a href="showorder-login.jsp">Purchases</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            <a href="showcart.jsp" class="btn btn-default navbar-btn">
+          <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart 
+          </a>
+
+          </ul>
+        
+        </div><!--/.nav-collapse -->
+
+      </div>
+    </nav>
+
+      </div>
+    </div>
 	<%@ page import="java.sql.*"%>
 	<%
 

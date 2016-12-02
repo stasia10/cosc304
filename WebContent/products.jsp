@@ -60,6 +60,7 @@
 							<li><a href="about.html">About</a></li>
 							<li class="active"><a href="products.jsp">Products</a></li>
 							<li><a href="staff.jsp">Staff</a></li>
+							<li><a href="showorder-login.jsp">Purchases</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<a href="showcart.jsp" class="btn btn-default navbar-btn"> <span
@@ -76,7 +77,7 @@
 
 		</div>
 	</div>
-	
+
 	<div id="wrapper">
 		<div class="overlay"></div>
 
@@ -147,11 +148,10 @@
 								while (rst.next()) {
 									spec = rst.getString(5);
 									out.println("<hr class='featurette-divider'><div class='row featurette'><div class='col-md-7'>"
-											+ "<h2 class='featurette-heading'>" + rst.getString(1) + " <span class='text-muted'><br>"
-											+ "$" + rst.getString(3) + "</h2></span>");
-									out.println("<h1><a href=\"addcart.jsp?id=" + rst.getString(2) + "&name="
-											+ rst.getString(1) + "&price=" + rst.getString(3)
-											+ "\">Add to cart</a></h1><p class='lead'>");
+											+ "<h2 class='featurette-heading'>" + rst.getString(1)
+											+ " <span class='text-muted'><br>" + "$" + rst.getString(3) + "</h2></span>");
+									out.println("<h1><a href=\"addcart.jsp?id=" + rst.getString(2) + "&name=" + rst.getString(1)
+											+ "&price=" + rst.getString(3) + "\">Add to cart</a></h1><p class='lead'>");
 									if (spec != null) {
 										sun = rst.getInt("sunLevel");
 										water = rst.getInt("waterLevel");
@@ -162,13 +162,15 @@
 										out.println("<p>Water Level: </p>");
 										out.println("<div class=\"progress\">");
 										out.println(
-												"<div class=\"progress-bar progress-bar-info progress-bar-striped active\" role=\"progressbar\" style=\"width:" + water + "0%\">");
+												"<div class=\"progress-bar progress-bar-info progress-bar-striped active\" role=\"progressbar\" style=\"width:"
+														+ water + "0%\">");
 										out.println(water + "/10");
 										out.println("</div></div>");
 										out.println("<p>Sun Level:</p>");
 										out.println("<div class=\"progress\">");
 										out.println(
-												"<div class=\"progress-bar progress-bar-warning progress-bar-striped active\" role=\"progressbar\" style=\"width:" + sun + "0%\">");
+												"<div class=\"progress-bar progress-bar-warning progress-bar-striped active\" role=\"progressbar\" style=\"width:"
+														+ sun + "0%\">");
 										out.println(sun + "/10");
 										out.println("</div></div>");
 									}
@@ -186,8 +188,8 @@
 								while (rst.next()) {
 									spec = rst.getString(5);
 									out.println("<hr class='featurette-divider'><div class='row featurette'><div class='col-md-7'>"
-											+ "<h2 class='featurette-heading'>" + rst.getString(1) + " <span class='text-muted'><br> "
-											+ "$"+rst.getString(3) + " </span>");
+											+ "<h2 class='featurette-heading'>" + rst.getString(1)
+											+ " <span class='text-muted'><br> " + "$" + rst.getString(3) + " </span>");
 									out.println("</h2>" + "<h1><a href=\"addcart.jsp?id=" + rst.getString(2) + "&name="
 											+ rst.getString(1) + "&price=" + rst.getString(3)
 											+ "\">Add to cart</a></h1><p class='lead'>");
@@ -201,13 +203,15 @@
 										out.println("<p>Water Level: </p>");
 										out.println("<div class=\"progress\">");
 										out.println(
-												"<div class=\"progress-bar progress-bar-info progress-bar-striped active\" role=\"progressbar\" style=\"width:" + water + "0%\">");
+												"<div class=\"progress-bar progress-bar-info progress-bar-striped active\" role=\"progressbar\" style=\"width:"
+														+ water + "0%\">");
 										out.println(water + "/10");
 										out.println("</div></div>");
 										out.println("<p>Sun Level:</p>");
 										out.println("<div class=\"progress\">");
 										out.println(
-												"<div class=\"progress-bar progress-bar-warning progress-bar-striped active\" role=\"progressbar\" style=\"width:" + sun + "0%\">");
+												"<div class=\"progress-bar progress-bar-warning progress-bar-striped active\" role=\"progressbar\" style=\"width:"
+														+ sun + "0%\">");
 										out.println(sun + "/10");
 										out.println("</div></div>");
 									}
@@ -225,8 +229,8 @@
 								while (rst.next()) {
 									spec = rst.getString(5);
 									out.println("<hr class='featurette-divider'><div class='row featurette'><div class='col-md-7'>"
-											+ "<h2 class='featurette-heading'>" + rst.getString(1) + " <span class='text-muted'><br>"
-											+"$"+ rst.getString(3) + " </span>");
+											+ "<h2 class='featurette-heading'>" + rst.getString(1)
+											+ " <span class='text-muted'><br>" + "$" + rst.getString(3) + " </span>");
 									out.println("</h2>" + "<h1><a href=\"addcart.jsp?id=" + rst.getString(2) + "&name="
 											+ rst.getString(1) + "&price=" + rst.getString(3)
 											+ "\">Add to cart</a></h1><p class='lead'>");
@@ -240,13 +244,15 @@
 										out.println("<p>Water Level: </p>");
 										out.println("<div class=\"progress\">");
 										out.println(
-												"<div class=\"progress-bar progress-bar-info progress-bar-striped active\" role=\"progressbar\" style=\"width:" + water + "0%\">");
+												"<div class=\"progress-bar progress-bar-info progress-bar-striped active\" role=\"progressbar\" style=\"width:"
+														+ water + "0%\">");
 										out.println(water + "/10");
 										out.println("</div></div>");
 										out.println("<p>Sun Level:</p>");
 										out.println("<div class=\"progress\">");
 										out.println(
-												"<div class=\"progress-bar progress-bar-warning progress-bar-striped active\" role=\"progressbar\" style=\"width:" + sun + "0%\">");
+												"<div class=\"progress-bar progress-bar-warning progress-bar-striped active\" role=\"progressbar\" style=\"width:"
+														+ sun + "0%\">");
 										out.println(sun + "/10");
 										out.println("</div></div>");
 									}
