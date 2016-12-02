@@ -146,7 +146,7 @@
 				ORD.append(
 						"<thead><tr><th> Order Id </th><th>Order Total</th></tr></thead>");
 				// First table body
-				ORD.append("<tbody><tr><td>" + rst.getString(1) + "</td><td>" + rst.getString(2) + "</td></tr>");
+				ORD.append("<tbody><tr><td>" + rst.getString(1) + "</td><td>$" + rst.getString(2) + "</td></tr>");
 				ORD.append("</tbody></table>");
 				
 				// Heading of the sub table
@@ -161,7 +161,7 @@
 				while (rst2.next()) {
 				// Body of the Second Table
 			ORD.append("<tbdody><tr><td>" + rst2.getString(1) + "</td><td>" + rst2.getString(2)
-										+ "</td><td>" + rst2.getString(3) + "</td></tr>");
+										+ "</td><td>$" + rst2.getString(3) + "</td></tr>");
 		
 				}
 				
