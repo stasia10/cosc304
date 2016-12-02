@@ -158,6 +158,7 @@
 				String newQty = request.getParameter("newQty");
 				String newInvent = request.getParameter("newInvent");
 				String orderId = request.getParameter("orderId");
+				String delete = request.getParameter("delete");
 
 				String oid = null;
 				String pid = null;
@@ -250,6 +251,10 @@
 						up.setString(1, newInvent);
 						up.setString(2, update);
 						up.executeUpdate();
+					} else if (delete != null && (!delete.equals(""))){
+						PreparedStatement del = con.prepareStatement("DELETE FROM Product WHERE productId = ?");
+						del.setString(1, delete);
+						del.executeUpdate();
 					}
 
 					if ("orders".equalsIgnoreCase(select)) {
@@ -311,6 +316,7 @@
 						while (rst.next()) {
 							invent++;
 							spec = rst.getString("species");
+							pid = rst.getString("productId");
 							PLT.append("<tbody>");
 							PLT.append(
 									"<tr><td>" + rst.getString("productId") + "</td><td>" + rst.getString("productName"));
@@ -320,7 +326,8 @@
 							PLT.append(rst.getString("Inventory") + "\"></td><td>" + rst.getString("category") + "</td>");
 							PLT.append("<td><input type=BUTTON OnClick=\"update(" + rst.getString("productId"));
 							PLT.append(", document.listadmin.newInvent" + invent);
-							PLT.append(".value)\"value=\"Update Inventory\"></td></tr>");
+							PLT.append(".value)\"value=\"Update Inventory\"></td>");
+							PLT.append("<td><input type=BUTTON OnClick=window.location=\"admin.jsp?view=products&delete=" + pid + "\" value=\"Remove item from database\"></tr>");
 
 						}
 						PLT.append("</tbody></table>");
