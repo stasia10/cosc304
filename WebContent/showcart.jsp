@@ -81,7 +81,7 @@
 								<li><a href="about.html">About</a></li>
 								<li><a href="products.jsp">Products</a></li>
 								<li><a href="staff.jsp">Staff</a></li>
-								<li class="active"><a href="showorder-login.jsp">Purchases</a></li>
+								<li><a href="showorder-login.jsp">Purchases</a></li>
 							</ul>
 							<ul class="nav navbar-nav navbar-right">
 								<a href="showcart.jsp" class="btn btn-default navbar-btn active">

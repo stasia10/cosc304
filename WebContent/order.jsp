@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.text.NumberFormat"%>
 <%@ page import="java.util.HashMap"%>
@@ -6,14 +7,81 @@
 <%@ page import="java.util.Map"%>
 <%@ page import="java.time.LocalDate"%>
 <%@ page import="java.time.format.DateTimeFormatter"%>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
-<!DOCTYPE html>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<html lang="en">
 <head>
-<title>Fancy Cacti Order Processing</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="img/fav/favicon.ico">
+
+<title>Order Placed</title>
+
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<script src="js/ie-emulation-modes-warning.js"></script>
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+<!-- Custom styles for this template -->
+<link href="css/carousel.css" rel="stylesheet">
 </head>
+<!-- NAVBAR
+================================================== -->
 <body>
-	<%@ page import="java.sql.*"%>
+	<div class="navbar-wrapper">
+		<div class="container">
+
+			<!-- Fixed navbar -->
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header">
+
+						<a class="navbar-brand" href="index.html">Fancy Cacti</a>
+					</div>
+					<div id="navbar" class="navbar-collapse collapse">
+						<ul class="nav navbar-nav">
+							<li><a href="index.html">Home</a></li>
+							<li><a href="about.html">About</a></li>
+							<li><a href="products.jsp">Products</a></li>
+							<li><a href="staff.jsp">Staff</a></li>
+									<li><a href="showorder-login.jsp">Purchases</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<a href="showcart.jsp" class="btn btn-default navbar-btn active"> <span
+								class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+							</a>
+
+						</ul>
+
+					</div>
+					<!--/.nav-collapse -->
+
+				</div>
+			</nav>
+
+		</div>
+	</div>
+	<!-- Marketing messaging and featurettes
+    ================================================== -->
+	<!-- Wrap the rest of the page in another container to center all the content. -->
+	<div class="container marketing">
+		<div class="formpadding">
+			
 	<%
 		@SuppressWarnings({ "unchecked" })
 		HashMap<String, ArrayList<Object>> productList = (HashMap<String, ArrayList<Object>>) session
@@ -124,14 +192,25 @@
 					psInvoice.executeUpdate();
 					ResultSet keys = psInvoice.getGeneratedKeys();
 					keys.next();
+					StringBuilder ORDER = new StringBuilder();
 					int orderId = keys.getInt(1);
 					double totalAmt = shipCost;
 					double totalWt = 0;
 
 					Iterator<Map.Entry<String, ArrayList<Object>>> iterator = productList.entrySet().iterator();
-					out.println("<h1>Your Order Summary</h1>");
-					out.println(
-							"<table><tr><td>Product Id</td><td>Product Name</td><td>Quantity</td><td>Price</td><td>Subtotal</td></tr>");
+					
+					// Header
+					ORDER.append("<h1>Order Summary:</h1>");
+					// Order Info
+					ORDER.append("<p>Thank You for shopping with us: " + custName);
+					ORDER.append("<br>Your order is placed and will be shipped on: "+ ship );
+					ORDER.append("<br>Your expected delivery date is: "+ deliv );
+					ORDER.append("<br>Your order number is: " + orderId );
+					ORDER.append("</p>");
+					// Table Header
+					ORDER.append("<div class=\"table\">");
+					ORDER.append("<table class=\"table table-hover\">");
+					ORDER.append("<tr><th>Product Id</th><th>Product Name</th><th>Quantity</th><th>Price</th><th>Subtotal</th></tr>");
 					while (iterator.hasNext()) {
 						Map.Entry<String, ArrayList<Object>> entry = iterator.next();
 						ArrayList<Object> product = (ArrayList<Object>) entry.getValue();
@@ -164,16 +243,15 @@
 
 						totalAmt += qty * pr;
 						totalWt += weight.getDouble(1);
-						out.println("<tr><td>" + productId + "</td><td>" + product.get(1) + "</td><td>" + qty
-								+ "</td><td>" + pr + "</td><td>" + qty * pr + "</td></tr>");
+						ORDER.append("<tr><td>" + productId + "</td><td>" + product.get(1) + "</td><td>" + qty
+								+ "</td><td>$" + pr + "</td><td>$" + qty * pr + "</td></tr>");
 
 					}
 					
-					out.println("<tr><td colspan='4'>Shipping Cost </td><td>" + shipCost
-							+  "</td></tr>");
+					ORDER.append("<tr><td>Shipping Cost </td><td>$" + shipCost +  "</td></tr>");
 
 					
-					out.println("<tr><td colspan='4'><b>Order Total </b></td><td>" + currFormat.format(totalAmt)
+					ORDER.append("<tr><td><b>Order Total </b></td><td>" + currFormat.format(totalAmt)
 							+  "</td></tr></table>");
 					String upOrd = "UPDATE Invoice SET totalAmount = ?, weight=? WHERE orderId = ?";
 					PreparedStatement pord = con.prepareStatement(upOrd);
@@ -183,11 +261,8 @@
 					pord.setDouble(2, totalWt);
 					pord.setInt(3, orderId);
 					pord.executeUpdate();
-
-					out.println("<h2>Order Completed. Will be shipped on "+ ship +"</h2>");
-					out.println("<h2>Your expected delivery date is "+ deliv +"</h2>");
-					out.println("<h2>Your reference number is: " + orderId + "</h2>");
-					out.println("<h2>Shipping to customer: " + custName + "</h2>");
+					
+					out.print(ORDER.toString());
 					session.setAttribute("productList", null);
 					}
 				
@@ -238,11 +313,21 @@
 						int orderId = keys.getInt(1);
 						double totalAmt = shipCost;
 						double totalWt = 0;
-
+						StringBuilder ORDER = new StringBuilder();
 						Iterator<Map.Entry<String, ArrayList<Object>>> iterator = productList.entrySet().iterator();
-						out.println("<h1>Your Order Summary</h1>");
-						out.println(
-								"<table><tr><td>Product Id</td><td>Product Name</td><td>Quantity</td><td>Price</td><td>Subtotal</td></tr>");
+						// Header
+						ORDER.append("<h1>Order Summary:</h1>");
+						// Order Info
+						custName = rstAccount.getString(2);
+						ORDER.append("<p>Thank you for shopping with us: " + custName);
+						ORDER.append("<br>Your order is placed and will be shipped on: "+ ship );
+						ORDER.append("<br>Your expected delivery date is: "+ deliv );
+						ORDER.append("<br>Your order number is: " + orderId );
+						ORDER.append("</p>");
+						// Table Header
+						ORDER.append("<div class=\"table\">");
+						ORDER.append("<table class=\"table table-hover\">");
+						ORDER.append("<tr><th>Product Id</th><th>Product Name</th><th>Quantity</th><th>Price</th><th>Subtotal</th></tr>");
 						while (iterator.hasNext()) {
 							Map.Entry<String, ArrayList<Object>> entry = iterator.next();
 							ArrayList<Object> product = (ArrayList<Object>) entry.getValue();
@@ -275,16 +360,14 @@
 
 							totalAmt += qty * pr;
 							totalWt += weight.getDouble(1);
-							out.println("<tr><td>" + productId + "</td><td>" + product.get(1) + "</td><td>" + qty
-									+ "</td><td>" + pr + "</td><td>" + qty * pr + "</td></tr>");
+							ORDER.append("<tr><td>" + productId + "</td><td>" + product.get(1) + "</td><td>" + qty
+									+ "</td><td>$" + pr + "</td><td>$" + qty * pr + "</td></tr>");
 
 						}
 						
-						out.println("<tr><td colspan='4'>Shipping Cost </td><td>" + shipCost
-								+  "</td></tr>");
-
+						ORDER.append("<tr><td>Shipping Cost </td><td>$" + shipCost +  "</td></tr>");
 						
-						out.println("<tr><td colspan='4'><b>Order Total </b></td><td>" + currFormat.format(totalAmt)
+						ORDER.append("<tr><td><b>Order Total </b></td><td>" + currFormat.format(totalAmt)
 								+  "</td></tr></table>");
 						String upOrd = "UPDATE Invoice SET totalAmount = ?, weight=? WHERE orderId = ?";
 						PreparedStatement pord = con.prepareStatement(upOrd);
@@ -294,11 +377,7 @@
 						pord.setDouble(2, totalWt);
 						pord.setInt(3, orderId);
 						pord.executeUpdate();
-
-						out.println("<h2>Order Completed. Will be shipped on "+ ship +"</h2>");
-						out.println("<h2>Your expected delivery date is "+ deliv +"</h2>");
-						out.println("<h2>Your reference number is: " + orderId + "</h2>");
-						out.println("<h2>Shipping to customer: " + rstAccount.getString("fullName") + "</h2>");
+						out.print(ORDER.toString());
 						session.setAttribute("productList", null);
 					}
 				}
@@ -315,7 +394,24 @@
 					System.err.println("SQLException: " + ex);
 				}
 		}
+		
+	
 	%>
+	
+			</div>
+			<footer>
+				<p class="pull-right">
+					<a href="#">Back to top</a>
+				</p>
+				<p>
+					&copy; 2016 Fancy Cacti, Inc. &middot; <a href="privacy.html">Privacy</a>
+					&middot; <a href="legal.html">Legal</a>
+				</p>
+			</footer>
+		
+	</div>
 </body>
-</html>
+<!-- /container -->
+<script src="signin_files/ie10-viewport-bug-workaround.js"></script>
 
+</html>

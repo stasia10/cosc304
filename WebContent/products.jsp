@@ -284,7 +284,7 @@
 					</p>
 					<p>
 						&copy; 2016 Fancy Cacti, Inc. &middot; <a href="privacy.html">Privacy</a>
-						&middot; <a href="terms.html">Terms</a>
+						&middot; <a href="legal.html">Legal</a>
 					</p>
 				</footer>
 			</div>
