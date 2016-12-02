@@ -40,9 +40,9 @@
 	<%
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		Connection con = null;
-		String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_kreid;";
-		String uid = "kreid";
-		String pw = "39265137";
+		String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_mkurz;";
+		String uid = "mkurz";
+		String pw = "33205121";
 	%>
 	<div class="navbar-wrapper">
 		<div class="container">
