@@ -119,13 +119,6 @@
 			</div>
 		</div>
 
-	
-	<div>
-		<input type="button" OnClick="window.location='admin.jsp?view=orders'"
-			value="View Orders"> <input type="button"
-			OnClick="window.location='admin.jsp?view=products'"
-			value="Edit Products">
-	</div>
 	<script>
 		function updateShipment(newId, newShip) {
 			window.location = "admin.jsp?view=orders&updateShipment=" + newId

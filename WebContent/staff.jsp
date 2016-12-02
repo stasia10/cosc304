@@ -72,39 +72,57 @@
 	<!-- Marketing messaging and featurettes
     ================================================== -->
 	<!-- Wrap the rest of the page in another container to center all the content. -->
+	<div class="container marketing">
+		<div class="formpadding">
+			<form method="POST" action="staff.jsp" class="staff-signin"
+				name=signIn>
+				<h2 class="form-signin-heading">Please sign in</h2>
 
-	<div class="container formpadding">
 
-		<form method="POST" action="staff.jsp" class="staff-signin" name=signIn>
-			<h2 class="form-signin-heading">Please sign in</h2>
-			<label for="inputEmail" class="sr-only">Email address</label> <input
-				id="inputEmail" name="inputEmail" class="form-control"
-				placeholder="Email address" required="" autofocus="" type="email">
-			<label for="inputPassword" class="sr-only">Password</label> <input
-				id="inputPassword" name="inputPassword" class="form-control"
-				placeholder="Password" required="" type="password">
-			<button class="btn btn-lg btn-primary btn-block" type="submit"
-				value="Submit">Sign in</button>
-		</form>
-		 <!-- FOOTER -->
-      <footer>
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2016 Fancy Cacti, Inc. &middot; <a href="privacy.html">Privacy</a> &middot; <a href="legal.html">Legal</a></p>
-      </footer>
+				<div class="form-group row">
+				<label for="inputEmail" class="col-xs-2 col-form-label">Email:</label>
+					<div class="col-xs-10">
+						<input id="inputEmail" name="inputEmail" class="form-control"
+							placeholder="Example@FancyCacti.com" type="email">
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="inputPassword" class="col-xs-2 col-form-label">Password:</label>
+					<div class="col-xs-10">
+						<input class="form-control" name="inputPassword" type="password"
+							placeholder="hunter2">
+					</div>
+				</div>
+				<button class="btn btn-lg btn-primary btn-block" type="submit"
+					value="Submit">Sign in</button>
+
+			</form>
+			<!-- FOOTER -->
+			<footer>
+				<p class="pull-right">
+					<a href="#">Back to top</a>
+				</p>
+				<p>
+					&copy; 2016 Fancy Cacti, Inc. &middot; <a href="privacy.html">Privacy</a>
+					&middot; <a href="legal.html">Legal</a>
+				</p>
+			</footer>
+		</div>
 	</div>
-	</body>
-	<!-- /container -->
-	<script src="signin_files/ie10-viewport-bug-workaround.js"></script>
-	<%
-		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		Connection con = null;
-		String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_kreid;";
-		String uid = "kreid";
-		String pw = "39265137";
-		String password = request.getParameter("inputPassword");
-		String email = request.getParameter("inputEmail");
-		if(email==null){ }
-		else{
+</body>
+<!-- /container -->
+<script src="signin_files/ie10-viewport-bug-workaround.js"></script>
+<%
+	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	Connection con = null;
+	String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_kreid;";
+	String uid = "kreid";
+	String pw = "39265137";
+	String password = request.getParameter("inputPassword");
+	String email = request.getParameter("inputEmail");
+	if (email == null) {
+	} else {
 		try {
 			con = DriverManager.getConnection(url, uid, pw);
 			String SQL = "SELECT empEmail, title FROM Employee WHERE empEmail=? AND empPass =?";
@@ -112,36 +130,32 @@
 			pstmt.setString(1, email);
 			pstmt.setString(2, password);
 			ResultSet rst = pstmt.executeQuery();
-			if (rst.next()){
+			if (rst.next()) {
 				if (rst.getString("title").equalsIgnoreCase("AD")) {
-				%>
-				<jsp:forward page="admin.jsp" />
-				<%
-					} else if (rst.getString("title").equalsIgnoreCase("SP")) {
-				%>
-				<jsp:forward page="supervisor.jsp" />
-				<%
-					}
-					else if (rst.getString("title").equalsIgnoreCase("GH")|| rst.getString("title").equalsIgnoreCase("WH")) {
-						%>
-						<script>
-						alert("Sorry you are not authorized to log in to this page");
-					</script>
-						<%
-					}
-				} 
-			else{%>
-			<script>
-			alert("Sorry this email and/or password does not match an employee");
-		</script>
-			<%
-				
-			}
-			
-			
-		
-			
-			} catch (SQLException ex) {
+%>
+<jsp:forward page="admin.jsp" />
+<%
+	} else if (rst.getString("title").equalsIgnoreCase("SP")) {
+%>
+<jsp:forward page="supervisor.jsp" />
+<%
+	} else if (rst.getString("title").equalsIgnoreCase("GH")
+						|| rst.getString("title").equalsIgnoreCase("WH")) {
+%>
+<script>
+	alert("Sorry you are not authorized to log in to this page");
+</script>
+<%
+	}
+			} else {
+%>
+<script>
+	alert("Sorry this email and/or password does not match an employee");
+</script>
+<%
+	}
+
+		} catch (SQLException ex) {
 			out.println(ex);
 		} finally {
 			if (con != null)
@@ -150,8 +164,9 @@
 				} catch (SQLException ex) {
 					System.err.println("SQLException: " + ex);
 				}
-		}}
-	%>
+		}
+	}
+%>
 
 </html>
 
