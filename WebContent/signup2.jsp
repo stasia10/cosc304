@@ -183,7 +183,7 @@
 		</p>
 	</footer>
 
-	</div>
+	
 	<!-- /.container -->
 
 

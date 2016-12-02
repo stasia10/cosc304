@@ -151,16 +151,16 @@
 						String SQL = "SELECT * FROM Product";
 						PreparedStatement pstmt = con.prepareStatement(SQL);
 						ResultSet rst = pstmt.executeQuery();
-						PLT.append("<div class=\"table table-hover\">");
+						PLT.append("<div class=\"table\">");
+						PLT.append("<table class=\"table table-hover\">");
+						PLT.append(
+								" <thead><tr><th> Product Id </th><th> Product Name </th><th> Weight </th><th> Price </th><th> Inventory </th><th> Category </th></tr></thead>");
 						String spec = null;
 						while (rst.next()) {
 							invent++;
 							spec = rst.getString("species");
 
-						
-							PLT.append("<table class=\"table\">");
-							PLT.append(
-									" <thead><tr><th> Product Id </th><th> Product Name </th><th> Weight </th><th> Price </th><th> Inventory </th><th> Category </th></tr></thead>");
+
 							PLT.append("<tbody>");
 							PLT.append(
 									"<tr><td>" + rst.getString("productId") + "</td><td>" + rst.getString("productName"));
