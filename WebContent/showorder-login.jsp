@@ -74,7 +74,7 @@
 	<div class="container marketing">
 		<div class="formpadding">
 			<form class="form-signin" method="POST" action="listorders.jsp">
-			
+			<h2 class="form-signin-heading">Please sign in</h2>
 				<div class="form-group row">
 					<label for="inputEmail" class="col-xs-2 col-form-label">Email:</label>
 					<div class="col-xs-10">
@@ -92,11 +92,8 @@
 				</div>
 				
 
-				<div class="form-group row">
-				<div class="col-m-10">
 	<button class="btn btn-lg btn-primary btn-block" type="submit">Check Previous Orders</button>
-	</div>
-	</div>
+
 					
 			</form>
 				</div>

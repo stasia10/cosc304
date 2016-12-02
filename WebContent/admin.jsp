@@ -114,7 +114,7 @@
 			<div class="form-group row">
 				<div class="col-m-10">
 					<a class="btn btn-lg btn-block btn-register" href="addproduct.jsp"
-						value="Add New Product">Add Products</a>
+						value="Add New Product">Add Product</a>
 				</div>
 			</div>
 		</div>
@@ -251,37 +251,41 @@
 						up.setString(1, newInvent);
 						up.setString(2, update);
 						up.executeUpdate();
-					} else if (delete != null && (!delete.equals(""))){
+					} else if (delete != null && (!delete.equals(""))) {
 						PreparedStatement del = con.prepareStatement("DELETE FROM Product WHERE productId = ?");
 						del.setString(1, delete);
 						del.executeUpdate();
 					}
 
 					if ("orders".equalsIgnoreCase(select)) {
+						StringBuilder ORD = new StringBuilder();
 						String SQL = "SELECT orderId, totalAmount, orderDate, paymentType, shipDate, shipType, expectedDelivery FROM Invoice";
 						PreparedStatement pstmt = con.prepareStatement(SQL);
 						ResultSet rst = pstmt.executeQuery();
-						out.println("<table id='hor-minimalist-b'><tbody><th><b>Order Id</b></th><th><b>Order Date</b></th>"
-								+ "<th><b>Ship Date</b></th><th><b>Ship Type</b></th><th><b>Expected Delivery</b></th>"
-								+ "<th><b>Payment Type</b></th><th><b>Total Amount</b></th>");
-
+					// Starting the class and the header of the first table
+						
 						while (rst.next()) {
 							oid = rst.getString(1);
 							pay++;
 							ship++;
-							out.println("<tr align='center'><td>" + oid + "</td><td>" + rst.getString(3) + "</td><td>"
-									+ rst.getString(5) + "</td><td><input type=\"text\" name=\"newShip" + ship
-									+ "\" size=\"25\" value=\"" + rst.getString(6) + "\"></td><td>" + rst.getString(7)
-									+ "</td><td><input type=\"text\" name=\"newPay" + pay + "\" size= \"25\" value=\""
-									+ rst.getString(4) + "\"></td><td>$" + rst.getString(2));
-							out.println("<td><input type=BUTTON OnClick=\"updateShipment(" + oid
-									+ ", document.listadmin.newShip" + ship + ".value)\"value=\"Update Shipment\"></td>");
-							out.println(
-									"<td><input type=BUTTON OnClick=\"updatePayment(" + oid + ", document.listadmin.newPay"
-											+ pay + ".value)\" value= \"Update Payment\"></td></tr>");
-							out.println(
-									"<tr align='right'><td colspan='7'><table id='hor-minimalist-b'><th><b>Product Id</b></th><th><b>Product Name</b></th>"
-											+ "<th><b>Quantity</b></th><th><b>Price</b></th>");
+							// First table body
+							ORD.append("<div class=\"table-responsive \">");
+						ORD.append("<table class=\"table table-hover\">");
+						ORD.append(
+								"<thead><tr><th> Order Id </th><th> Order Date </th><th> Ship Date </th><th> Shipment Type </th><th> ETA </th><th> Payment Type </th><th>Total</th></tr></thead>");
+
+							ORD.append("<tbody><tr><td>" + oid + "</td><td>" + rst.getString(3) + "</td><td>");
+							ORD.append(rst.getString(5) + "</td><td><input type=\"text\" name=\"newShip" + ship);
+							ORD.append("\" size=\"11\" value=\"" + rst.getString(6) + "\"></td><td>" + rst.getString(7));
+							ORD.append("</td><td><input type=\"text\" name=\"newPay" + pay + "\" size= \"20\" value=\"");
+							ORD.append(rst.getString(4) + "\"></td><td>$" + rst.getString(2));
+							ORD.append("<td><input type=BUTTON OnClick=\"updateShipment(" + oid);
+							ORD.append(", document.listadmin.newShip" + ship + ".value)\"value=\"Update Shipment\"></td>");
+							ORD.append("<td><input type=BUTTON OnClick=\"updatePayment(" + oid + ", document.listadmin.newPay");
+							ORD.append( pay + ".value)\" value= \"Update Payment\"></td></tr>");
+							ORD.append("</tbody></table>");
+							// Heading of the sub table
+							ORD.append("<table class = \"table table hover\"><thead><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th><th>Price</th></tr></thead>");
 							String SQL2 = "SELECT O.productId, quantity, O.price, productName FROM OrderedProduct O INNER JOIN Product P ON O.productId = P.productId "
 									+ " WHERE orderId = ?";
 							PreparedStatement pstmt2 = con.prepareStatement(SQL2);
@@ -290,16 +294,17 @@
 							while (rst2.next()) {
 								qty++;
 								pid = rst2.getString(1);
-								out.println("<tr align='center'><td>" + rst2.getString(1) + "</td><td>" + rst2.getString(4)
+								ORD.append("<tbdody><tr><td>" + rst2.getString(1) + "</td><td>" + rst2.getString(4)
 										+ "</td><td><input type =\"text\" name =\"newQty" + qty + "\" size = \"3\" value=\""
 										+ rst2.getString(2) + "\"></td><td>$" + rst2.getDouble(3) + "</td>");
-								out.println("<td><input type=BUTTON OnClick=\"updateQty(" + pid + "," + oid
+								ORD.append("<td><input type=BUTTON OnClick=\"updateQty(" + pid + "," + oid
 										+ ", document.listadmin.newQty" + qty
 										+ ".value)\" value= \"Update Quantity\"></td></tr>");
 							}
-							out.println("</tbody></table></td></tr>");
+							ORD.append("</tbody></table></div>");
 						}
-						out.println("</tbody></table>");
+					
+						out.print(ORD.toString());
 					} else if ("products".equalsIgnoreCase(select)) {
 						// PLT = Product Listing Table
 						StringBuilder PLT = new StringBuilder(1000);
@@ -308,7 +313,7 @@
 						ResultSet rst = pstmt.executeQuery();
 
 						PLT.append("<div class=\"table-responsive\">");
-						PLT.append("<table class=\"table\">");
+						PLT.append("<table class=\"table table-hover\">");
 						PLT.append(
 								" <thead><tr><th> Product Id </th><th> Product Name </th><th> Weight </th><th> Price </th><th> Inventory </th><th> Category </th></tr></thead>");
 
@@ -327,7 +332,8 @@
 							PLT.append("<td><input type=BUTTON OnClick=\"update(" + rst.getString("productId"));
 							PLT.append(", document.listadmin.newInvent" + invent);
 							PLT.append(".value)\"value=\"Update Inventory\"></td>");
-							PLT.append("<td><input type=BUTTON OnClick=window.location=\"admin.jsp?view=products&delete=" + pid + "\" value=\"Remove item from database\"></tr>");
+							PLT.append("<td><input type=BUTTON OnClick=window.location=\"admin.jsp?view=products&delete="
+									+ pid + "\" value=\"Remove item from database\"></tr>");
 
 						}
 						PLT.append("</tbody></table>");

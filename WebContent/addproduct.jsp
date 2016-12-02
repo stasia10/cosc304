@@ -192,8 +192,9 @@
 				&middot; <a href="terms.html">Terms</a>
 			</p>
 		</footer>
+		</div>
 		<!-- /.container -->
-	</div>
+	
 </body>
 <script src="signin_files/ie10-viewport-bug-workaround.js"></script>
 <%@ page import="java.sql.*"%>

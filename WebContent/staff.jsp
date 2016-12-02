@@ -100,6 +100,7 @@
 
 			</form>
 			<!-- FOOTER -->
+			</div>
 			<footer>
 				<p class="pull-right">
 					<a href="#">Back to top</a>
@@ -109,7 +110,7 @@
 					&middot; <a href="legal.html">Legal</a>
 				</p>
 			</footer>
-		</div>
+		
 	</div>
 </body>
 <!-- /container -->

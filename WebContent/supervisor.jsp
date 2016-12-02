@@ -150,7 +150,7 @@
 						PreparedStatement pstmt = con.prepareStatement(SQL);
 						ResultSet rst = pstmt.executeQuery();
 
-						PLT.append("<div class=\"table-responsive\">");
+						PLT.append("<div class=\"table table-hover\">");
 						PLT.append("<table class=\"table\">");
 						PLT.append(
 								" <thead><tr><th> Product Id </th><th> Product Name </th><th> Weight </th><th> Price </th><th> Inventory </th><th> Category </th></tr></thead>");
