@@ -51,7 +51,7 @@
     <link href="css/carousel.css" rel="stylesheet">
 </head>
 <body>
-<div class="formpadding">
+
  <div class="navbar-wrapper">
       <div class="container">
       
@@ -65,11 +65,11 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="products.jsp">Products</a></li>
             <li><a href="staff.jsp">Staff</a></li>
-            <li><a href="showorder-login.jsp">Purchases</a></li>
+            <li class="active"><a href="showorder-login.jsp">Purchases</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
             <a href="showcart.jsp" class="btn btn-default navbar-btn">
@@ -85,6 +85,8 @@
 
       </div>
     </div>
+    <div class="container marketing">
+    <div class="formpadding">
 	<%@ page import="java.sql.*"%>
 	<%
 
@@ -132,33 +134,43 @@
 			PreparedStatement psListOrd = con.prepareStatement(listOrd);
 			psListOrd.setString(1,custId);
 			ResultSet rst = psListOrd.executeQuery();
-			out.println(
-					"<table id = 'hor-minimalist-b'><tbody><th align = 'left' colspan = '2'><b>Order Id</b></th>");
+			StringBuilder ORD = new StringBuilder();
+		
 			String oid = null;
 			int rowcount = 0;
 			while (rst.next()) {
 				rowcount++;
 				oid = rst.getString(1);
-				out.println("<tr><td colspan = '2'>" + rst.getString(1) + "</td>");
-				out.println(
-						"<tr><td colspan='2' align='right'><table id = 'hor-minimalist-b'><th><b>Product Id</b></th><th><b>Quantity</b></th><th><b>Price</b></th>");
+				ORD.append("<div class=\"table-responsive \">");
+				ORD.append("<table class=\"table table-hover\">");
+				ORD.append(
+						"<thead><tr><th> Order Id </th><th>Order Total</th></tr></thead>");
+				// First table body
+				ORD.append("<tbody><tr><td>" + rst.getString(1) + "</td><td>" + rst.getString(2) + "</td></tr>");
+				ORD.append("</tbody></table>");
+				
+				// Heading of the sub table
+				ORD.append("<table class = \"table table hover\"><thead><tr><th>Product Name</th><th>Quantity</th><th>Price</th></tr></thead>");
+				
 				String SQL2 = "SELECT p.productName, o.quantity, o.price FROM OrderedProduct as O, Product as P WHERE o.productId = p.productId AND orderId=?";
+				
+				
 				PreparedStatement pstmt2 = con.prepareStatement(SQL2);
 				pstmt2.setString(1, oid);
 				ResultSet rst2 = pstmt2.executeQuery();
 				while (rst2.next()) {
-					out.println("<tr><td>" + rst2.getString(1) + "</td><td>" + rst2.getString(2) + "</td><td>"
-							+ rst2.getString(3) + "</td></tr>");
+				// Body of the Second Table
+			ORD.append("<tbdody><tr><td>" + rst2.getString(1) + "</td><td>" + rst2.getString(2)
+										+ "</td><td>" + rst2.getString(3) + "</td></tr>");
+		
 				}
-				out.println("</table></td></tr>");
-				out.println("<tr><td align = 'left' colspan='2'><b>Total Amount</b></td>");
-				out.println("<tr><td  align = 'left' colspan='2'>"+rst.getString(2)+"</b></td>");
+				
 			}
 			if(rowcount == 0){
-				out.println("<tr><td colspan = '2'> You have no previous orders </td></tr>");
+				ORD.append("<tr><td > You have no previous orders </td></tr>");
 			}
-			out.println("</tbody></table>");
-			
+			ORD.append("</tbody></table></div>");
+			out.print(ORD.toString());
 
 				}
 			}
@@ -174,6 +186,20 @@
 		}
 	%>
 	</div>
+		<!-- FOOTER -->
+			<footer>
+				<p class="pull-right">
+					<a href="#">Back to top</a>
+				</p>
+				<p>
+					&copy; 2016 Fancy Cacti, Inc. &middot; <a href="privacy.html">Privacy</a>
+					&middot; <a href="legal.html">Legal</a>
+				</p>
+			</footer>
+		</div>
+		
+	</form>
+	
 </body>
 </html>
 
