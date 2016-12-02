@@ -246,19 +246,11 @@
 						newI.executeUpdate();
 					}
 				} else if (update != null && (!update.equals(""))) {
-					if (Integer.parseInt(newInvent) >= 0) {
 						PreparedStatement up = con
 								.prepareStatement("UPDATE Product SET Inventory = ? WHERE productId = ?");
 						up.setString(1, newInvent);
 						up.setString(2, update);
 						up.executeUpdate();
-					} else {
-						PreparedStatement up = con
-								.prepareStatement("UPDATE Product SET Inventory = Inventory + ? WHERE productId = ?");
-						up.setString(1, newInvent);
-						up.setString(2, update);
-						up.executeUpdate();
-					}
 				}
 
 				if ("orders".equalsIgnoreCase(select)) {
