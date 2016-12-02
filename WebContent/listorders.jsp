@@ -15,9 +15,6 @@
 <body>
 	<%@ page import="java.sql.*"%>
 	<%
-		@SuppressWarnings({"unchecked"})
-		HashMap<String, ArrayList<Object>> productList = (HashMap<String, ArrayList<Object>>) session
-				.getAttribute("productList");
 
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		Connection con = null;
@@ -48,7 +45,7 @@
 				<%
 		} else {
 
-				if (!pass.equals(rstAccount.getString(3))) {
+				if (!pass.equals(rstAccount.getString(2))) {
 					%>
 
 						<script>
@@ -64,15 +61,16 @@
 			psListOrd.setString(1,custId);
 			ResultSet rst = psListOrd.executeQuery();
 			out.println(
-					"<table id = 'hor-minimalist-b'><tbody><th><b>Order Id</b></th><th><b>Total Amount</b></th>");
+					"<table id = 'hor-minimalist-b'><tbody><th align = 'left' colspan = '2'><b>Order Id</b></th>");
 			String oid = null;
+			int rowcount = 0;
 			while (rst.next()) {
+				rowcount++;
 				oid = rst.getString(1);
-				out.println("<tr><td>" + rst.getString(1) + "</td><td>" + rst.getString(2) + "</td><td>"
-						+ rst.getString(3) + "</td><td>" + rst.getString(4) + "</td></tr>");
+				out.println("<tr><td colspan = '2'>" + rst.getString(1) + "</td>");
 				out.println(
-						"<tr align='right'><td colspan='4'><table id = 'hor-minimalist-b'><th><b>Product Id</b></th><th><b>Quantity</b></th><th><b>Price</b></th>");
-				String SQL2 = "SELECT productId, quantity, price FROM OrderedProduct WHERE orderId=?";
+						"<tr><td colspan='2' align='right'><table id = 'hor-minimalist-b'><th><b>Product Id</b></th><th><b>Quantity</b></th><th><b>Price</b></th>");
+				String SQL2 = "SELECT p.productName, o.quantity, o.price FROM OrderedProduct as O, Product as P WHERE o.productId = p.productId AND orderId=?";
 				PreparedStatement pstmt2 = con.prepareStatement(SQL2);
 				pstmt2.setString(1, oid);
 				ResultSet rst2 = pstmt2.executeQuery();
@@ -80,9 +78,14 @@
 					out.println("<tr><td>" + rst2.getString(1) + "</td><td>" + rst2.getString(2) + "</td><td>"
 							+ rst2.getString(3) + "</td></tr>");
 				}
-				out.println("</tbody></table></td></tr>");
+				out.println("</table></td></tr>");
+				out.println("<tr><td align = 'left' colspan='2'><b>Total Amount</b></td>");
+				out.println("<tr><td  align = 'left' colspan='2'>"+rst.getString(2)+"</b></td>");
 			}
-			out.println("</table>");
+			if(rowcount == 0){
+				out.println("<tr><td colspan = '2'> You have no previous orders </td></tr>");
+			}
+			out.println("</tbody></table>");
 			
 
 				}
